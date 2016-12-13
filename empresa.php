@@ -44,7 +44,7 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
 					<label for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" placeholder="Nome">
+					<input type="text" class="form-control" id="nome" placeholder="Nome" required>
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 					<label for="cnpj">CNPJ</label>

@@ -61,16 +61,16 @@
 						<li><a href="carros.php"><i class="fa fa-car margimDireitaIcon"></i>Carros</a>
 						</li>
 
-						<li><a href="#"><i class="glyphicon glyphicon-road margimDireitaIcon"></i> Rotas</a>
+						<li><a href="rotas.php"><i class="glyphicon glyphicon-road margimDireitaIcon"></i> Rotas</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-truck margimDireitaIcon"></i> Fornecedor</a>
+						<li><a href="fornecedor.php"><i class="fa fa-truck margimDireitaIcon"></i> Fornecedor</a>
 						</li>
 						<li class="divider"></li>
 						<li><a href="produtos.php"><i class="fa fa-product-hunt margimDireitaIcon"></i> Produtos</a>
 						</li>
 						<li class="divider"></li>
-						<li><a href="#"><i class="fa fa-money margimDireitaIcon"></i> Despesas</a>
+						<li><a href="despesas.php"><i class="fa fa-money margimDireitaIcon"></i> Despesas</a>
 						</li>
 					</ul>
 				</li>

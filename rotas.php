@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="stylesheet" href="css/menu.css">
-<link rel="stylesheet" href="css/layout-pag-carros.css">
+<link rel="stylesheet" href="css/layout-pag-rotas.css">
 <link rel="stylesheet" href="css/ajustes-font.css">
 <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
 <script src="js/jquery.min.js"></script>
@@ -25,7 +25,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="app-h1-painel">Painel - Carros</h1>
+			<h1 class="app-h1-painel">Painel - Rotas</h1>
 		</div>
 	</div>
 </div>
@@ -40,7 +40,7 @@
 	
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			
-		<h1>Carros</h1><p>Cadastro de carros da Empresa.</p><hr>
+		<h1>Rotas</h1><p>Cadastro de rotas.</p><hr>
 		<form>
 		
 			<div class="row">
@@ -103,7 +103,7 @@
 		
 		
 		
-				<h1 class="zerarMargimH">Carros Cadastrados</h1><p>Lista com todos os carros da empresa.</p><hr>
+				<h1 class="zerarMargimH">Rotas Cadastradas</h1><p>Lista com todas as rotas.</p><hr>
 			<div class="form-group">
     <input type="text" class="form-control input-search" alt="lista-clientes" placeholder="Buscar na Lista">
   </div>		

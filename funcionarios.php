@@ -4,17 +4,16 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
+<meta name="Sistema de Vendas" content="">
+<meta name="Cleydson Carvalho & Jhonatas de Oliveira" content="">
 <link rel="icon" href="#">
 <title>S.G.V</title>
 
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/layout-pag-funcionarios.css">
+<link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/ajustes-font.css">
 <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
 <script src="js/jquery.min.js"></script>
@@ -25,7 +24,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="app-h1-painel">Painel - Empresa</h1>
+			<h1 class="app-h1-painel">Painel - Funcionários</h1>
 		</div>
 	</div>
 </div>

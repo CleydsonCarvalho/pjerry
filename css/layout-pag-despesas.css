@@ -24,3 +24,12 @@
 	margin-bottom: 20px;
 }
 
+
+
+h2.zerarMargimH.app-total-dispesas {
+background-color: #d9534f;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+	border-radius: 6px;
+}

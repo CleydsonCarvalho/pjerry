@@ -32,7 +32,7 @@ $('#myModal').on('shown.bs.modal', function () {
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-			<h1 class="app-h1-painel">Painel - Cadastro de Produtos</h1>
+			<h1 class="app-h1-painel">Painel - Produtos</h1>
 		</div>
 	</div>
 </div>
@@ -44,6 +44,7 @@ $('#myModal').on('shown.bs.modal', function () {
 	<div class="row">
 	
 		<div class="col-lg-12">
+		<h1>Produtos</h1><p>Cadastro de produtos da Empresa.</p><hr>
 		<button type="button" class="btn btn-primary btn-lg pull-right app-buscarProduto" data-toggle="modal" data-target="#myModal">
 		Cadastrar Produto
 		</button>
