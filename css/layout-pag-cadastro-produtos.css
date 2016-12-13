@@ -9,7 +9,7 @@
     padding: 8px;
     line-height: 1.42857143;
 	vertical-align: middle;
-    border-top: 1px solid #ddd;
+    border: 1px solid rgba(0,0,0,.0001);
 }
 @media screen and (max-width: 992px){
 .table-responsive {
@@ -17,7 +17,7 @@
     margin-bottom: 15px;
     overflow-y: hidden;
     -ms-overflow-style: -ms-autohiding-scrollbar;
-    border: 0px solid #ddd;
+    border: 1px solid rgba(0,0,0,.0001);
 }
 }
 .app-buscarProduto{

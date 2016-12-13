@@ -55,10 +55,10 @@
 						<li><a href='empresa.php'><i class="fa fa-building-o margimDireitaIcon"></i> Empresa</a>
 						</li>
 
-						<li><a href="#"><i class="fa fa-user margimDireitaIcon"></i> Funcionários</a>
+						<li><a href="funcionarios.php"><i class="fa fa-user margimDireitaIcon"></i> Funcionários</a>
 						</li>
 
-						<li><a href="#"><i class="fa fa-car margimDireitaIcon"></i>Carros</a>
+						<li><a href="carros.php"><i class="fa fa-car margimDireitaIcon"></i>Carros</a>
 						</li>
 
 						<li><a href="#"><i class="glyphicon glyphicon-road margimDireitaIcon"></i> Rotas</a>
