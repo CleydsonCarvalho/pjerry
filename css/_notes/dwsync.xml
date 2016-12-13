@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="bootstrap.min.css" server="C:/wamp64/www/pjerry/" local="131261364042594458" remote="131261364040000000" Dst="0" />
+<file name="bootstrap.min.css" server="C:/wamp64/www/pjerry/" local="131261447751070901" remote="131261447750000000" Dst="0" />
 <file name="font-awesome.min.css" server="C:/wamp64/www/pjerry/" local="131177361800000000" remote="131177361800000000" Dst="0" />
 <file name="bootstrap.min.css" server="//KALLIL/pjerry/" local="131139464080000000" remote="131139464080000000" Dst="0" />
 <file name="font-awesome.min.css" server="//KALLIL/pjerry/" local="131177361800000000" remote="131177361800000000" Dst="0" />
@@ -12,4 +12,5 @@
 <file name="layout-pag-rotas.css" server="C:/wamp64/www/pjerry/" local="131261309061618113" remote="131261309060000000" Dst="0" />
 <file name="layout-pag-fornecedor.css" server="C:/wamp64/www/pjerry/" local="131261309296339138" remote="131261309290000000" Dst="0" />
 <file name="layout-pag-despesas.css" server="C:/wamp64/www/pjerry/" local="131261381136183507" remote="131261381130000000" Dst="0" />
+<file name="layout-pag-funcionarios.css" server="C:/wamp64/www/pjerry/" local="131261290516485470" remote="131261290510000000" Dst="0" />
 </dwsync>

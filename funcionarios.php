@@ -24,7 +24,11 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
+<<<<<<< HEAD
 			<h1 class="app-h1-painel">Painel - Funcionários</h1>
+=======
+			<h1 class="app-h1-painel">Painel - Funcionário</h1>
+>>>>>>> origin/master
 		</div>
 	</div>
 </div>
@@ -34,37 +38,41 @@
 
 <div class="container">
 	<div class="row">
-	
-		
-	
+
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			
-		<h1>Funcionários</h1><p>Cadastro de funcionários da Empresa.</p><hr>
+		<h1>Cadastro Funcionário</h1><p>Forneça Alguns Informações Sobre o Funcionário (a).</p><hr>
 		<form>
 		
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
-					<label for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" placeholder="Nome">
+				<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 app-margimBotomCamposFomr">
+					<label for="nome"><spam class="app-astericoRed">*</spam> Nome Completo:</label>
+					<input type="text" class="form-control" id="nome" placeholder="Digete o Nome Completo">
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 app-margimBotomCamposFomr">
-					<label for="cnpj">CNPJ</label>
-					<input type="text" class="form-control" id="cnpj" placeholder="Digite seu CNPJ">
+				<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+					<label for="cnpj">RG:</label>
+					<input type="text" class="form-control" id="cnpj" placeholder="Digite seu CPF">
 				</div>
+				
+				<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+					<label for="cnpj">CPF:</label>
+					<input type="text" class="form-control" id="cnpj" placeholder="Digite seu CPF">
+				</div>
+				 
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 app-margimBotomCamposFomr">
-					<label for="representante">Endereço</label>
+					<label for="representante">Endereço:</label>
 					<input type="text" class="form-control" id="representante" placeholder="Digite o endreço. Ex: Rua, Avenida...">
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 app-margimBotomCamposFomr">
-					<label for="bairro">Bairro</label>
+					<label for="bairro">Bairro:</label>
 					<input type="text" class="form-control" id="bairro" placeholder="Bairro">
 				</div>
 				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-					<label for="numero">Numero</label>
+					<label for="numero">Numero:</label>
 					<input type="text" class="form-control" id="numero" placeholder="Numero">
 				</div>
 				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-					<label for="numero">Região</label>
+					<label for="numero">Região:</label>
 						<select class="form-control">
 							<option>Região</option>
 							<option>Norte</option>
@@ -74,30 +82,31 @@
 							<option>Centro</option>
 						</select>
 				</div>
-				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-10 app-margimBotomCamposFomr">
-					<label for="representante">Representante</label>
-					<input type="text" class="form-control" id="numero" placeholder="Nome do proprientário">
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 app-margimBotomCamposFomr">
-					<label for="representante">Contato</label>
+				
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 app-margimBotomCamposFomr">
+					<label for="representante">Celular 1:</label>
 					<input type="text" class="form-control" id="numero" placeholder="Telefone Fixo">
 				</div>
-				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 app-margimBotomCamposFomr">
-					<label for="representante">Contato Movel</label>
+				<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 app-margimBotomCamposFomr">
+					<label for="representante">Celular 2:</label>
 					<input type="text" class="form-control" id="numero" placeholder="Telefone Movel">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 app-margimBotomCamposFomr">
 					<label for="representante">E-mail</label>
 					<input type="text" class="form-control" id="numero" placeholder="E-mail">
 				</div>
-				
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+					<div><spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em></div>
 				</div>
+		
+				</div>
+				
 		
 		
 		
 		
 			
-			<button type="submit" class="btn btn-primary btn-lg">Gravar Dados</button>
+			<button type="submit" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
 		</form><br><br><br><br>
 		
 		
@@ -111,141 +120,30 @@
   <table class="table table-hover lista-clientes" id="tabela">
     <thead>
       <tr>
-        <th>Código</th>
+       
         <th>Nome</th>
-        <th>Estoque</th>
-        <th>Valor C</th>
-        <th>Valor V</th>
-        <th>Ganho %</th>
-        <th>Retorno</th>
-        <th class="app-center">Ações</th>
+        <th>Telefone 1</th>
+        <th>Telefone 2</th>
+        
+        <th >Ações</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td scope="row">098</td>
-        <td>Guarda Roupa 4 portas cinza</td>
-        <td>2</td>
-        <td>139,00</td>
-        <td>222,40</td>
-        <td>60%</td>
-        <td>300,00</td>
-        <td class="app-center">
+        
+        <td>Ana Maria Pereira Leal Nunes</td>
+        <td>86 98814-4785</td>
+        <td>86 99514-8652</td>
+        
+        <td>
+        	<button type="button" class="btn btn-success">Visualizar</button>
         	<button type="button" class="btn btn-warning">Editar</button>
         	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
 			<button type="button" class="btn btn-danger">Excluir</button>
        		</a>
         </td>
       </tr>
-       <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
       
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
       </tr>
     </tbody>
   </table>
