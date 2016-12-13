@@ -21,6 +21,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
+			<h1 class="app-h1-painel">Painel Jhonata</h1>
 		</div>
 	</div>
 </div>
