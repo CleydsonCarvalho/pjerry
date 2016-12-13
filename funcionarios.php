@@ -24,11 +24,9 @@
 <div class="container">
 	<div class="row">
 		<div class="col-lg-12">
-<<<<<<< HEAD
+
 			<h1 class="app-h1-painel">Painel - Funcionários</h1>
-=======
-			<h1 class="app-h1-painel">Painel - Funcionário</h1>
->>>>>>> origin/master
+
 		</div>
 	</div>
 </div>

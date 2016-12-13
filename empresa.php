@@ -43,14 +43,14 @@
 		
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
-<<<<<<< HEAD
+
 					<label for="nome">Nome</label>
 					<input type="text" class="form-control" id="nome" placeholder="Nome" required>
-=======
+
 					<label for="nome"><spam class="app-astericoRede">*</spam> Nomeda Empresa:</label>
 					<input type="text" class="form-control" id="nome" placeholder="Nome" required title="This field should not be left blank.">
 					
->>>>>>> origin/master
+
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 					<label for="cnpj">CNPJ:</label>
