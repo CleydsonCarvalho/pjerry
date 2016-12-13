@@ -94,7 +94,7 @@
 				<li>
 					<a href="" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-pie-chart margimDireitaIcon"></i>
-						Relatorios
+						Relatórios
 						<b class="caret"></b>
                     </a>
 				
@@ -105,7 +105,7 @@
 						<li><a href="#"><i class="glyphicon glyphicon-download margimDireitaIcon"></i> Devolução</a>
 						</li>
 					
-						<li><a href="produtos.php"><i class="glyphicon glyphicon-remove-sign margimDireitaIcon"></i> Prejuizo</a>
+						<li><a href="produtos.php"><i class="glyphicon glyphicon-remove-sign margimDireitaIcon"></i> Prejuízo</a>
 						</li>
 						
 						<li><a href="#"><i class="glyphicon glyphicon-edit margimDireitaIcon"></i> Negativados</a>
