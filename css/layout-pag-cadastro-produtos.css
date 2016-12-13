@@ -1,0 +1,26 @@
+.app-margimBotomCamposFomr{
+	margin-bottom: 15px;
+}
+.zerarMargimH{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+	vertical-align: middle;
+    border-top: 1px solid #ddd;
+}
+@media screen and (max-width: 992px){
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 0px solid #ddd;
+}
+}
+.app-buscarProduto{
+	margin-bottom: 20px;
+}
+

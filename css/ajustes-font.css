@@ -1,0 +1,53 @@
+
+
+@media screen and (max-width: 640px){
+	h1.app-h1-painel {
+		font-size: 24px;
+	}
+}
+
+@media screen and (max-width: 425px){
+	h1.app-h1-painel {
+		font-size: 29px;
+	}
+}
+
+@media screen and (max-width: 414px){
+	h1.app-h1-painel {
+		font-size: 28px;
+	}
+}
+
+@media screen and (max-width: 412px){
+	h1.app-h1-painel {
+		font-size: 28px;
+	}
+}
+
+@media screen and (max-width: 375px){
+	h1.app-h1-painel {
+		font-size: 25px;
+	}
+}
+
+/* Galaxy S5 */
+@media screen and (max-width: 360px){
+	h1.app-h1-painel {
+		font-size: 24px;
+	}
+}
+
+@media screen and (max-width: 320px){
+	h1.app-h1-painel {
+		font-size: 21px;
+	}
+}
+/*Fonte botão cadastrar produto*/
+.btn-group-lg>.btn, .btn-lg {
+    font-size: 15px;
+}
+/*Fonte Menu*/
+.nav>li>a {
+    font-size: 15px;
+}
+
