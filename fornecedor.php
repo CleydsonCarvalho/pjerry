@@ -40,32 +40,32 @@
 	
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			
-		<h1>Fornecedores</h1><p>Cadastro de fornecedor da Empresa.</p><hr>
+		<h1>Fornecedor</h1><p>Cadastro de fornecedor da Empresa.</p><hr>
 		<form>
 		
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
-					<label for="nome">Nome</label>
+					<label for="nome">Nome:</label>
 					<input type="text" class="form-control" id="nome" placeholder="Nome">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 app-margimBotomCamposFomr">
-					<label for="cnpj">CNPJ</label>
+					<label for="cnpj">CNPJ:</label>
 					<input type="text" class="form-control" id="cnpj" placeholder="Digite seu CNPJ">
 				</div>
 				<div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 app-margimBotomCamposFomr">
-					<label for="representante">Endereço</label>
+					<label for="representante">Endereço:</label>
 					<input type="text" class="form-control" id="representante" placeholder="Digite o endreço. Ex: Rua, Avenida...">
 				</div>
 				<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 app-margimBotomCamposFomr">
-					<label for="bairro">Bairro</label>
+					<label for="bairro">Bairro:</label>
 					<input type="text" class="form-control" id="bairro" placeholder="Bairro">
 				</div>
 				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-					<label for="numero">Numero</label>
+					<label for="numero">Numero:</label>
 					<input type="text" class="form-control" id="numero" placeholder="Numero">
 				</div>
 				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-					<label for="numero">Região</label>
+					<label for="numero">Região:</label>
 						<select class="form-control">
 							<option>Região</option>
 							<option>Norte</option>
