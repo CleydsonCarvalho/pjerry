@@ -33,9 +33,7 @@
 
 <div class="container">
 	<div class="row">
-	
-		
-	
+
 		<div class="col-lg-12">
 			
 		<h1>Cadastro Empresa</h1><p>Forneça Alguns Informações Sobre a Empresa.</p><hr>
@@ -44,12 +42,9 @@
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
 
-					<label for="nome">Nome</label>
-					<input type="text" class="form-control" id="nome" placeholder="Nome" required>
 
-					<label for="nome"><spam class="app-astericoRede">*</spam> Nomeda Empresa:</label>
+					<label for="nome"><spam class="app-astericoRed">*</spam> Nome da Empresa:</label>
 					<input type="text" class="form-control" id="nome" placeholder="Nome" required title="This field should not be left blank.">
-					
 
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 app-margimBotomCamposFomr">
