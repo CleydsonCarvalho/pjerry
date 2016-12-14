@@ -19,6 +19,18 @@
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.quick.search.js"></script>
 
+<script type="text/javascript">
+    function optionCheck(){
+        var option = document.getElementById("options").value;
+        if(option == "show"){
+            document.getElementById("hiddenDiv").style.visibility ="visible";
+        }
+        if(option == "goto"){
+            window.location = "http://google.com";
+        }
+    }
+</script>
+
 </head>
 
 <body>
@@ -36,8 +48,8 @@ include'menu.php';
 ?>
 
 	<div class="container">
+	
 		<div class="row">
-
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
 				<h1>Efetuar Nova Venda</h1>
@@ -160,15 +172,43 @@ include'menu.php';
 				</div>
 				
 			</div>
-
 		</div>
 		
 		<div class="row">
 			<div class="col-lg-12 text-right">
-					<h1>Total <span class="label label-default">$544,00</span></h1>
-				</div>
+				<h1>Total <span class="label label-default">$544,00</span></h1>
+			</div>
 		</div>
 		
+		<div class="row">
+			<div class="col-lg-12">
+			
+			
+			<select id="options" onchange="optionCheck()">
+
+
+			<option value="show">Mostra Div</option>
+			<option value="goto">Vai para o Google</option>
+
+			</select>
+
+			
+			
+			
+			<select onChange='setText()' id='option1' class="form-control">
+				
+				<option value='0'>Avista</option>
+				<option value='2'>Parcelado</option>
+			</select>
+			
+			
+			
+			<hr>
+				<div id="hiddenDiv" style="height:100px;width:300px;border:1px;visibility:hidden;">
+				Eu estou visível agora!
+				</div>
+			</div>
+		</div>
 		
 		<div class="row">
 			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right">
@@ -179,8 +219,7 @@ include'menu.php';
 			</div>
 			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right">	
 				<button type="submit" class="btn btn-danger btn-block">Cancelar</button>				
-			</div>
-			
+			</div>	
 		</div>
 		
 	</div>

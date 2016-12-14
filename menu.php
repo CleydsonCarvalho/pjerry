@@ -58,6 +58,9 @@
 						<li><a href="funcionarios.php"><i class="fa fa-user margimDireitaIcon"></i> Funcionários</a>
 						</li>
 
+						<li><a href="clientes.php"><i class="fa fa-user margimDireitaIcon"></i> Clientes</a>
+						</li>
+						
 						<li><a href="carros.php"><i class="fa fa-car margimDireitaIcon"></i>Carros</a>
 						</li>
 
