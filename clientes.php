@@ -39,7 +39,7 @@
 
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			
-		<h1>Cadastro Cliente</h1><p>Forneça Alguns Informações Sobre o novo cliente.</p><hr>
+		<h1>Cadastro Cliente</h1><p>Forneça Alguns Informações Sobre o Novo Cliente.</p><hr>
 		<form>
 		
 			<div class="row">
@@ -93,16 +93,19 @@
 					<label for="representante">E-mail</label>
 					<input type="text" class="form-control" id="numero" placeholder="E-mail">
 				</div>
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+					<label for="numero">Status:</label>
+						<select class="form-control">
+							<option>Ativo</option>
+							<option>negativado</option>
+						</select>
+				</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 					<div><spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em></div>
 				</div>
 		
 				</div>
-				
-		
-		
-		
-		
+
 			
 			<button type="submit" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
 		</form><br><br><br><br>
@@ -122,6 +125,7 @@
         <th>Nome</th>
         <th>Telefone 1</th>
         <th>Telefone 2</th>
+        <th>Status</th>
         
         <th >Ações</th>
       </tr>
@@ -132,6 +136,7 @@
         <td>Ana Maria Pereira Leal Nunes</td>
         <td>86 98814-4785</td>
         <td>86 99514-8652</td>
+        <td>Negativado</td>
         
         <td>
         	<button type="button" class="btn btn-success">Visualizar</button>
