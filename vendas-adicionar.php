@@ -40,7 +40,7 @@
 		<div class="row">
 			<div class="col-lg-12">
 
-				<h1 class="app-h1-painel">Painel - Vendas1</h1>
+				<h1 class="app-h1-painel">Painel - Vendas</h1>
 
 			</div>
 		</div>
