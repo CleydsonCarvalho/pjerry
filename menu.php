@@ -83,7 +83,7 @@
                     </a>
 
 					<ul class="dropdown-menu multi-level">
-						<li><a href='empresa.php'><i class="fa fa-plus margimDireitaIcon"></i> Adiconar</a>
+						<li><a href='vendas-adicionar.php'><i class="fa fa-plus margimDireitaIcon"></i> Adiconar</a>
 						</li>
 
 						<li><a href="#"><i class="fa fa-search margimDireitaIcon"></i> Procurar</a>

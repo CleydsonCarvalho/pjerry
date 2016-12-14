@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="index.php" server="C:/wamp64/www/pjerry/" local="131261239084294984" remote="131261239080000000" Dst="0" />
-<file name="menu.php" server="C:/wamp64/www/pjerry/" local="131261312277045148" remote="131261312270000000" Dst="0" />
+<file name="menu.php" server="C:/wamp64/www/pjerry/" local="131261476277293883" remote="131261476270000000" Dst="0" />
 <file name="empresa.php" server="C:/wamp64/www/pjerry/" local="131261462740643575" remote="131261462740000000" Dst="0" />
 <file name="produtos.php" server="C:/wamp64/www/pjerry/" local="131261314790211435" remote="131261314790000000" Dst="0" />
 <file name="funcionarios.php" server="C:/wamp64/www/pjerry/" local="131261463401451430" remote="131261463400000000" Dst="0" />
@@ -9,4 +9,5 @@
 <file name="rotas.php" server="C:/wamp64/www/pjerry/" local="131261314652457599" remote="131261314650000000" Dst="0" />
 <file name="fornecedor.php" server="C:/wamp64/www/pjerry/" local="131261315125758431" remote="131261315120000000" Dst="0" />
 <file name="despesas.php" server="C:/wamp64/www/pjerry/" local="131261379865062841" remote="131261379860000000" Dst="0" />
+<file name="vendas-adicionar.php" server="C:/wamp64/www/pjerry/" local="131261585565665666" remote="131261585560000000" Dst="0" />
 </dwsync>

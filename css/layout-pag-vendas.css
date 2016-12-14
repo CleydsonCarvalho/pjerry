@@ -37,4 +37,12 @@ td.app-center-th {
 spam.app-astericoRed {
     color: #a94442;
 }
+.form-group.camposTabelas {
+    margin-bottom: 0px;
+	min-width: 100px;
+}
 
+th.app-btn-excluir {
+    background-color: #bdbdbd;
+    width: 20px;
+}
