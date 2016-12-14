@@ -20,14 +20,16 @@
 <script type="text/javascript" src="js/jquery.quick.search.js"></script>
 
 <script type="text/javascript">
+	
     function optionCheck(){
         var option = document.getElementById("options").value;
         if(option == "show"){
             document.getElementById("hiddenDiv").style.visibility ="visible";
         }
-        if(option == "goto"){
-            window.location = "http://google.com";
+		if(option == "0"){
+            document.getElementById("avista").style.visibility ="visible";
         }
+        
     }
 </script>
 
@@ -184,28 +186,28 @@ include'menu.php';
 			<div class="col-lg-12">
 			
 			
-			<select id="options" onchange="optionCheck()">
+			<select class="form-control" id="options" onchange="optionCheck()">
 
 
-			<option value="show">Mostra Div</option>
-			<option value="goto">Vai para o Google</option>
+			<option value="0">Forma de Pagamento</option>
+			<option value="show">Avista</option>
+			<option value="show">Aprazo</option>
 
 			</select>
 
 			
 			
 			
-			<select onChange='setText()' id='option1' class="form-control">
-				
-				<option value='0'>Avista</option>
-				<option value='2'>Parcelado</option>
-			</select>
 			
 			
 			
 			<hr>
 				<div id="hiddenDiv" style="height:100px;width:300px;border:1px;visibility:hidden;">
 				Eu estou visível agora!
+				</div>
+				
+				<div id="avista" style="height:100px;width:300px;border:1px;visibility:hidden;">
+				pagamento avista
 				</div>
 			</div>
 		</div>
