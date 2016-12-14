@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
 <file name="index.php" server="C:/wamp64/www/pjerry/" local="131261239084294984" remote="131261239080000000" Dst="0" />
+<<<<<<< HEAD
 <file name="menu.php" server="C:/wamp64/www/pjerry/" local="131262100589660151" remote="131262100580000000" Dst="0" />
 <file name="empresa.php" server="C:/wamp64/www/pjerry/" local="131262115995456375" remote="131262115990000000" Dst="0" />
+=======
+<file name="menu.php" server="C:/wamp64/www/pjerry/" local="131262091657948637" remote="131262091650000000" Dst="0" />
+<file name="empresa.php" server="C:/wamp64/www/pjerry/" local="131261462740643575" remote="131261462740000000" Dst="0" />
+>>>>>>> origin/master
 <file name="produtos.php" server="C:/wamp64/www/pjerry/" local="131261314790211435" remote="131261314790000000" Dst="0" />
 <file name="funcionarios.php" server="C:/wamp64/www/pjerry/" local="131261463401451430" remote="131261463400000000" Dst="0" />
 <file name="carros.php" server="C:/wamp64/www/pjerry/" local="131262100588215730" remote="131262100580000000" Dst="0" />
 <file name="rotas.php" server="C:/wamp64/www/pjerry/" local="131261314652457599" remote="131261314650000000" Dst="0" />
 <file name="fornecedor.php" server="C:/wamp64/www/pjerry/" local="131261315125758431" remote="131261315120000000" Dst="0" />
 <file name="despesas.php" server="C:/wamp64/www/pjerry/" local="131261379865062841" remote="131261379860000000" Dst="0" />
-<file name="vendas-adicionar.php" server="C:/wamp64/www/pjerry/" local="131261980721298750" remote="131261980720000000" Dst="0" />
+<file name="vendas-adicionar.php" server="C:/wamp64/www/pjerry/" local="131262122447212431" remote="131262122440000000" Dst="0" />
+<file name="clientes.php" server="C:/wamp64/www/pjerry/" local="131262092057592631" remote="131262092050000000" Dst="0" />
 </dwsync>
