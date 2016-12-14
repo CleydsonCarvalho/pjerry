@@ -21,16 +21,14 @@
 
 <script type="text/javascript">
 	
-    function optionCheck(){
-        var option = document.getElementById("options").value;
-        if(option == "show"){
-            document.getElementById("hiddenDiv").style.visibility ="visible";
-        }
-		if(option == "0"){
-            document.getElementById("avista").style.visibility ="visible";
-        }
-        
-    }
+function showDiv(div)
+{
+document.getElementById("avista").className = "invisivel";
+document.getElementById("aprazo").className = "invisivel";
+
+
+document.getElementById(div).className = "visivel";
+}
 </script>
 
 </head>
@@ -185,15 +183,13 @@ include'menu.php';
 		<div class="row">
 			<div class="col-lg-12">
 			
-			
-			<select class="form-control" id="options" onchange="optionCheck()">
-
-
-			<option value="0">Forma de Pagamento</option>
-			<option value="show">Avista</option>
-			<option value="show">Aprazo</option>
-
+			<select class="form-control" id="combobox" name="combobox" onChange="showDiv(this.value);">
+				<option value="0">Metodo de Pagamento</option>
+				<option value="avista">Avista</option>
+				<option value="aprazo">Aprazo</option>
+				
 			</select>
+			
 
 			
 			
@@ -202,13 +198,77 @@ include'menu.php';
 			
 			
 			<hr>
-				<div id="hiddenDiv" style="height:100px;width:300px;border:1px;visibility:hidden;">
-				Eu estou visível agora!
+				<div id="inicio" class="invisivel">Metado de Pagamento</div>
+				<div id="avista" class="invisivel">Pagamento Avista</div>
+				<div id="aprazo" class="invisivel">
+					<?php 
+					
+		
+					
+						$valor = 444;
+						$parcela = 4;
+						$resultado = $valor/$parcela;
+						$formatado = number_format($resultado, 2,",", "");
+
+						echo "<p><small><b>Parcele em até '".$parcela."' X sem juros de '".$formatado."'</b></small><br />";
+					
+						for ( $i=1; $i <= $parcela; $i++ ) {
+						echo '<small>'.$i.'x de '.$formatado = number_format($valor/$i, 2,",", "").'</small><br />';	
+						}
+						echo '</p>';
+
+					
+					?>
+					
+					<hr>
+					
+					
+					
+					
+				<?php 
+					
+					function calcularParcelas($nParcelas, $dataPrimeiraParcela = null){
+						if($dataPrimeiraParcela != null){
+						$dataPrimeiraParcela = explode( "/",$dataPrimeiraParcela);
+						$dia = $dataPrimeiraParcela[0];
+						$mes = $dataPrimeiraParcela[1];
+						$ano = $dataPrimeiraParcela[2];
+						} else {
+						$dia = date("d");
+						$mes = date("m");
+						$ano = date("Y");
+						}
+
+						for($x = 0; $x < $nParcelas; $x++){
+						echo date("d/m/Y",strtotime("+".$x." month",mktime(0, 0, 0,$mes,$dia,$ano))),"<br/>";
+						}
+					}
+
+					echo "Calcula as parcela a partir de hoje<br/>";
+					calcularParcelas(3);
+					
+					
+					echo "<br/><br/>";
+					echo "Calcula as parcela a partir de uma data qualquer<br/>";
+					calcularParcelas(3, "20/12/2016");
+					
+					?>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
 				</div>
 				
-				<div id="avista" style="height:100px;width:300px;border:1px;visibility:hidden;">
-				pagamento avista
-				</div>
+		
 			</div>
 		</div>
 		

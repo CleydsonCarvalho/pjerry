@@ -46,3 +46,5 @@ th.app-btn-excluir {
     background-color: #bdbdbd;
     width: 20px;
 }
+.invisivel { display: none; }
+.visivel { visibility: visible; }
