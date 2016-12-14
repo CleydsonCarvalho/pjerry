@@ -171,12 +171,14 @@ include'menu.php';
 		
 		
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-4">
-				<button type="submit" class="btn btn-success demo pull-right">Pagamento</button>
-				<button type="submit" class="btn btn-warning demo pull-right">Guardar</button>		
-				<button type="submit" class="btn btn-danger demo pull-right">Cancelar</button>
-				
-					
+			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right">
+				<button type="submit" class="btn btn-success btn-block">Pagamento</button>
+			</div>
+			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right">
+				<button type="submit" class="btn btn-warning btn-block">Guardar</button>					
+			</div>
+			<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 pull-right">	
+				<button type="submit" class="btn btn-danger btn-block">Cancelar</button>				
 			</div>
 			
 		</div>
