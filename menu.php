@@ -28,7 +28,7 @@
 				<li>
 					<a href="" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-file-text margimDireitaIcon"></i>
-						 Cadastro
+						 Cadastros
 						<b class="caret"></b>
                     </a>
 				

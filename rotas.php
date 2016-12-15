@@ -55,18 +55,21 @@
 
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
-							<label for="nome">Nome da Rota:</label>
-							<input type="text" class="form-control" id="nome" placeholder="Nome">
+							<label for="nome"><spam class="app-astericoRed">*</spam> Nome da Rota:</label>
+							<input type="text" class="form-control" id="nome" placeholder="Nome" required>
 						</div>
 
 						<div class="col-xs-12 col-sm-2 col-md-3 col-lg-3 app-margimBotomCamposFomr">
-							<label for="numero">Estado:</label>
+							<label for="numero"><spam class="app-astericoRed">*</spam> Estado:</label>
 							<select class="form-control">
-								<option>Piaui</option>
-								<option>Maranhão</option>
-
+								<option value="">Selecione o Estado</option>
+								<option value="piaui">Piaui</option>
+								<option value="maranhao">Maranhão</option>
 							</select>
 						</div>
+						<div>
+								<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
+							</div>
 
 					</div>
 
