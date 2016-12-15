@@ -9,30 +9,10 @@
             </button>
 		
 
+
 			<!--<a class="navbar-brand" href="index.php"><strong>P</strong>JERRY </a>-->
 		</div>
 		<div class="collapse navbar-collapse">
-
-			<!-- Nada a ver
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="#">Link</a>
-				</li>
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li><a href="#">Action</a>
-						</li>
-						<li><a href="#">Another action</a>
-						</li>
-						<li><a href="#">Something else here</a>
-						</li>
-						<li role="separator" class="divider"></li>
-						<li><a href="#">Separated link</a>
-						</li>
-					</ul>
-				</li>
-			</ul>
-			-->
 
 			<ul class="nav navbar-nav">
 
@@ -42,6 +22,7 @@
                    Home
                     </a>
 				
+
 				</li>
 
 				<li>
@@ -50,6 +31,7 @@
 						 Cadastro
 						<b class="caret"></b>
                     </a>
+				
 
 					<ul class="dropdown-menu multi-level">
 						<li><a href='empresa.php'><i class="fa fa-building-o margimDireitaIcon"></i> Empresa</a>
@@ -60,7 +42,7 @@
 
 						<li><a href="clientes.php"><i class="fa fa-user margimDireitaIcon"></i> Clientes</a>
 						</li>
-						
+
 						<li><a href="carros.php"><i class="fa fa-car margimDireitaIcon"></i>Carros</a>
 						</li>
 
@@ -84,6 +66,7 @@
 						Vendas
 						<b class="caret"></b>
                     </a>
+				
 
 					<ul class="dropdown-menu multi-level">
 						<li><a href='vendas-adicionar.php'><i class="fa fa-plus margimDireitaIcon"></i> Adiconar</a>
@@ -93,7 +76,7 @@
 						</li>
 					</ul>
 				</li>
-				
+
 				<li>
 					<a href="" class="dropdown-toggle" data-toggle="dropdown">
 						<i class="fa fa-pie-chart margimDireitaIcon"></i>
@@ -101,19 +84,20 @@
 						<b class="caret"></b>
                     </a>
 				
+
 					<ul class="dropdown-menu multi-level">
 						<li><a href='empresa.php'><i class="glyphicon glyphicon-shopping-cart margimDireitaIcon"></i> Vendas</a>
 						</li>
-						
+
 						<li><a href="#"><i class="glyphicon glyphicon-download margimDireitaIcon"></i> Devolução</a>
 						</li>
-					
+
 						<li><a href="produtos.php"><i class="glyphicon glyphicon-remove-sign margimDireitaIcon"></i> Prejuízo</a>
 						</li>
-						
+
 						<li><a href="#"><i class="glyphicon glyphicon-edit margimDireitaIcon"></i> Negativados</a>
 						</li>
-						
+
 						<li class="divider"></li>
 						<li class="dropdown-submenu">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-usd margimDireitaIcon"></i> Financeiro</a>
@@ -129,15 +113,13 @@
 								<li class="divider"></li>
 								<li><a href="#"><i class="fa fa-money margimDireitaIcon"></i> Despesas</a>
 								</li>
-								
+
 							</ul>
 						</li>
 					</ul>
 				</li>
 
 			</ul>
-
-
 
 		</div>
 		<!--/.nav-collapse -->

@@ -91,7 +91,7 @@
 					<input type="text" class="form-control" id="numero" placeholder="E-mail">
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 ">
-					<div><spam class="app-astericoRede">*</spam> <em>Preenchimento obrigatório.</em></div>
+					<div><spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em></div>
 				</div>
 					
 				</div>
