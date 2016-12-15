@@ -80,7 +80,7 @@
   </div>		
 <div class="table-responsive">
   
-  <table class="table table-hover lista-clientes" id="tabela">
+  <table class="table table-hover table-striped lista-clientes" id="tabela">
     <thead>
       <tr>
         <th>Código</th>
@@ -89,7 +89,7 @@
         <th>Cor</th>
         <th>Placa</th>
         
-        <th class="app-center">Ações</th>
+        <th class="app-btn-acoes text-center">Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -101,7 +101,31 @@
         <td>Branco</td>
         <td>MIN-4257</td>
         
-        <td class="app-center">
+        <td class="app-btn-acoes text-center">
+        	<button type="button" class="btn btn-warning">Editar</button>
+			<button type="button" class="btn btn-danger">Excluir</button>
+        </td>
+      </tr>
+       <tr>
+        <td scope="row">1</td>
+        <td>Fiat</td>
+        <td>Palio Elx</td>
+        <td>Branco</td>
+        <td>MIN-4257</td>
+        
+        <td class="app-btn-acoes text-center">
+        	<button type="button" class="btn btn-warning">Editar</button>
+			<button type="button" class="btn btn-danger">Excluir</button>
+        </td>
+      </tr>
+       <tr>
+        <td scope="row">1</td>
+        <td>Fiat</td>
+        <td>Palio Elx</td>
+        <td>Branco</td>
+        <td>MIN-4257</td>
+        
+        <td class="app-btn-acoes text-center">
         	<button type="button" class="btn btn-warning">Editar</button>
 			<button type="button" class="btn btn-danger">Excluir</button>
         </td>

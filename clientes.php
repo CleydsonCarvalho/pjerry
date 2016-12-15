@@ -12,7 +12,7 @@
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="css/bootstrap.min.css">
 <link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="stylesheet" href="css/layout-pag-funcionarios.css">
+<link rel="stylesheet" href="css/layout-pag-cliente.css">
 <link rel="stylesheet" href="css/menu.css">
 <link rel="stylesheet" href="css/ajustes-font.css">
 <!-- jQuery (obrigatório para plugins JavaScript do Bootstrap) -->
@@ -118,7 +118,7 @@
   </div>		
 <div class="table-responsive">
   
-  <table class="table table-hover lista-clientes" id="tabela">
+  <table class="table table-hover table-striped lista-clientes" id="tabela">
     <thead>
       <tr>
        
@@ -127,7 +127,7 @@
         <th>Telefone 2</th>
         <th>Status</th>
         
-        <th >Ações</th>
+        <th class="app-btn-acoes text-center">Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -138,7 +138,37 @@
         <td>86 99514-8652</td>
         <td>Negativado</td>
         
-        <td>
+        <td class="app-btn-acoes">
+        	<button type="button" class="btn btn-success">Visualizar</button>
+        	<button type="button" class="btn btn-warning">Editar</button>
+        	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
+			<button type="button" class="btn btn-danger">Excluir</button>
+       		</a>
+        </td>
+      </tr> 
+       <tr>
+        
+        <td>Ana Maria Pereira Leal Nunes</td>
+        <td>86 98814-4785</td>
+        <td>86 99514-8652</td>
+        <td>Negativado</td>
+        
+        <td class="app-btn-acoes">
+        	<button type="button" class="btn btn-success">Visualizar</button>
+        	<button type="button" class="btn btn-warning">Editar</button>
+        	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
+			<button type="button" class="btn btn-danger">Excluir</button>
+       		</a>
+        </td>
+      </tr>
+       <tr>
+        
+        <td>Ana Maria Pereira Leal Nunes</td>
+        <td>86 98814-4785</td>
+        <td>86 99514-8652</td>
+        <td>Negativado</td>
+        
+        <td class="app-btn-acoes">
         	<button type="button" class="btn btn-success">Visualizar</button>
         	<button type="button" class="btn btn-warning">Editar</button>
         	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">

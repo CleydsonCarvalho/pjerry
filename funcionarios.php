@@ -115,7 +115,7 @@
   </div>		
 <div class="table-responsive">
   
-  <table class="table table-hover lista-clientes" id="tabela">
+  <table class="table table-hover table-striped lista-clientes" id="tabela">
     <thead>
       <tr>
        
@@ -123,7 +123,7 @@
         <th>Telefone 1</th>
         <th>Telefone 2</th>
         
-        <th >Ações</th>
+        <th class="app-btn-acoes text-center"> Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -133,7 +133,35 @@
         <td>86 98814-4785</td>
         <td>86 99514-8652</td>
         
-        <td>
+        <td class="app-btn-acoes">
+        	<button type="button" class="btn btn-success">Visualizar</button>
+        	<button type="button" class="btn btn-warning">Editar</button>
+        	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
+			<button type="button" class="btn btn-danger">Excluir</button>
+       		</a>
+        </td>
+      </tr>
+       <tr>
+        
+        <td>Ana Maria Pereira Leal Nunes</td>
+        <td>86 98814-4785</td>
+        <td>86 99514-8652</td>
+        
+        <td class="app-btn-acoes">
+        	<button type="button" class="btn btn-success">Visualizar</button>
+        	<button type="button" class="btn btn-warning">Editar</button>
+        	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
+			<button type="button" class="btn btn-danger">Excluir</button>
+       		</a>
+        </td>
+      </tr>
+       <tr>
+        
+        <td>Ana Maria Pereira Leal Nunes</td>
+        <td>86 98814-4785</td>
+        <td>86 99514-8652</td>
+        
+        <td class="app-btn-acoes">
         	<button type="button" class="btn btn-success">Visualizar</button>
         	<button type="button" class="btn btn-warning">Editar</button>
         	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
@@ -142,7 +170,7 @@
         </td>
       </tr>
       
-      </tr>
+      
     </tbody>
   </table>
 </div>

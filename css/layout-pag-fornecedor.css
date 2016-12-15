@@ -24,3 +24,12 @@
 	margin-bottom: 20px;
 }
 
+thead {
+    background-color: rgb(215, 226, 236) !important;
+}
+th.app-btn-acoes {
+    width: 151px;
+}
+td.app-btn-acoes {
+    background-color: #bdbdbd !important; 
+}

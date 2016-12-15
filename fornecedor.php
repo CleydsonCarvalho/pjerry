@@ -109,7 +109,7 @@
   </div>		
 <div class="table-responsive">
   
-  <table class="table table-hover lista-clientes" id="tabela">
+  <table class="table table-hover table-striped lista-clientes" id="tabela">
     <thead>
       <tr>
         <th>Código</th>
@@ -119,7 +119,7 @@
         <th>Valor V</th>
         <th>Ganho %</th>
         <th>Retorno</th>
-        <th class="app-center">Ações</th>
+        <th class="app-btn-acoes text-center">Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -131,7 +131,7 @@
         <td>222,40</td>
         <td>60%</td>
         <td>300,00</td>
-        <td class="app-center">
+        <td class="app-btn-acoes text-center">
         	<button type="button" class="btn btn-warning">Editar</button>
         	<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
 			<button type="button" class="btn btn-danger">Excluir</button>
@@ -146,108 +146,12 @@
         <td>120,00</td>
         <td>100%</td>
         <td>200,00</td>
-        <td class="app-center">
+        <td class="app-btn-acoes text-center">
         	<button type="button" class="btn btn-warning">Editar</button>
 			<button type="button" class="btn btn-danger">Excluir</button>
         </td>
       </tr>
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
-      
-             <tr>
-        <td scope="row">79</td>
-        <td>Espelho 2M</td>
-        <td>2</td>
-        <td>50,00</td>
-        <td>120,00</td>
-        <td>100%</td>
-        <td>200,00</td>
-        <td class="app-center">
-        	<button type="button" class="btn btn-warning">Editar</button>
-			<button type="button" class="btn btn-danger">Excluir</button>
-        </td>
-      </tr>
+     
     </tbody>
   </table>
 </div>

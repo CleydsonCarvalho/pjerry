@@ -25,7 +25,9 @@
 	margin-bottom: 20px;
 }
 
-
+thead {
+    background-color: rgb(215, 226, 236) !important;
+}
 th.app-center-th {
     text-align: center;
 }
@@ -37,4 +39,9 @@ td.app-center-th {
 spam.app-astericoRed {
     color: #a94442;
 }
-
+th.app-btn-acoes {
+    width: 242px;
+}
+td.app-btn-acoes {
+    background-color: #bdbdbd !important;
+}
