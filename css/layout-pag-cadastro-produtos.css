@@ -33,3 +33,7 @@ th.app-btn-acoes {
 td.app-btn-acoes {
     background-color: #bdbdbd !important; 
 }
+
+spam.app-astericoRed {
+    color: #a94442;
+}

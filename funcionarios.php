@@ -86,8 +86,13 @@
 							<input type="text" class="form-control" id="numero" placeholder="Segundo contato">
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 app-margimBotomCamposFomr">
-							<label for="representante">E-mail</label>
-							<input type="text" class="form-control" id="numero" placeholder="E-mail">
+							<label for="representante">Função</label>
+							<select class="form-control">
+									<option>Vendedor</option>
+									<option>Cobrador</option>
+									<option>Motorista</option>
+									<option>Supervisor</option>
+								</select>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
 							<div>

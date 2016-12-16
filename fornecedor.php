@@ -35,7 +35,7 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<h1>Fornecedor</h1>
-				<p>Cadastro de fornecedor da Empresa.</p>
+				<p><em>Cadastro de fornecedor da Empresa.</em></p>
 				<hr>
 				<form>
 					<div class="row">
@@ -87,17 +87,15 @@
 							<label for="representante">E-mail</label>
 							<input type="text" class="form-control" id="numero" placeholder="E-mail">
 						</div>
-
 						<div>
 							<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
 						</div>
 					</div>
-
 					<button type="submit" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
 				</form><br><br><br><br>
 
 				<h1 class="zerarMargimH">Fornecedores Cadastrados</h1>
-				<p>Lista com todos os fornecedores da empresa.</p>
+				<p><em>Lista com todos os fornecedores da empresa.</em></p>
 				<hr>
 				<div class="form-group">
 					<input type="text" class="form-control input-search" alt="lista-clientes" placeholder="Buscar na Lista">
@@ -107,41 +105,33 @@
 						<thead>
 							<tr>
 								<th>Código</th>
-								<th>Nome</th>
-								<th>Estoque</th>
-								<th>Valor C</th>
-								<th>Valor V</th>
-								<th>Ganho %</th>
-								<th>Retorno</th>
+								<th>Fornecedor</th>
+								<th>CNPJ / CPF</th>
+								<th>Telefone</th>
 								<th class="app-btn-acoes text-center">Ações</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td scope="row">098</td>
-								<td>Guarda Roupa 4 portas cinza</td>
-								<td>2</td>
-								<td>139,00</td>
-								<td>222,40</td>
-								<td>60%</td>
-								<td>300,00</td>
+								<td scope="row">01</td>
+								<td>AA Comesticos</td>
+								<td>080.054.950-001</td>
+								<td>86 99548-7854</td>
 								<td class="app-btn-acoes text-center">
 									<button type="button" class="btn btn-warning">Editar</button>
 									<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
 									<button type="button" class="btn btn-danger">Excluir</button>
        								</a>
-								
 								</td>
 							</tr>
 							<tr>
-								<td scope="row">79</td>
-								<td>Espelho 2M</td>
-								<td>2</td>
-								<td>50,00</td>
-								<td>120,00</td>
-								<td>100%</td>
-								<td>200,00</td>
+								<td scope="row">02</td>
+								<td>Herry Cosmeticos</td>
+								<td>548.147.853-0001</td>
+								<td>86 98871-4587</td>
+								
 								<td class="app-btn-acoes text-center">
+									<!--<button type="button" class="btn btn-success">Visualizar</button>-->
 									<button type="button" class="btn btn-warning">Editar</button>
 									<button type="button" class="btn btn-danger">Excluir</button>
 								</td>
@@ -156,5 +146,4 @@
 
 	<script src="js/bootstrap.min.js"></script>
 </body>
-
 </html>
