@@ -43,15 +43,3 @@ td.app-btn-acoes {
     background-color: #bdbdbd !important; 
 }
 
-/* Corrigir isso*/
-button.btn.btn-success.btn-lg.btn-block.app-buscarProduto.app-top-18 {
-    margin-top: 23px;
-}
-
-button.btn.btn-primary.btn-lg.btn-block.app-buscarProduto.app-top-18 {
-    margin-top: 23px;
-}
-
-h2.zerarMargimH.app-total-dispesas.app-top-18 {
-    margin-top: 23px;
-}

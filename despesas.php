@@ -42,24 +42,33 @@
 
 	<div class="container">
 		<div class="row">
+		
 			<div class="col-lg-3">
 				<h1>Despesas</h1>
 				<p>Despesas da Empresa.</p>
-				<hr>
+				
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+		</div>
+		<div class="row">	
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
 				<button type="button" class="btn btn-success btn-lg btn-block app-buscarProduto app-top-18" data-toggle="modal" data-target="#myModalTipo">
 				Novo Tipo 
 				</button>			
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+			
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
 				<button type="button" class="btn btn-primary btn-lg btn-block app-buscarProduto app-top-18" data-toggle="modal" data-target="#myModal">
 				Cadastrar Despesa
 				</button>		
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+			
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-2">
 				<h2 class="zerarMargimH app-total-dispesas app-top-18">4.567.00</h2>
 			</div>
+			
+			
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><hr></div>
+			
 			<div class="col-lg-12">
 				<div class="form-group">
 					<input type="text" class="form-control input-search" alt="lista-clientes" placeholder="Buscar na Lista">

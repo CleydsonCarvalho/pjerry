@@ -201,22 +201,58 @@ include'menu.php';
 				<div id="inicio" class="invisivel">Metado de Pagamento</div>
 				<div id="avista" class="invisivel">Pagamento Avista</div>
 				<div id="aprazo" class="invisivel">
+				
+					<div class="form-group">
+						<label for="dia">Primeira Parcela</label>
+						<input type="date" class="form-control" id="dia" placeholder="Informe o dia do mes ">
+					</div>
+				
 					<?php 
+				
 					
-		
 					
-						$valor = 444;
-						$parcela = 4;
-						$resultado = $valor/$parcela;
-						$formatado = number_format($resultado, 2,",", "");
+						function calcularParcelas($nParcelas, $valor, $dataPrimeiraParcela = null){
+						
+							
+							if($dataPrimeiraParcela != null){
+								$dataPrimeiraParcela = explode( "/",$dataPrimeiraParcela);
+								$dia = $dataPrimeiraParcela[0];
+								$mes = $dataPrimeiraParcela[1];
+								$ano = $dataPrimeiraParcela[2];
+								} else {
+									$dia = date("d");
+									$mes = date("m");
+									$ano = date("Y");
+									}
 
-						echo "<p><small><b>Parcele em até '".$parcela."' X sem juros de '".$formatado."'</b></small><br />";
-					
-						for ( $i=1; $i <= $parcela; $i++ ) {
-						echo '<small>'.$i.'x de '.$formatado = number_format($valor/$i, 2,",", "").'</small><br />';	
+					 		return $nParcelas;
+							
+							$resultado = $valor/$nParcelas;
+							$formatado = number_format($resultado, 2,",", "");
+							
+							
+							for($x = 0; $x < $nParcelas; $x++){
+							echo $formatado ." VENCIMENTO EM ". date("d/m/Y",strtotime("+".$x." month",mktime(0, 0, 0,$mes,$dia,$ano))),"<br/>";
+							}
+
+
+						
 						}
-						echo '</p>';
+					
+					
+						echo "Calcula as parcela a partir de hoje<br/>";
+						echo "<p><small><b>Parcele em até '".$nParcela."' X sem juros de '".$formatado."'</b></small><br />";
+						calcularParcelas(3, 400);
 
+
+						echo "<br/><br/>";
+					/*
+						echo "Calcula as parcela a partir de uma data qualquer<br/>";
+						calcularParcelas(7, "20/12/2016");
+					
+					*/
+					
+					
 					
 					?>
 					
@@ -225,34 +261,10 @@ include'menu.php';
 					
 					
 					
-				<?php 
-					
-					function calcularParcelas($nParcelas, $dataPrimeiraParcela = null){
-						if($dataPrimeiraParcela != null){
-						$dataPrimeiraParcela = explode( "/",$dataPrimeiraParcela);
-						$dia = $dataPrimeiraParcela[0];
-						$mes = $dataPrimeiraParcela[1];
-						$ano = $dataPrimeiraParcela[2];
-						} else {
-						$dia = date("d");
-						$mes = date("m");
-						$ano = date("Y");
-						}
-
-						for($x = 0; $x < $nParcelas; $x++){
-						echo date("d/m/Y",strtotime("+".$x." month",mktime(0, 0, 0,$mes,$dia,$ano))),"<br/>";
-						}
-					}
-
-					echo "Calcula as parcela a partir de hoje<br/>";
-					calcularParcelas(3);
 					
 					
-					echo "<br/><br/>";
-					echo "Calcula as parcela a partir de uma data qualquer<br/>";
-					calcularParcelas(3, "20/12/2016");
 					
-					?>
+			
 					
 					
 					
