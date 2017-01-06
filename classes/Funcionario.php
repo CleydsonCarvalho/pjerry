@@ -1,8 +1,8 @@
 <?php
 
-class Users extends DB {
+class Funcionario extends DB {
 
-    protected $table = 'users';
+    protected $table = 'funcionarios';
 	
 	
 	public function create( $criar ) {
@@ -116,10 +116,9 @@ class Users extends DB {
 	//foreach($user->readId($id = $resultado de outra class->tipo_empresa ) as $key => $value): ?
 
 	//endforeach;
-	public function readId($id) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id  ORDER BY id DESC";
+	public function readAll() {
+		$sql = "SELECT * FROM $this->table ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}

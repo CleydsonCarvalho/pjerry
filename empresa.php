@@ -26,29 +26,13 @@ $empresa = new Empresa();
 		}else{
 			
 			$empresa->create($criar);
+			 header("empresa.php"); 
 		}
-		
-		
-		
-		
-	    //$users->testarForm($demo);
-		
-
-		var_dump($res);
-		echo"<hr>";
-		var_dump($_POST);
-	
-		
-	
-		
-	
 		
 	}
 
 	if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'salvar' ) {
 
-		//$buscaUsers = $users->readLine( $id = $_POST[ 'id' ] );
-		
 		// CAMPOS NEGADOS
 		$remover = array(
 			$_POST[ 'acao' ],
@@ -58,17 +42,13 @@ $empresa = new Empresa();
 		$atualizar = array_filter($resultado);
 	    
 	    $empresa->update($atualizar);
-		//var_dump($atualizar);
-
-
+		 header("Location: empresa.php"); 
 	}
 
 	if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 		$users->delete( $id = $_GET[ 'id' ] );
 		$tipo_clientes->deletex( $id = $_GET[ 'id' ] );
 		$sistemacliente->deletex( $id = $_GET[ 'id' ] );
-		
-
 	}
 ?>
 <!doctype html>
@@ -101,7 +81,6 @@ $empresa = new Empresa();
 	<?php 
  include'menu.php';	
 ?>
-
 	<div class="container">
 		<div class="row">
 		
@@ -109,7 +88,6 @@ $empresa = new Empresa();
 			if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'editar' ) {
 
 				$buscaEmpresa = $empresa->readLine( $id = $_GET[ 'id' ] );
-
 		?>
 		<!-- Editar da Empresa-->
 		<div class="col-lg-12">
@@ -144,7 +122,8 @@ $empresa = new Empresa();
 							<label for="numero">Região:</label>
 							<select class="form-control" name="regiao" required>
 							
-								<option selected value="value="<?=$buscaEmpresa->regiao?>""><?=$buscaEmpresa->regiao?></option>
+								<option selected value="<?=$buscaEmpresa->regiao?>"><?=$buscaEmpresa->regiao?></option>
+								
 								<option value="Norte">Norte</option>
 								<option value="Sul">Sul</option>
 								<option value="Leste">Leste</option>
@@ -198,7 +177,7 @@ $empresa = new Empresa();
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 							<label for="cnpj">CNPJ:</label>
-							<input type="text" class="form-control" id="nome" name="cnpj" placeholder="Digite cnpj" required>
+							<input type="text" class="form-control" id="cnpj" name="cnpj" placeholder="Digite cnpj" required>
 						</div>
 						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 app-margimBotomCamposFomr">
 							<label for="endereco">Endereço e complemento:</label>
@@ -213,7 +192,7 @@ $empresa = new Empresa();
 							<input type="text" class="form-control" id="numero" name="numero" placeholder="Numero">
 						</div>
 						<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-							<label for="numero">Região:</label>
+							<label for="regiao">Região:</label>
 							<select class="form-control" name="regiao" required>
 								<option selected value="">Selecione</option>
 								<option value="Norte">Norte</option>
@@ -234,7 +213,7 @@ $empresa = new Empresa();
 						</div>
 						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 app-margimBotomCamposFomr">
 							<label for="telefoneCelular">Contato Movel:</label>
-							<input type="text" class="form-control" id="numero" name="telefoneCelular" placeholder="Telefone Movel">
+							<input type="text" class="form-control" id="telefoneCelular" name="telefoneCelular" placeholder="Telefone Movel">
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 app-margimBotomCamposFomr">
 							<label for="email">E-mail:</label>
