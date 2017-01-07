@@ -74,7 +74,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 	<?php 
  include'menu.php';	
 ?>
-
+<!--Cadastro-->
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -157,7 +157,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 					<button type="submit" name="acao" value="cadastrar" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
 				</form><br><br><br><br>
 
-
+<!--Tabela Funcionarios-->
 				<h1 class="zerarMargimH">Funcionários Cadastrados</h1>
 				<p>Lista com todos os funcionários da empresa.</p>
 				<hr>
@@ -239,6 +239,8 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 		</div>
 	</div>
 	</div>
+	
+	
 	<!--Modal Visualizar Funcionarios-->
 	<div id="modalVisualizarFuncionario" class="modal fade" role="dialog">
 		<div class="modal-dialog">
@@ -250,8 +252,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 							&nbsp; Dados do Funcionário
 						</strong>
 					</h4>
-				
-
 				</div>
 				<div class="modal-body esp">
 					<div class="row">
@@ -321,22 +321,12 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
       				</h4>
 				</div>
 				<div class="modal-body">
-					
-					<form action="" name="" method="post" enctype="multipart/form-data" autocomplete="off">
-					
+					<form action="" name="" method="post" enctype="multipart/form-data" autocomplete="off">		
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-						
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">			
 							<label for="nome">
-								<spam class="app-astericoRed">*</spam> Nome Completo:</label>
-								
-								
+								<spam class="app-astericoRed">*</spam> Nome Completo:</label>	
 	<input type="hidden" class="form-control" id="idEdit" name="id" value="" >
-
-								
-								
-								
-								
 							<input type="text" class="form-control" id="nomeEdit" name="nome" value="" placeholder="Digete o Nome Completo" required>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 app-margimBotomCamposFomr">
@@ -373,7 +363,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						</div>
 						<div class="col-xs-12 col-sm-2 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 							<label for="regiao">Região:</label>
-							
 							<select class="form-control" name="regiao">
 								<option id="regiaoEdit"></option>
 								<option>Norte</option>
@@ -407,18 +396,8 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 							</div>
 						</div>
 					</div>
-
-					
-				
-				
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-					
-					
-					
-					
-					
-					
 					<button type="submit" name="acao" value="atualizar" class="btn btn-info">Confirmar</button>
 					</form>
 				</div>

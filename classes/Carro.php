@@ -1,7 +1,7 @@
 <?php
-class Funcionario extends DB {
+class Carro extends DB {
 
-    protected $table = 'funcionarios';
+    protected $table = 'carros';
 		
 	public function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
@@ -115,7 +115,7 @@ class Funcionario extends DB {
 
 	//endforeach;
 	public function readAll() {
-		$sql = "SELECT * FROM $this->table ORDER BY nome ASC";
+		$sql = "SELECT * FROM $this->table ORDER BY id ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();

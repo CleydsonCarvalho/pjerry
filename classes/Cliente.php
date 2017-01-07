@@ -1,7 +1,7 @@
 <?php
-class Funcionario extends DB {
+class Cliente extends DB {
 
-    protected $table = 'funcionarios';
+    protected $table = 'clientes';
 		
 	public function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
