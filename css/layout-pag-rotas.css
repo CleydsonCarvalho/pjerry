@@ -30,10 +30,54 @@ thead {
 th.app-btn-acoes {
     width: 242px;
 }
-td.app-btn-acoes {
-    background-color: #bdbdbd !important; 
-}
+
 
 spam.app-astericoRed {
     color: #a94442;
+}
+th.app-btn-acoes {
+    width: 242px;
+}
+td.app-btn-acoes {
+    background-color: #bdbdbd !important;
+}
+
+label.red {
+    color: #a94442;
+}
+
+.custom.modal-header {
+    background: #5bc0de;
+    color: #fff;
+}
+
+strong.nome.nomeRed {
+    color: #da423d;
+    font-size: 19px;
+}
+
+.col-xs-12.col-sm-12.col-md-12.col-lg-12.margim-botton.center {
+    text-align: center;
+	margin-bottom: 16px;
+}
+
+span.nome.app-span {
+    font-size: 20px;
+    color: #da423d;
+}
+
+label.laber-txt {
+    font-size: 16px;
+}
+
+a.btn.btn-primary.delete-yes.btinfo {
+    
+    background: #5bc0de;
+    border-color: #46b8da;
+}
+
+.margim-botton {
+    margin-bottom: 6px;
+    font-size: 15px;
+    color: #5C2C8B;
 }
