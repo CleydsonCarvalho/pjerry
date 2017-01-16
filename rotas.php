@@ -143,19 +143,26 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								<td class="app-btn-acoes">
 
 									<button type="button" 
-									data-nome="<?= $value_rota->id ?>" 
-									data-rg="<?= $value_rota->nome ?>" 
-									data-cpf="<?= $value_rota->estado ?>" 
+									data-id="<?= $value_rota->id ?>" 
+									data-nome="<?= $value_rota->nome ?>" 
+									data-estado="<?= $value_rota->estado ?>" 
 									
 									
 									class="visualizar btn btn-success">Visualizar</button>
 
 									<button type="button" 
+									data-id="<?= $value_rota->id ?>" 
+									data-nome="<?= $value_rota->nome ?>" 
+									data-estado="<?= $value_rota->estado ?>" 
+									
+									class="editar btn btn-warning">Editar</button>
+									
+									<button type="button" 
 										data-nome="<?= $value_rota->id ?>" 
 									data-rg="<?= $value_rota->nome ?>" 
 									data-cpf="<?= $value_rota->estado ?>" 
 									
-									class="editar btn btn-warning">Editar</button>
+									class="excluir btn btn-info">+ Cidades</button>
 									
 									<button type="button" 
 										data-nome="<?= $value_rota->id ?>" 
@@ -178,8 +185,8 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 	</div>
 	
 	
-	<!--- MODAL VISUALIZAR ROTAS -->
-	<div id="visualizarModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
+	<!--- MODAL VISUALIZAR Carros -->
+	<div id="ModalvisualizarCarro" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -190,9 +197,9 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 					<div class="modal-body">
 
 						<div class="row">
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-								<label for="nome">Rota: </label>
-								Rota 5 - Sul do Estado.
+							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr font17">
+								
+								<span class="rota"></span> - <strong><span class="estado"></span></strong>.
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
 								<label for="cnpj">Cidades: </label>
@@ -216,7 +223,151 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 	<!-- /.modal -->
 
 	<!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
-	<script src="js/bootstrap.min.js"></script>
+	
+	<!--Modal Editar Carros-->
+	<div id="modalEditarCarro" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="custom modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+      					<strong class="size-text">
+							<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+							&nbsp; Editar Funcionário
+						</strong>
+      				</h4>
+				</div>
+				<div class="modal-body">
+					<form action="" name="" method="post" enctype="multipart/form-data" autocomplete="off">		
+					<div class="row">
+					
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">			
+							<label for="nome">
+								<spam class="app-astericoRed">*</spam> Nome Completo:</label>	
+	<input type="hidden" class="form-control" id="idEdit" name="id" value="" >
+							<input type="text" class="form-control" id="nomeEdit" name="nome" value="" placeholder="Digete o Nome Completo" required >
+						</div>
+						
+						
+						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 app-margimBotomCamposFomr">
+							<label for="rg">RG:</label>
+							<input type="text" class="rdEdit form-control" id="rgEdit" name="rg" value="" placeholder="Digite seu CPF">
+						</div>
+						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 app-margimBotomCamposFomr">
+							<label for="cpf">CPF:</label>
+							<input type="text" class="form-control" id="cpfEdit" name="cpf" value="" placeholder="Digite seu CPF">
+						</div>
+						<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+							<label for="numero" >Status:</label>
+							<select class="form-control" name="status" id="status">
+								<option id="statusEdit"></option>
+								<option>Ativo</option>
+								<option>Negativado</option>
+							</select>
+						</div>
+						
+						
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+							<label for="representante">Contato 1:</label>
+							<input type="text" class="form-control" name="contato1" id="contato1Edit" placeholder="Telefone 1">
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+							<label for="representante">Contato 2:</label>
+							<input type="text" class="form-control" name="contato2" id="contato2Edit" placeholder="Telefone 2">
+						</div>
+						
+						
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
+							<label for="referencia">Referência:</label>
+							<input type="text" class="form-control" id="referenciaEdit" name="referencia" value="" placeholder="Digite seu CPF">
+						</div>
+						
+						
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
+							<label for="endereco">Endereço e complemento:</label>
+							<input type="text" class="form-control" id="enderecoEdit" name="endereco" value="" placeholder="Digite o endreço. Ex: Rua, Avenida...">
+						</div>
+						
+						
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+							<label for="bairro">Bairro:</label>
+							<input type="text" class="form-control" id="bairroEdit" name="bairro" value="" placeholder="Bairro">
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+							<label for="regiao">Região:</label>
+							<select class="form-control" name="regiao">
+								<option id="regiaoEdit"></option>
+								<option>Norte</option>
+								<option>Sul</option>
+								<option>Leste</option>
+								<option>Centro</option>
+								<option>Zona Rural</option>
+								<option>Interior</option>
+							</select>
+						</div>
+						
+						
+						
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+							<label for="cidade">Ciade:</label>
+							<input type="text" class="form-control" id="cidadeEdit" name="cidade" value="" placeholder="Cidade">
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+							<label for="estado">Estado:</label>
+							<select class="form-control" id="estadoEditSel" name="estado">
+								<option id="estadoEdit"></option>
+								<option>PI</option>
+								<option>MA</option>
+							</select>
+						</div>
+						
+						
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+							<div>
+								<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
+							</div>
+						</div>
+					</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					<button type="submit" name="acao" value="atualizar" class="btn btn-info">Confirmar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	
+	<script>
+$( '.visualizar' ).on( 'click', function () {
+	$( 'span.rota' ).text( $( this ).data( 'nome' ) );
+	$( 'span.estado' ).text( $( this ).data( 'estado' ) );
+	
+	$( '#ModalvisualizarCarro' ).modal( 'show' );
+} );
+</script>
+
+<script>
+	$( '.editar' ).on( 'click', function () {
+		var id = $( this ).data( 'id' );
+		document.getElementById('nomeEdit').text = $( this ).data( 'nome' );
+		document.getElementById('rgEdit').text = $( this ).data( 'rg' );
+		document.getElementById('cpfEdit').text = $( this ).data( 'cpf' );
+		document.getElementById('statusEdit').text = $( this ).data( 'status' );
+		document.getElementById('contato1Edit').value = $( this ).data( 'contato1' );
+		document.getElementById('contato2Edit').value = $( this ).data( 'contato1' );
+		document.getElementById('referenciaEdit').value = $( this ).data( 'referencia' );
+		document.getElementById('enderecoEdit').value = $( this ).data( 'endereco' );
+		document.getElementById('bairroEdit').value = $( this ).data( 'bairro' );
+		document.getElementById('regiaoEdit').text = $( this ).data( 'regiao' );
+		document.getElementById('cidadeEdit').value = $( this ).data( 'cidade' );
+		document.getElementById('estadoEdit').text = $( this ).data( 'estado' );
+		document.getElementById('idEdit').value = id;
+		$( '#modalEditarCarro' ).modal( 'show' );
+	} );
+</script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>

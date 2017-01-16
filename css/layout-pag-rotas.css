@@ -36,11 +36,11 @@ spam.app-astericoRed {
     color: #a94442;
 }
 th.app-btn-acoes {
-    width: 242px;
+    width: 236px;
 }
-td.app-btn-acoes {
-    background-color: #bdbdbd !important;
-}
+/*td.app-btn-acoes {
+   background-color: rgba(158, 158, 158, 0.36) !important;
+}*/
 
 label.red {
     color: #a94442;
@@ -81,3 +81,12 @@ a.btn.btn-primary.delete-yes.btinfo {
     font-size: 15px;
     color: #5C2C8B;
 }
+
+.col-xs-12.col-sm-12.col-md-12.col-lg-12.app-margimBotomCamposFomr.font17 {
+    font-size: 17px;
+}
+
+td.app-btn-acoes {
+    width: 336px;
+}
+
