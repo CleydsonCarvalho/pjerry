@@ -33,7 +33,7 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizar' ) {
 	$atualizar = array_filter( $resultado );
 
 	$carro->update( $atualizar );
-	 header("Location: carros.php");
+	// header("Location: carros.php");
 }
 
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
@@ -233,7 +233,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 							<label for="marca">
 								<spam class="app-astericoRed">*</spam> Marca:</label>
 								
-							<select id="marcaEdit" class="form-control" required>
+							<select id="marcaEdit" name="marca" class="form-control" required>
 								
 								
 								<option>Fiat</option>

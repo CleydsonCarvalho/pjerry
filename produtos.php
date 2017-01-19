@@ -20,7 +20,7 @@
 
 <script>
 	$( '#myModal' ).on( 'shown.bs.modal', function () {
-		$( '#myInput' ).focus()
+		$( '#myInput form-control' ).focus()
 	} )
 </script>
 </head>
@@ -130,7 +130,7 @@
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 app-margimBotomCamposFomr">
 								<label for="nome"><spam class="app-astericoRed">*</spam> Nome do Produdo:</label>
-								<input type="text" class="form-control" id="nome" placeholder="Nome">
+								<input type="text" class="myInput form-control" id="nome" placeholder="Nome">
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 app-margimBotomCamposFomr">
 								<label for="cnpj">Marca:</label>
