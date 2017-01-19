@@ -1,7 +1,7 @@
 <?php
-class Rota extends DB {
+class Estados extends DB {
 
-    protected $table = 'rotas';
+    protected $table = 'estados';
 		
 	public function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
@@ -82,54 +82,22 @@ class Rota extends DB {
 }
 	
 	//PRECISA USAR O foreach PARA LER TODOS
-	public function readAllAdmin() {
+	public function readAll() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '1' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	//PRECISA USAR O foreach PARA LER TODOS
-	//foreach($user->readAllCliente() as $key => $value_users): ?
 
-	//endforeach;
-	public function readAllCliente() {
-		$sql = "SELECT * FROM $this->table WHERE tipo = '3' ORDER BY id DESC";
+	
+	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
+	public function readLine( $idestados ) {
+		$sql = "SELECT * FROM $this->table WHERE idestados = :idestados";
 		$stmt = DB::prepare( $sql );
+		$stmt->bindParam( ':idestados', $idestados, PDO::PARAM_INT );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	
-	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	//foreach($user->readAllTecnico() as $key => $value_users): ?
-
-	//endforeach;
-	public function readAllTecnico() {
-		$sql = "SELECT * FROM $this->table WHERE tipo = '2' ORDER BY id DESC";
-		$stmt = DB::prepare( $sql );
-		$stmt->execute();
-		return $stmt->fetchAll();
-	}
-	
-	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	//foreach($user->readId($id = $resultado de outra class->tipo_empresa ) as $key => $value): ?
-
-	//endforeach;
-	public function readAll() {
-		$sql = "SELECT * FROM $this->table";
-		$stmt = DB::prepare( $sql );
-		$stmt->execute();
-		return $stmt->fetchAll();
-	}
-	
-	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
-		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
-		$stmt->execute();
-		return $stmt->fetch();
-	}
-
 
 
 	public function delete( $id ) {

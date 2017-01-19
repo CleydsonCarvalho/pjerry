@@ -4,7 +4,9 @@ function __autoload( $class_name ) {
 	require_once 'classes/' . $class_name . '.php';
 }
 
-$rota = new Rota();
+$rota        = new Rota();
+$relacao_rce = new Relacao_rce();
+$estados     = new Estados();
 
 if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'cadastrar' ) {
 
@@ -130,6 +132,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								<?php $n=0;
 								foreach($rota->readAll() as $key => $value_rota){ $n++;?>
 								
+								
 								<td>
 									<?=$n?>
 								</td>
@@ -137,37 +140,39 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 									<?=$value_rota->nome?>
 								</td>
 								<td>
-									<?=$value_rota->estado?>
+									<?php foreach($relacao_rce->readLine($value_rota->idrotas) as $key => $value_relacao_rce){?>
+											<?php foreach($estados->readLine($value_relacao_rce->idestados) as $key => $value_estados){?>
+												<?=$value_estados->nome ?>
+											<?php } ?>
+									<?php } ?>
 								</td>
 
 								<td class="app-btn-acoes">
 
 									<button type="button" 
-									data-id="<?= $value_rota->id ?>" 
+									data-id="<?= $value_rota->idrotas ?>" 
 									data-nome="<?= $value_rota->nome ?>" 
-									data-estado="<?= $value_rota->estado ?>" 
-									
+									data-estado="<?=$value_estados->nome ?>"
 									
 									class="visualizar btn btn-success">Visualizar</button>
 
 									<button type="button" 
-									data-id="<?= $value_rota->id ?>" 
+									data-id="<?= $value_rota->idrotas ?>" 
 									data-nome="<?= $value_rota->nome ?>" 
-									data-estado="<?= $value_rota->estado ?>" 
+									data-estado="<?=$value_estados->nome ?>"
+									 
 									
 									class="editar btn btn-warning">Editar</button>
 									
 									<button type="button" 
-										data-nome="<?= $value_rota->id ?>" 
-									data-rg="<?= $value_rota->nome ?>" 
-									data-cpf="<?= $value_rota->estado ?>" 
 									
-									class="excluir btn btn-info">+ Cidades</button>
+									
+									class="cidades btn btn-info">Cidades</button>
 									
 									<button type="button" 
-										data-nome="<?= $value_rota->id ?>" 
+										data-nome="<?= $value_rota->idrotas ?>" 
 									data-rg="<?= $value_rota->nome ?>" 
-									data-cpf="<?= $value_rota->estado ?>" 
+									
 									
 									class="excluir btn btn-danger">Excluir</button>
 
@@ -185,7 +190,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 	</div>
 	
 	
-	<!--- MODAL VISUALIZAR Carros -->
+	<!--- MODAL VISUALIZAR ROTAS -->
 	<div id="ModalvisualizarCarro" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -221,8 +226,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-
-	<!-- Inclui todos os plugins compilados (abaixo), ou inclua arquivos separadados se necessário -->
 	
 	<!--Modal Editar Carros-->
 	<div id="modalEditarCarro" class="modal fade" role="dialog">
@@ -244,7 +247,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">			
 							<label for="nome">
 								<spam class="app-astericoRed">*</spam> Nome Completo:</label>	
-	<input type="hidden" class="form-control" id="idEdit" name="id" value="" >
+								<input type="hidden" class="form-control" id="idEdit" name="id" value="" >
 							<input type="text" class="form-control" id="nomeEdit" name="nome" value="" placeholder="Digete o Nome Completo" required >
 						</div>
 						
@@ -336,16 +339,37 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 			</div>
 		</div>
 	</div>
-</div>
+	
+	
+	<!--- MODAL ADD CIDADES  -->
+	<div id="modalAdd" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="custom modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+      					<strong class="size-text">
+							<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+							&nbsp; Editar Funcionário
+						</strong>
+      				</h4>
+				</div>
+				<div class="modal-body">
+					demo dmeo
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	
-	<script>
-$( '.visualizar' ).on( 'click', function () {
+<script>
+	$( '.visualizar' ).on( 'click', function () {
 	$( 'span.rota' ).text( $( this ).data( 'nome' ) );
 	$( 'span.estado' ).text( $( this ).data( 'estado' ) );
-	
+
 	$( '#ModalvisualizarCarro' ).modal( 'show' );
-} );
+	} );
 </script>
 
 <script>
@@ -367,6 +391,16 @@ $( '.visualizar' ).on( 'click', function () {
 		$( '#modalEditarCarro' ).modal( 'show' );
 	} );
 </script>
+
+	<script>
+$( '.cidades' ).on( 'click', function () {
+	
+	
+	$( '#modalAdd' ).modal( 'show' );
+} );
+</script>
+
+
 <script src="js/bootstrap.min.js"></script>
 </body>
 
