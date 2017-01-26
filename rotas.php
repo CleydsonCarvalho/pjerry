@@ -140,41 +140,21 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 									<?=$value_rota->nome?>
 								</td>
 								<td>
-									<?php foreach($relacao_rce->readLine($value_rota->idrotas) as $key => $value_relacao_rce){?>
-											<?php foreach($estados->readLine($value_relacao_rce->idestados) as $key => $value_estados){?>
-												<?=$value_estados->nome ?>
+									<?php foreach($relacao_rce->readLine($value_rota->idRota) as $key => $value_relacao_rce){?>
+										
+											<?php foreach($estados->readLine($value_relacao_rce->idEstado) as $key => $value_estado){?>
+												<?php echo $value_estado->nome; ?>
+												
 											<?php } ?>
 									<?php } ?>
 								</td>
 
 								<td class="app-btn-acoes">
 
-									<button type="button" 
-									data-id="<?= $value_rota->idrotas ?>" 
-									data-nome="<?= $value_rota->nome ?>" 
-									data-estado="<?=$value_estados->nome ?>"
-									
-									class="visualizar btn btn-success">Visualizar</button>
-
-									<button type="button" 
-									data-id="<?= $value_rota->idrotas ?>" 
-									data-nome="<?= $value_rota->nome ?>" 
-									data-estado="<?=$value_estados->nome ?>"
-									 
-									
-									class="editar btn btn-warning">Editar</button>
-									
-									<button type="button" 
-									
-									
-									class="cidades btn btn-info">Cidades</button>
-									
-									<button type="button" 
-										data-nome="<?= $value_rota->idrotas ?>" 
-									data-rg="<?= $value_rota->nome ?>" 
-									
-									
-									class="excluir btn btn-danger">Excluir</button>
+									<button type="button" data-id="" data-nome="" data-estado="" class="visualizar btn btn-success">Visualizar</button>
+									<button type="button" data-id="" data-nome="" data-estado="" class="editar btn btn-warning">Editar</button>					
+									<button type="button" class="cidades btn btn-info">Cidades</button>
+									<button type="button" data-nome="" data-rg="" class="excluir btn btn-danger">Excluir</button>
 
 								</td>
 							</tr>

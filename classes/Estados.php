@@ -91,10 +91,10 @@ class Estados extends DB {
 
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function readLine( $idestados ) {
-		$sql = "SELECT * FROM $this->table WHERE idestados = :idestados";
+	public function readLine( $idEstado ) {
+		$sql = "SELECT * FROM $this->table WHERE idEstado = :idEstado";
 		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':idestados', $idestados, PDO::PARAM_INT );
+		$stmt->bindParam( ':idEstado', $idEstado, PDO::PARAM_INT );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}

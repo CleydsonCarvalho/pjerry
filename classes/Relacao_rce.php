@@ -91,10 +91,10 @@ class Relacao_rce extends DB {
 
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function readLine( $idrotas ) {
-		$sql = "SELECT * FROM $this->table WHERE idrotas = :idrotas";
+	public function readLine( $idRota ) {
+		$sql = "SELECT * FROM $this->table WHERE idRota = :idRota";
 		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':idrotas', $idrotas, PDO::PARAM_INT );
+		$stmt->bindParam( ':idRota', $idRota, PDO::PARAM_INT );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
