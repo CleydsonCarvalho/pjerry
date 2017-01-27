@@ -10,9 +10,13 @@ $estados     = new Estados();
 
 if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'cadastrar' ) {
 
+
+	
 	$remover = array(
 		$_POST[ 'acao' ],
+		$_POST[ 'estado' ],
 	);
+
 
 	$resultado = array_diff( $_POST, $remover );
 	$criar = array_filter( $resultado );
@@ -23,6 +27,23 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'cadastrar' ) {
 	} else {
 		$rota->create( $criar );
 	}
+
+	$remover2 = array(
+		$_POST[ 'acao' ],
+		$_POST[ 'nome' ],
+	);
+
+
+	$resultado2 = array_diff( $_POST, $remover2 );
+	$criar2 = array_filter( $resultado2 );
+	$nColunas2 = count( $criar2 );
+
+	if ( $nColunas2 > $nColunas2 ) {
+		echo $erro = 'sim';
+	} else {
+		$estados->create( $criar2 );
+	}
+		var_dump($criar);
 }
 
 if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizar' ) {
@@ -132,7 +153,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								<?php $n=0;
 								foreach($rota->readAll() as $key => $value_rota){ $n++;?>
 								
-								
 								<td>
 									<?=$n?>
 								</td>
@@ -140,21 +160,28 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 									<?=$value_rota->nome?>
 								</td>
 								<td>
-									<?php foreach($relacao_rce->readLine($value_rota->idRota) as $key => $value_relacao_rce){?>
-										
-											<?php foreach($estados->readLine($value_relacao_rce->idEstado) as $key => $value_estado){?>
-												<?php echo $value_estado->nome; ?>
-												
-											<?php } ?>
-									<?php } ?>
+	<?php foreach($relacao_rce->readLine($value_rota->idRota) as $key => $value_relacao_rce){
+
+				foreach($estados->readLine($value_relacao_rce->idEstado) as $key => $value_estado){
+				 	echo $value_estado->estado;
+
+			 	} 
+	 		} 
+	?>
 								</td>
 
 								<td class="app-btn-acoes">
 
-									<button type="button" data-id="" data-nome="" data-estado="" class="visualizar btn btn-success">Visualizar</button>
-									<button type="button" data-id="" data-nome="" data-estado="" class="editar btn btn-warning">Editar</button>					
+									<button type="button" data-nome="<?=$value_rota->nome?>" data-estado="<?=$value_estado->estado?>" class="visualizar btn btn-success">Visualizar
+									</button>
+									
+									<button type="button" data-id="" data-nome="" data-estado="" class="editar btn btn-warning">Editar
+									</button>	
+													
 									<button type="button" class="cidades btn btn-info">Cidades</button>
-									<button type="button" data-nome="" data-rg="" class="excluir btn btn-danger">Excluir</button>
+									
+									<button type="button" data-nome="" data-rg="" class="excluir btn btn-danger">Excluir
+									</button>
 
 								</td>
 							</tr>
