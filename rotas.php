@@ -28,22 +28,6 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'cadastrar' ) {
 		$rota->create( $criar );
 	}
 
-	$remover2 = array(
-		$_POST[ 'acao' ],
-		$_POST[ 'nome' ],
-	);
-
-
-	$resultado2 = array_diff( $_POST, $remover2 );
-	$criar2 = array_filter( $resultado2 );
-	$nColunas2 = count( $criar2 );
-
-	if ( $nColunas2 > $nColunas2 ) {
-		echo $erro = 'sim';
-	} else {
-		$estados->create( $criar2 );
-	}
-		var_dump($criar);
 }
 
 if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizar' ) {
