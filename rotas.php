@@ -4,51 +4,70 @@ function __autoload( $class_name ) {
 	require_once 'classes/' . $class_name . '.php';
 }
 
-$rota        = new Rota();
+$rota = new Rota();
 $relacao_rce = new Relacao_rce();
-$estados     = new Estados();
+$estado = new Estados();
+$cidade = new Cidade();
 
-if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'cadastrar' ) {
-
-
+if(isset($_POST['acao']) && $_POST['acao'] == 'gravarCidade' ){
+	echo "O post existe";
 	
+}
+
+if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'gravarCidade' ) {
+
+	// CAMPOS NEGADOS
 	$remover = array(
 		$_POST[ 'acao' ],
 		$_POST[ 'estado' ],
+		$_POST[ 'rota' ],
 	);
-
-
+	// RETIRA DO ARRAY Os CAMPOS NEGADOS
 	$resultado = array_diff( $_POST, $remover );
 	$criar = array_filter( $resultado );
-	$nColunas = count( $criar );
 
-	if ( $nColunas > $nColunas ) {
+
+	$res = count( $criar );
+
+	if ( $res > 8 ) {
+
 		$erro = 'sim';
+
 	} else {
-		$rota->create( $criar );
+
+		$relacao_rce->create( $criar );
 	}
 
 }
 
-if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizar' ) {
+if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'salvar' ) {
 
+	//$buscaUsers = $users->readLine( $id = $_POST[ 'id' ] );
+
+	// CAMPOS NEGADOS
 	$remover = array(
 		$_POST[ 'acao' ],
 	);
-
+	// RETIRA DO ARRAY Os CAMPOS NEGADOS
 	$resultado = array_diff( $_POST, $remover );
 	$atualizar = array_filter( $resultado );
 
-	$rota->update( $atualizar );
-	 header("Location: carros.php");
+	$users->update( $atualizar );
+	//var_dump($atualizar);
+
+
 }
 
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
-	$rota->delete( $id = $_GET[ 'id' ] );
+	$users->delete( $id = $_GET[ 'id' ] );
+	$tipo_clientes->deletex( $id = $_GET[ 'id' ] );
+	$sistemacliente->deletex( $id = $_GET[ 'id' ] );
+
+
 }
 ?>
 <!doctype html>
-<html>
+<html ng-app="rota">
 <meta lang="pt-br">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -66,9 +85,27 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 <link rel="stylesheet" href="css/ajustes-font.css">
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.quick.search.js"></script>
+
+<script src="angular.js"></script>
+<script>
+	angular.module( "rota", [] );
+	angular.module( "rota" ).controller( "controle", function ( $scope, $http ) {
+
+
+		$scope.idEstado = document.getElementById( 'idEstado' ).value;
+		$scope.idRota = document.getElementById( 'idRota' ).value;
+
+
+		console.log( $scope.idEstado );
+
+
+
+	} );
+</script>
 </head>
 
-<body>
+<body ng-controller="controle">
+
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
@@ -88,25 +125,27 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 				<h1>Rotas</h1>
 				<p>Cadastro de rotas.</p>
 				<hr>
-				<form method="post" enctype="multipart/form-data" >
+				<form method="post" enctype="multipart/form-data">
 
 					<div class="row">
 						<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
-							<label for="nome"><spam class="app-astericoRed">*</spam> Nome da Rota:</label>
+							<label for="nome">
+								<spam class="app-astericoRed">*</spam> Nome da Rota:</label>
 							<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required>
 						</div>
 
 						<div class="col-xs-12 col-sm-2 col-md-3 col-lg-3 app-margimBotomCamposFomr">
-							<label for="estado"><spam class="app-astericoRed">*</spam> Estado:</label>
+							<label for="estado">
+								<spam class="app-astericoRed">*</spam> Estado:</label>
 							<select name="estado" id="estado" class="form-control" required>
 								<option value="">Selecione o Estado</option>
-								<option >Piaui</option>
-								<option >Maranhão</option>
+								<option>Piaui</option>
+								<option>Maranhão</option>
 							</select>
 						</div>
 						<div>
-								<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
-							</div>
+							<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
+						</div>
 
 					</div>
 
@@ -121,7 +160,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 				<div class="form-group">
 					<input type="text" class="form-control input-search" alt="lista-clientes" placeholder="Buscar na Lista">
 				</div>
-			
+
 				<div class="table-responsive">
 					<table class="table table-hover lista-clientes" id="tabela">
 						<thead>
@@ -136,7 +175,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 							<tr>
 								<?php $n=0;
 								foreach($rota->readAll() as $key => $value_rota){ $n++;?>
-								
+
 								<td>
 									<?=$n?>
 								</td>
@@ -144,32 +183,26 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 									<?=$value_rota->nome?>
 								</td>
 								<td>
-	<?php foreach($relacao_rce->readLine($value_rota->idRota) as $key => $value_relacao_rce){
+									<?php foreach($estado->readLine($value_rota->idEstado) as $key => $valueEstado): ?>
+									<?php echo $valueEstado->estado; ?>
 
-				foreach($estados->readLine($value_relacao_rce->idEstado) as $key => $value_estado){
-				 	echo $value_estado->estado;
-
-			 	} 
-	 		} 
-	?>
+									<?php endforeach; ?>
 								</td>
 
-								<td class="app-btn-acoes">
+								<td>
+									<input type="hidden" id="idEstado" value="<?=$valueEstado->idEstado; ?>">
+									<input type="hidden" id="idRota" value="<?=$value_rota->idRota?>">
 
-									<button type="button" data-nome="<?=$value_rota->nome?>" data-estado="<?=$value_estado->estado?>" class="visualizar btn btn-success">Visualizar
-									</button>
-									
-									<button type="button" data-id="" data-nome="" data-estado="" class="editar btn btn-warning">Editar
-									</button>	
-													
-									<button type="button" class="cidades btn btn-info">Cidades</button>
-									
-									<button type="button" data-nome="" data-rg="" class="excluir btn btn-danger">Excluir
-									</button>
+
+									<button type="button" data-nome="<?=$value_rota->nome?>" data-estado="<?=$value_rota->idRota?>" class="visualizar btn btn-success">Visualizar</button>
+
+									<button type="button" data-rota="<?=$value_rota->nome?>" data-estado="<?=$valueEstado->estado?>" class="editar btn btn-warning">Cidades</button>
+									<button type="button" data-nome="" class="excluir btn btn-danger">Excluir</button>
 
 								</td>
 							</tr>
-							<?php } ?>
+
+							<?php }?>
 						</tbody>
 					</table>
 				</div>
@@ -179,46 +212,48 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 		</div>
 	</div>
 	</div>
-	
-	
+
+
 	<!--- MODAL VISUALIZAR ROTAS -->
 	<div id="ModalvisualizarCarro" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h1 class="modal-title" id="gridSystemModalLabel"><spam class="glyphicon glyphicon-road"></spam> Visualizar Rota</h1>
+					<h1 class="modal-title" id="gridSystemModalLabel">
+						<spam class="glyphicon glyphicon-road"></spam> Visualizar Rota</h1>
 				</div>
+
 				<form>
 					<div class="modal-body">
 
 						<div class="row">
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr font17">
-								
-								<span class="rota"></span> - <strong><span class="estado"></span></strong>.
+
+								<span class="rota" id="demo"></span> - <strong><span class="estado" id="estadoo"></span></strong>.
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-								<label for="cnpj">Cidades: </label>
-								Teresina → Parnaiba → Piracura → Teresina → Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura, Teresina, Parnaiba, Piracura, Teresina, Parnaiba, Piracura,
+								<label for="cnpj">Cidades: </label> Teresina → Parnaiba → Piracura → Teresina → Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura, Teresina, Parnaiba, Piracura, Teresina, Parnaiba, Piracura,
 							</div>
-							
+
 						</div>
 
 					</div>
 					<div class="modal-footer">
-						
+
 						<button type="button" class="btn btn-primary">Salvar</button>
 						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 					</div>
 				</form>
+
 			</div>
 			<!-- /.modal-content -->
 		</div>
 		<!-- /.modal-dialog -->
 	</div>
 	<!-- /.modal -->
-	
-	<!--Modal Editar Carros-->
+
+	<!--Modal Cidades-->
 	<div id="modalEditarCarro" class="modal fade" role="dialog">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -230,169 +265,101 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 							&nbsp; Editar Funcionário
 						</strong>
       				</h4>
+				
+
 				</div>
 				<div class="modal-body">
-					<form action="" name="" method="post" enctype="multipart/form-data" autocomplete="off">		
-					<div class="row">
-					
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">			
-							<label for="nome">
-								<spam class="app-astericoRed">*</spam> Nome Completo:</label>	
-								<input type="hidden" class="form-control" id="idEdit" name="id" value="" >
-							<input type="text" class="form-control" id="nomeEdit" name="nome" value="" placeholder="Digete o Nome Completo" required >
-						</div>
-						
-						
-						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 app-margimBotomCamposFomr">
-							<label for="rg">RG:</label>
-							<input type="text" class="rdEdit form-control" id="rgEdit" name="rg" value="" placeholder="Digite seu CPF">
-						</div>
-						<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 app-margimBotomCamposFomr">
-							<label for="cpf">CPF:</label>
-							<input type="text" class="form-control" id="cpfEdit" name="cpf" value="" placeholder="Digite seu CPF">
-						</div>
-						<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
-							<label for="numero" >Status:</label>
-							<select class="form-control" name="status" id="status">
-								<option id="statusEdit"></option>
-								<option>Ativo</option>
-								<option>Negativado</option>
-							</select>
-						</div>
-						
-						
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-							<label for="representante">Contato 1:</label>
-							<input type="text" class="form-control" name="contato1" id="contato1Edit" placeholder="Telefone 1">
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-							<label for="representante">Contato 2:</label>
-							<input type="text" class="form-control" name="contato2" id="contato2Edit" placeholder="Telefone 2">
-						</div>
-						
-						
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-							<label for="referencia">Referência:</label>
-							<input type="text" class="form-control" id="referenciaEdit" name="referencia" value="" placeholder="Digite seu CPF">
-						</div>
-						
-						
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-							<label for="endereco">Endereço e complemento:</label>
-							<input type="text" class="form-control" id="enderecoEdit" name="endereco" value="" placeholder="Digite o endreço. Ex: Rua, Avenida...">
-						</div>
-						
-						
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-							<label for="bairro">Bairro:</label>
-							<input type="text" class="form-control" id="bairroEdit" name="bairro" value="" placeholder="Bairro">
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-							<label for="regiao">Região:</label>
-							<select class="form-control" name="regiao">
-								<option id="regiaoEdit"></option>
-								<option>Norte</option>
-								<option>Sul</option>
-								<option>Leste</option>
-								<option>Centro</option>
-								<option>Zona Rural</option>
-								<option>Interior</option>
-							</select>
-						</div>
-						
-						
-						
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-							<label for="cidade">Ciade:</label>
-							<input type="text" class="form-control" id="cidadeEdit" name="cidade" value="" placeholder="Cidade">
-						</div>
-						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-							<label for="estado">Estado:</label>
-							<select class="form-control" id="estadoEditSel" name="estado">
-								<option id="estadoEdit"></option>
-								<option>PI</option>
-								<option>MA</option>
-							</select>
-						</div>
-						
-						
-						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-							<div>
-								<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
+					<form action="" method="post" enctype="multipart/form-data" autocomplete="off">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-8 col-md-8 col-lg-12 app-margimBotomCamposFomr">
+								<label for="nome">
+									<spam class="app-astericoRed">*</spam> Rota</label>
+
+								<input type="hidden" class="form-control" name="idEstado" value="{{idEstado}}">
+								<input type="hidden" class="form-control" name="idRota" value="{{idRota}}">
+
+
+								<input type="text" class="form-control" id="rotaCidade" name="rota" value="" readonly>
+							</div>
+
+
+							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6 app-margimBotomCamposFomr">
+								<label for="rg">Estado</label>
+
+
+
+								<input type="text" class="form-control" id="estadoCidade" name="estado" value="" readonly>
+
+
+							</div>
+
+
+
+							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6 app-margimBotomCamposFomr">
+								<label for="rg">Cidades</label>
+
+
+								<?php $estadoForm = "Maranhão";?>
+								<select name="idCidade" class="form-control" required>
+
+									<option value=" ">Add Cidade</option>
+									<?php foreach($cidade->buscaCidade($estadoForm) as $key => $valueCidade): ?>
+									<option value="<?php echo $valueCidade->idCidade; ?>">
+										<?php echo $valueCidade->nome; ?>
+									</option>
+									<?php endforeach; ?>
+
+
+								</select>
 							</div>
 						</div>
-					</div>
+
+
+				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-					<button type="submit" name="acao" value="atualizar" class="btn btn-info">Confirmar</button>
+					<button type="submit" name="acao" value="gravarCidade" class="btn btn-info">Confirmar</button>
 					</form>
 				</div>
+
 			</div>
+
+
 		</div>
 	</div>
-	
-	
-	<!--- MODAL ADD CIDADES  -->
-	<div id="modalAdd" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="custom modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">
-      					<strong class="size-text">
-							<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
-							&nbsp; Editar Funcionário
-						</strong>
-      				</h4>
-				</div>
-				<div class="modal-body">
-					demo dmeo
-				</div>
-			</div>
-		</div>
 	</div>
 
 
-	
-<script>
-	$( '.visualizar' ).on( 'click', function () {
-	$( 'span.rota' ).text( $( this ).data( 'nome' ) );
-	$( 'span.estado' ).text( $( this ).data( 'estado' ) );
 
-	$( '#ModalvisualizarCarro' ).modal( 'show' );
-	} );
-</script>
 
-<script>
-	$( '.editar' ).on( 'click', function () {
-		var id = $( this ).data( 'id' );
-		document.getElementById('nomeEdit').text = $( this ).data( 'nome' );
-		document.getElementById('rgEdit').text = $( this ).data( 'rg' );
-		document.getElementById('cpfEdit').text = $( this ).data( 'cpf' );
-		document.getElementById('statusEdit').text = $( this ).data( 'status' );
-		document.getElementById('contato1Edit').value = $( this ).data( 'contato1' );
-		document.getElementById('contato2Edit').value = $( this ).data( 'contato1' );
-		document.getElementById('referenciaEdit').value = $( this ).data( 'referencia' );
-		document.getElementById('enderecoEdit').value = $( this ).data( 'endereco' );
-		document.getElementById('bairroEdit').value = $( this ).data( 'bairro' );
-		document.getElementById('regiaoEdit').text = $( this ).data( 'regiao' );
-		document.getElementById('cidadeEdit').value = $( this ).data( 'cidade' );
-		document.getElementById('estadoEdit').text = $( this ).data( 'estado' );
-		document.getElementById('idEdit').value = id;
-		$( '#modalEditarCarro' ).modal( 'show' );
-	} );
-</script>
+
 
 	<script>
-$( '.cidades' ).on( 'click', function () {
-	
-	
-	$( '#modalAdd' ).modal( 'show' );
-} );
-</script>
+		$( '.visualizar' ).on( 'click', function () {
+			$( 'span.rota' ).text( $( this ).data( 'nome' ) );
+			$( 'span.estado' ).text( $( this ).data( 'estado' ) );
+
+			$( '#ModalvisualizarCarro' ).modal( 'show' );
+		} );
+	</script>
+
+	<script>
+		$( '.editar' ).on( 'click', function () {
+			document.getElementById( 'rotaCidade' ).value = $( this ).data( 'rota' );
+			document.getElementById( 'estadoCidade' ).value = $( this ).data( 'estado' );
 
 
-<script src="js/bootstrap.min.js"></script>
+
+
+			$( '#modalEditarCarro' ).modal( 'show' );
+		} );
+	</script>
+
+
+
+
+	<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
