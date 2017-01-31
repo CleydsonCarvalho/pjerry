@@ -9,11 +9,6 @@ $relacao_rce = new Relacao_rce();
 $estado = new Estados();
 $cidade = new Cidade();
 
-if(isset($_POST['acao']) && $_POST['acao'] == 'gravarCidade' ){
-	echo "O post existe";
-	
-}
-
 if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'gravarCidade' ) {
 
 	// CAMPOS NEGADOS
@@ -29,7 +24,7 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'gravarCidade' ) {
 
 	$res = count( $criar );
 
-	if ( $res > 8 ) {
+	if ( $res > $res ) {
 
 		$erro = 'sim';
 
@@ -66,8 +61,11 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 
 }
 ?>
+
 <!doctype html>
 <html ng-app="rota">
+
+<head>
 <meta lang="pt-br">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -86,25 +84,43 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 <script src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.quick.search.js"></script>
 
-<script src="angular.js"></script>
-<script>
-	angular.module( "rota", [] );
-	angular.module( "rota" ).controller( "controle", function ( $scope, $http ) {
+	<script src="angular.js"></script>
 
-
-		$scope.idEstado = document.getElementById( 'idEstado' ).value;
-		$scope.idRota = document.getElementById( 'idRota' ).value;
-
-
-		console.log( $scope.idEstado );
-
-
-
-	} );
-</script>
 </head>
 
-<body ng-controller="controle">
+<script>
+	angular.module( "rota", [] );
+	angular.module( "rota" ).controller( "controller", function ( $scope, $http ) {
+		
+		var reload = function () {
+            window.location.reload(false); 
+        };
+		
+		$scope.cadastar = function ($rota) {
+			$http.post( '/controller/controller_rota.php', $rota )
+				.then( function ( dados ) {
+						$scope.statusCad = dados.data;
+					console.log($scope.statusCad);
+					} );
+			reload ();
+			};
+		
+		var listarEstado = function(){
+			
+			$http.get( '/controller/controller_rota.php?acao=listar' )
+				.then( function ( dados ) {
+						$scope.estados = dados.data;
+						console.log($scope.estados);
+					} );
+			};
+		listarEstado();
+		}); 
+										
+
+	
+</script>
+
+<body ng-controller="controller">
 
 	<div class="container">
 		<div class="row">
@@ -131,16 +147,20 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
 							<label for="nome">
 								<spam class="app-astericoRed">*</spam> Nome da Rota:</label>
-							<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required>
+							<input type="text" ng-model="rota.nome" class="form-control" placeholder="Nome da Rota" required>
+
+							<input type="hidden" ng-model="rota.acao"  ng-init="rota.acao='cadastrar'" >
+							
 						</div>
 
 						<div class="col-xs-12 col-sm-2 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 							<label for="estado">
 								<spam class="app-astericoRed">*</spam> Estado:</label>
-							<select name="estado" id="estado" class="form-control" required>
+							<select name="estado" ng-model="rota.idEstado"   class="form-control" 
+							required>
 								<option value="">Selecione o Estado</option>
-								<option>Piaui</option>
-								<option>Maranhão</option>
+								<option value="{{estados.idEstado}}" ng-repeat="estados in estados">{{estados.estado}}</option>
+								
 							</select>
 						</div>
 						<div>
@@ -150,7 +170,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 					</div>
 
 
-					<button type="submit" name="acao" value="cadastrar" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
+					<button type="submit" name="acao" ng-value="cadastrar" ng-click="cadastar(rota)" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
 				</form><br><br><br><br>
 
 				<!--Tabela de Clientes-->
@@ -190,8 +210,8 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								</td>
 
 								<td>
-									<input type="hidden" id="idEstado" value="<?=$valueEstado->idEstado; ?>">
-									<input type="hidden" id="idRota" value="<?=$value_rota->idRota?>">
+									<input type="hidden" ng-model="idEstado" ng-init="idEstado='<?=$valueEstado->idEstado;?>'">
+									<input type="hidden" ng-model="idRota" ng-init="idRota='<?=$value_rota->idRota?>'">
 
 
 									<button type="button" data-nome="<?=$value_rota->nome?>" data-estado="<?=$value_rota->idRota?>" class="visualizar btn btn-success">Visualizar</button>
