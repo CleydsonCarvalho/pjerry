@@ -83,7 +83,7 @@ class Estados extends DB {
 	
 	//PRECISA USAR O foreach PARA LER TODOS
 	public function readAll() {
-		$sql = "SELECT * FROM $this->table ";
+		$sql = "SELECT * FROM $this->table WHERE tipo = '1' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
@@ -96,7 +96,7 @@ class Estados extends DB {
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':idEstado', $idEstado, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
 	}
 
 
