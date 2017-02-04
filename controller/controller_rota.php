@@ -11,6 +11,7 @@ $dados =  json_decode(file_get_contents("php://input"));
 
 //Convertendo objeto em Array
 $POST = (array) $dados;
+$acao = $_GET['acao'];
 
 if(isset($POST[ 'acao' ]) && $POST[ 'acao' ] == "cadastrar"){
 	
@@ -28,13 +29,32 @@ if(isset($POST[ 'acao' ]) && $POST[ 'acao' ] == "cadastrar"){
 	print_r($rota);
 }
 
-
-$acao = $_GET['acao'];
-if(isset($acao) && $acao == "listar"){
+if(isset($acao) && $acao == "listarEstados"){
 	
 	$lista = $db_estados->readAll();
 	
 	print json_encode($lista);
+}
+
+if(isset($acao) && $acao == "listarRotas"){
+
+	$dados = $db_rota->readAll(); 
+		
+	$count = count($dados);
+		
+		for($i=0;$i<$count;$i++){
+			
+		$value_rota = (array) $dados[$i];
+		$idEstado=$value_rota['idEstado'];
+		
+		$dadosEstado = $db_estados->readLine($idEstado);
+		$dadosEstado = (array) $dadosEstado;
+		
+		$dadosRotas[$i] = ["idRota"=>$value_rota['idRota'],"nome"=>$value_rota['nome'],"idEstado"=>$idEstado,
+			  	  "estado"=>$dadosEstado['estado']];
+	}
+		
+	print json_encode($dadosRotas);	
 }
 
 ?>

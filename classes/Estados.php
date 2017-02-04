@@ -96,7 +96,7 @@ class Estados extends DB {
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':idEstado', $idEstado, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetchAll();
+		return $stmt->fetch();
 	}
 
 

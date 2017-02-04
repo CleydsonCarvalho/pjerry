@@ -19,10 +19,7 @@ class Rotas {
 		$sql = "INSERT INTO $this->table ($k) VALUES ($v)";
 		$stmt = DB::prepare( $sql );
 		
-	
-		
-		
-		
+
 		foreach ( $params as $key => & $val ):
 			
 		if($key == 'senha'){
