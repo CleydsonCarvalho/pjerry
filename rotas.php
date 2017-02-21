@@ -1,5 +1,4 @@
 <?php
-
 function __autoload( $class_name ) {
 	require_once 'classes/' . $class_name . '.php';
 }
@@ -7,11 +6,22 @@ function __autoload( $class_name ) {
 $rota = new Rota();
 $relacao_rce = new Relacao_rce();
 $estado = new Estados();
-$cidade = new Cidade();
+$cidade = new Cidades();
 
-if(isset($_POST['acao']) && $_POST['acao'] == 'gravarCidade' ){
-	echo "O post existe";
-	
+if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'gravarEstado' ) {
+
+	$criar = array_diff( $_POST, array( $_POST[ 'acao' ] ) );
+
+	$res = count( $criar );
+
+	if ( $res > $res ) {
+
+		$erro = 'sim';
+
+	} else {
+
+		$rota->create( $criar );
+	}
 }
 
 if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'gravarCidade' ) {
@@ -29,7 +39,7 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'gravarCidade' ) {
 
 	$res = count( $criar );
 
-	if ( $res > 8 ) {
+	if ( $res > $res ) {
 
 		$erro = 'sim';
 
@@ -66,8 +76,9 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 
 }
 ?>
+
 <!doctype html>
-<html ng-app="rota">
+<html>
 <meta lang="pt-br">
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -87,24 +98,31 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 <script type="text/javascript" src="js/jquery.quick.search.js"></script>
 
 <script src="angular.js"></script>
-<script>
+
+<!--<script>
 	angular.module( "rota", [] );
 	angular.module( "rota" ).controller( "controle", function ( $scope, $http ) {
 
 
-		$scope.idEstado = document.getElementById( 'idEstado' ).value;
-		$scope.idRota = document.getElementById( 'idRota' ).value;
-
-
-		console.log( $scope.idEstado );
-
-
-
+		$scope.app= $('demoEstado').value;
+			console.log($scope.app);
+		var listarCidades = function(){
+		
+		
+			//$http.get( '/controller/controller_rota.php?acao=listarCidades' )
+				//.then( function ( dados ) {
+						//$scope.cidades = dados.data;
+				//console.log($scope.cidades);
+						
+					//} );
+			};
+		
 	} );
-</script>
+</script>-->
+
 </head>
 
-<body ng-controller="controle">
+<body>
 
 	<div class="container">
 		<div class="row">
@@ -116,7 +134,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 	<?php 
  include'menu.php';	
 ?>
-
 	<div class="container">
 		<div class="row">
 
@@ -137,20 +154,23 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						<div class="col-xs-12 col-sm-2 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 							<label for="estado">
 								<spam class="app-astericoRed">*</spam> Estado:</label>
-							<select name="estado" id="estado" class="form-control" required>
+
+							<select name="idEstado" id="estado" class="form-control" required>
 								<option value="">Selecione o Estado</option>
-								<option>Piaui</option>
-								<option>Maranhão</option>
+								<?php foreach($estado->readAll() as $key => $value_estado){?>
+								<option value="<?=$value_estado->idEstado?>">
+									<?=$value_estado->estado?>
+								</option>
+								<?php }?>
 							</select>
+
 						</div>
 						<div>
 							<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
 						</div>
-
 					</div>
 
-
-					<button type="submit" name="acao" value="cadastrar" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
+					<button type="submit" name="acao" value="gravarEstado" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
 				</form><br><br><br><br>
 
 				<!--Tabela de Clientes-->
@@ -171,7 +191,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								<th class="app-btn-acoes text-center">Ações</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody ng-controller="controle">
 							<tr>
 								<?php $n=0;
 								foreach($rota->readAll() as $key => $value_rota){ $n++;?>
@@ -181,39 +201,128 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								</td>
 								<td>
 									<?=$value_rota->nome?>
-									
+
 								</td>
 								<td>
 									<?php foreach($estado->readLine($value_rota->idEstado) as $key => $valueEstado): ?>
-									<?= $valueEstado->estado ; ?>
+									<?= $valueEstado->estado ?>
 
 									<?php endforeach; ?>
+
 								</td>
 
 								<td>
+
 									<input type="hidden" id="idEstado" value="<?=$valueEstado->idEstado; ?>">
 									<input type="hidden" id="idRota" value="<?=$value_rota->idRota?>">
 
+									<button type="button" data-nome="<?=$value_rota->nome?>" data-estado="<?= $valueEstado->estado; ?>" data-id_rota="<?=$value_rota->idRota?>" class="visualizar btn btn-success">Visualizar</button>
 
-									<button type="button" data-nome="<?=$value_rota->nome?>" data-estado="<?=$value_rota->idRota?>" class="visualizar btn btn-success">Visualizar</button>
+									<button type="button" id="btn" value="<?=$valueEstado->estado?>" data-rota="<?=$value_rota->nome?>" data-estado="<?=$valueEstado->estado?>" data-id_estado="<?=$valueEstado->idEstado?>" data-id_rota="<?=$value_rota->idRota?>" class="editar btn btn-warning">Cidades</button>
 
-									<button type="button" data-rota="<?=$value_rota->nome?>" data-estado="<?=$valueEstado->estado?>" class="editar btn btn-warning">Cidades</button>
 									<button type="button" data-nome="" class="excluir btn btn-danger">Excluir</button>
 
 								</td>
 							</tr>
-
 							<?php }?>
 						</tbody>
 					</table>
 				</div>
-
 			</div>
-
 		</div>
 	</div>
 	</div>
 
+	<script>
+		$( '.visualizar' ).on( 'click', function () {
+			$( 'span.rota' ).text( $( this ).data( 'nome' ) );
+			$( 'span.estado' ).text( $( this ).data( 'estado' ) );
+			var idRota = document.getElementById( 'id_rota' ).value = $( this ).data( 'id_rota' );
+			$( '#ModalvisualizarCarro' ).modal( 'show' );
+
+			cidadesId();
+
+			function cidadesId() {
+				$.ajax( {
+					url: '/controller/controller_rota.php?acao=cidadesId&idRota=' + idRota,
+					datatype: "json",
+					success: function ( data ) {
+
+						var idCidades = JSON.parse( data );
+						if ( idCidades != null ) {
+							var i = 0;
+							var div = $( '#demo_cidades' );
+							div.find( 'span' ).remove();
+
+							$.each( idCidades, function ( key, value ) {
+
+								var cidade_idd = value.idCidade;
+
+								$.ajax( {
+									url: '/controller/controller_rota.php?acao=idCidade&idCidade=' + cidade_idd,
+									datatype: "json",
+									success: function ( data ) {
+
+										var idCidades = JSON.parse( data );
+
+										if ( idCidades != null ) {
+
+											i++;
+
+											$.each( idCidades, function ( key, value ) {
+
+
+												$( '<span>' + i + '.' + value.nome + ' &nbsp;&nbsp;</span>' ).appendTo( div );
+
+											} );
+										}
+									}
+								} );
+							} );
+						}
+					}
+				} );
+			}
+		} );
+	</script>
+
+	<script>
+		$( '.editar' ).on( 'click', function () {
+			document.getElementById( 'rotaCidade' ).value = $( this ).data( 'rota' );
+			var estado = document.getElementById( 'estadoCidade' ).value = $( this ).data( 'estado' );
+
+			document.getElementById( 'id_rota' ).value = $( this ).data( 'id_rota' );
+			document.getElementById( 'id_estado' ).value = $( this ).data( 'id_estado' );
+
+			$( '#modalEditarCarro' ).modal( 'show' );
+
+			listarCidades();
+
+			function listarCidades() {
+
+				$.ajax( {
+					url: '/controller/controller_rota.php?acao=listarCidades&estado=' + estado,
+					datatype: "json",
+					success: function ( data ) {
+						var cidades = JSON.parse( data );
+
+						if ( cidades != null ) {
+
+							var selectbox = $( '#selectCidades' );
+							selectbox.find( 'option' ).remove();
+
+							$.each( cidades, function ( key, value ) {
+
+								console.log( value );
+
+								$( '<option>' ).val( value.idCidade ).text( value.nome ).appendTo( selectbox );
+							} );
+						}
+					}
+				} );
+			};
+		} );
+	</script>
 
 	<!--- MODAL VISUALIZAR ROTAS -->
 	<div id="ModalvisualizarCarro" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal">
@@ -234,9 +343,9 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								<span class="rota" id="demo"></span> - <strong><span class="estado" id="estadoo"></span></strong>.
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-								<label for="cnpj">Cidades: </label> Teresina → Parnaiba → Piracura → Teresina → Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura,Teresina, Parnaiba, Piracura, Teresina, Parnaiba, Piracura, Teresina, Parnaiba, Piracura,
+								<label for="cnpj">Cidades: &nbsp;</label>
+								<span class="demo_cidades" id="demo_cidades"></span>
 							</div>
-
 						</div>
 
 					</div>
@@ -246,7 +355,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						<button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
 					</div>
 				</form>
-
 			</div>
 			<!-- /.modal-content -->
 		</div>
@@ -267,7 +375,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						</strong>
       				</h4>
 				
-
 				</div>
 				<div class="modal-body">
 					<form action="" method="post" enctype="multipart/form-data" autocomplete="off">
@@ -277,90 +384,36 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 								<label for="nome">
 									<spam class="app-astericoRed">*</spam> Rota</label>
 
-								<input type="hidden" class="form-control" name="idEstado" value="{{idEstado}}">
-								<input type="hidden" class="form-control" name="idRota" value="{{idRota}}">
-
-
-								<input type="text" class="form-control" id="rotaCidade" name="rota" value="" readonly>
+								<input type="hidden" class="form-control" name="idEstado" id="id_estado">
+								<input type="hidden" class="form-control" name="idRota" id="id_rota">
+								<input type="text" class="form-control" id="rotaCidade" name="rota" readonly>
 							</div>
-
 
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6 app-margimBotomCamposFomr">
 								<label for="rg">Estado</label>
 
-
-
-								<input type="text" class="form-control" id="estadoCidade" name="estado" value="" readonly>
-
-
+								<input type="text" class="estadoCidade form-control" id="estadoCidade" name="estado" readonly>
 							</div>
-
-
 
 							<div class="col-xs-12 col-sm-4 col-md-4 col-lg-6 app-margimBotomCamposFomr">
 								<label for="rg">Cidades</label>
 
-
-								<?php $estadoForm = "Maranhão";?>
-								<select name="idCidade" class="form-control" required>
-
-									<option value=" ">Add Cidade</option>
-									<?php foreach($cidade->buscaCidade($estadoForm) as $key => $valueCidade): ?>
-									<option value="<?php echo $valueCidade->idCidade; ?>">
-										<?php echo $valueCidade->nome; ?>
-									</option>
-									<?php endforeach; ?>
-
-
+								<select name="idCidade" id="selectCidades" class="form-control" required>
+									<option value=" ">Selecione a Cidade</option>
 								</select>
 							</div>
 						</div>
-
-
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 					<button type="submit" name="acao" value="gravarCidade" class="btn btn-info">Confirmar</button>
 					</form>
 				</div>
-
 			</div>
-
-
 		</div>
 	</div>
 	</div>
 
-
-
-
-
-
-	<script>
-		$( '.visualizar' ).on( 'click', function () {
-			$( 'span.rota' ).text( $( this ).data( 'nome' ) );
-			$( 'span.estado' ).text( $( this ).data( 'estado' ) );
-
-			$( '#ModalvisualizarCarro' ).modal( 'show' );
-		} );
-	</script>
-
-	<script>
-		$( '.editar' ).on( 'click', function () {
-			document.getElementById( 'rotaCidade' ).value = $( this ).data( 'rota' );
-			document.getElementById( 'estadoCidade' ).value = $( this ).data( 'estado' );
-
-
-
-
-			$( '#modalEditarCarro' ).modal( 'show' );
-		} );
-	</script>
-
-
-
-
-	<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
-
 </html>

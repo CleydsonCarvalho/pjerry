@@ -183,7 +183,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 									class="visualizar btn btn-success">Visualizar</button>
 
 									<button type="button" 
-									data-id="<?= $value_fornecedor->id ?>"
+									data-id="<?= $value_fornecedor->id_fornecedor ?>"
 									data-nome="<?= $value_fornecedor->nome ?>" 
 									data-cnpj="<?= $value_fornecedor->cnpjCpf ?>" 
 									data-endereco="<?= $value_fornecedor->endereco ?>" 
@@ -199,7 +199,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 									class="editar btn btn-warning">Editar</button>
 									
 									<button type="button" 
-									data-id="<?= $value_fornecedor->id ?>" 
+									data-id="<?= $value_fornecedor->id_fornecedor ?>" 
 									data-nome="<?= $value_fornecedor->nome ?>" 
 									
 									class="excluir btn btn-danger">Excluir</button>
@@ -313,7 +313,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">			
 							<label for="nome">
 								 Empresa / Nome:</label>	
-							<input type="hidden" id="idEdit" name="id">
+							<input type="hidden" id="idEdit" name="id_fornecedor">
 							<input type="text" class="form-control" id="nomeEdit" name="nome">
 						</div>
 						

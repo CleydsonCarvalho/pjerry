@@ -1,7 +1,7 @@
 <?php
-class Rota extends DB {
+class Despesas extends DB {
 
-    protected $table = 'rotas';
+    protected $table = 'despesas';
 		
 	public function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
@@ -17,13 +17,7 @@ class Rota extends DB {
 		$sql = "INSERT INTO $this->table ($k) VALUES ($v)";
 		$stmt = DB::prepare( $sql );
 		
-	//	foreach ( $params as $key => & $val ):
-	//		$stmt->bindParam( $key, $val );
-	//	endforeach;
-		
-		
-		
-		
+
 		foreach ( $params as $key => & $val ):
 			
 		if($key == 'senha'){
@@ -62,21 +56,15 @@ class Rota extends DB {
 		// CRIA UM NOVA QUERY SEM A VIRGULA FINAL
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id = :id";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_produto = :id_produto";
 		$stmt = DB::prepare( $sql );
 		
 		
-		foreach ( $params as $key => & $val ):
-			
-		if($key == 'senha'){
-				$senha = md5($val);
-				$stmt->bindParam( $key, $senha);
-				
-			} else {
+		foreach ( $params as $key => & $val ){
 				
 				$stmt->bindParam( $key, $val );
-			}
-		endforeach;
+			
+		};
 		return $stmt->execute();
 
 }
@@ -123,17 +111,17 @@ class Rota extends DB {
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
 	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+		$sql = "SELECT * FROM $this->table WHERE id_despesa = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
 	}
 
 
 
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id = :id";
+		$sql = "DELETE FROM $this->table WHERE id_despesa = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();

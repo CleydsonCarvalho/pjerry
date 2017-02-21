@@ -62,7 +62,7 @@ class Funcionario extends DB {
 		// CRIA UM NOVA QUERY SEM A VIRGULA FINAL
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id = :id";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_funcionario = :id_funcionario";
 		$stmt = DB::prepare( $sql );
 		
 		
@@ -82,8 +82,8 @@ class Funcionario extends DB {
 }
 	
 	//PRECISA USAR O foreach PARA LER TODOS
-	public function readAllAdmin() {
-		$sql = "SELECT * FROM $this->table WHERE tipo = '1' ORDER BY id DESC";
+	public function buscarMotorista() {
+		$sql = "SELECT * FROM $this->table WHERE funcao = 'Motorista' ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
@@ -123,17 +123,17 @@ class Funcionario extends DB {
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
 	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+		$sql = "SELECT * FROM $this->table WHERE id_funcionario = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
 	}
 
 
 
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id = :id";
+		$sql = "DELETE FROM $this->table WHERE id_funcionario = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();

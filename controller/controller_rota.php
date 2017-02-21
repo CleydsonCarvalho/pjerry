@@ -2,9 +2,13 @@
 <?php
 require_once '../classes/Rota2.php';
 require_once '../classes/Estados.php';
+require_once '../classes/Cidades.php';
+require_once '../classes/Relacao_rce.php';
 
 $db_rota = new Rotas ();
 $db_estados = new Estados ();
+$db_cidades = new Cidades ();
+$db_relacao = new Relacao_rce ();
 
 //Recuperando objeto com dados do POST do angular
 $dados =  json_decode(file_get_contents("php://input"));
@@ -34,6 +38,33 @@ if(isset($acao) && $acao == "listarEstados"){
 	$lista = $db_estados->readAll();
 	
 	print json_encode($lista);
+}
+
+if(isset($acao) && $acao == "listarCidades"){
+	
+	$estado = $_GET['estado'];
+	
+	$cidades = $db_cidades->buscaCidade($estado);
+	
+	print json_encode($cidades);
+}
+
+if(isset($acao) && $acao == "idCidade"){
+	
+	$cidade_id = $_GET['idCidade'];
+	
+	$cidades = $db_cidades->cidadeId ($cidade_id);
+	
+	print json_encode($cidades);
+}
+
+if(isset($acao) && $acao == "cidadesId"){
+	
+	$idRota = $_GET['idRota'];
+	
+	$id_cidade = $db_relacao->buscarCidades ($idRota);
+	
+	print json_encode($id_cidade);
 }
 
 if(isset($acao) && $acao == "listarRotas"){

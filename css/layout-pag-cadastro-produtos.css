@@ -28,7 +28,7 @@ thead {
     background-color: rgb(215, 226, 236) !important;
 }
 th.app-btn-acoes {
-    width: 151px;
+    width: 242px;
 }
 td.app-btn-acoes {
     background-color: #bdbdbd !important; 
@@ -36,4 +36,17 @@ td.app-btn-acoes {
 
 spam.app-astericoRed {
     color: #a94442;
+}
+
+.add {
+    margin-top: -5px;
+}
+
+.mod{
+	border: 0px;
+}
+
+.custom.modal-header {
+    background: #5bc0de;
+    color: #fff;
 }

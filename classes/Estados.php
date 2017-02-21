@@ -83,7 +83,7 @@ class Estados extends DB {
 	
 	//PRECISA USAR O foreach PARA LER TODOS
 	public function readAll() {
-		$sql = "SELECT * FROM $this->table WHERE tipo = '1' ORDER BY id DESC";
+		$sql = "SELECT * FROM $this->table ORDER BY estado DESC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();

@@ -1,7 +1,7 @@
 <?php
-class Cidade extends DB {
+class Produtos extends DB {
 
-    protected $table = 'cidades';
+    protected $table = 'produtos';
 		
 	public function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
@@ -17,13 +17,7 @@ class Cidade extends DB {
 		$sql = "INSERT INTO $this->table ($k) VALUES ($v)";
 		$stmt = DB::prepare( $sql );
 		
-	//	foreach ( $params as $key => & $val ):
-	//		$stmt->bindParam( $key, $val );
-	//	endforeach;
-		
-		
-		
-		
+
 		foreach ( $params as $key => & $val ):
 			
 		if($key == 'senha'){
@@ -62,21 +56,15 @@ class Cidade extends DB {
 		// CRIA UM NOVA QUERY SEM A VIRGULA FINAL
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id = :id";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_produto = :id_produto";
 		$stmt = DB::prepare( $sql );
 		
 		
-		foreach ( $params as $key => & $val ):
-			
-		if($key == 'senha'){
-				$senha = md5($val);
-				$stmt->bindParam( $key, $senha);
-				
-			} else {
+		foreach ( $params as $key => & $val ){
 				
 				$stmt->bindParam( $key, $val );
-			}
-		endforeach;
+			
+		};
 		return $stmt->execute();
 
 }
@@ -115,25 +103,25 @@ class Cidade extends DB {
 
 	//endforeach;
 	public function readAll() {
-		$sql = "SELECT * FROM $this->table";
+		$sql = "SELECT * FROM $this->table ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function buscaCidade( $estadoForm ) {
-		$sql = "SELECT * FROM $this->table WHERE estado = :estadoForm";
+	public function readLine( $id ) {
+		$sql = "SELECT * FROM $this->table WHERE id = :id";
 		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':estadoForm', $estadoForm, PDO::PARAM_INT );
+		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetchAll();
+		return $stmt->fetch();
 	}
 
 
 
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id = :id";
+		$sql = "DELETE FROM $this->table WHERE id_produto = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();

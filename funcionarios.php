@@ -28,12 +28,12 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizar' ) {
 	$remover = array(
 		$_POST[ 'acao' ],
 	);
-
+	
 	$resultado = array_diff( $_POST, $remover );
 	$atualizar = array_filter( $resultado );
 
 	$funcionario->update( $atualizar );
-	 header("Location: funcionarios.php");
+	
 }
 
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
@@ -205,7 +205,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 									class="visualizar btn btn-success">Visualizar</button>
 
 									<button type="button" 
-									data-id="<?= $value_funcionario->id ?>"
+									data-id="<?= $value_funcionario->id_funcionario ?>"
 									data-nome="<?= $value_funcionario->nome ?>" 
 									data-rg="<?= $value_funcionario->rg ?>" 
 									data-cpf="<?= $value_funcionario->cpf ?>" 
@@ -222,7 +222,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 
 
 									<button type="button" 
-									data-id="<?= $value_funcionario->id ?>" 
+									data-id="<?= $value_funcionario->id_funcionario ?>" 
 									data-nome="<?= $value_funcionario->nome ?>" 
 									data-funcao="<?= $value_funcionario->funcao ?>" 
 									
@@ -326,7 +326,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">			
 							<label for="nome">
 								<spam class="app-astericoRed">*</spam> Nome Completo:</label>	
-	<input type="hidden" class="form-control" id="idEdit" name="id" value="" >
+	<input type="hidden" class="form-control" id="idEdit" name="id_funcionario">
 							<input type="text" class="form-control" id="nomeEdit" name="nome" value="" placeholder="Digete o Nome Completo" required>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 app-margimBotomCamposFomr">

@@ -1,5 +1,10 @@
+
+
+
+
 <?php
-class Fornecedor extends DB {
+include 'DB.php';
+class Fornecedor  {
 
     protected $table = 'fornecedor';
 		
@@ -62,7 +67,7 @@ class Fornecedor extends DB {
 		// CRIA UM NOVA QUERY SEM A VIRGULA FINAL
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id = :id";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_fornecedor = :id_fornecedor";
 		$stmt = DB::prepare( $sql );
 		
 		
@@ -123,11 +128,11 @@ class Fornecedor extends DB {
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
 	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+		$sql = "SELECT * FROM $this->table WHERE id_fornecedor = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
 	}
 
 

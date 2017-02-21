@@ -26,10 +26,10 @@
 
 
 
-h2.zerarMargimH.app-total-dispesas {
+.zerarMargimH.app-total-dispesas {
 background-color: #d9534f;
     color: #fff;
-    padding: 5px;
+    padding: 11px;
     text-align: center;
 	border-radius: 6px;
 }
@@ -37,9 +37,26 @@ thead {
     background-color: rgb(215, 226, 236) !important;
 }
 th.app-btn-acoes {
-    width: 151px;
-}
-td.app-btn-acoes {
-    background-color: #bdbdbd !important; 
+    width: 152px;
 }
 
+
+.custom.modal-header {
+    background: #5bc0de;
+    color: #fff;
+}
+
+.index {
+    width: 45px;
+}
+.btn-excluir.text-center {
+    width: 70px;
+}
+
+.hr-mg {
+    margin-top: -14px;
+}
+
+.hr-top {
+    margin-top: 2px;
+}

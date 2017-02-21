@@ -62,7 +62,7 @@ class Carro extends DB {
 		// CRIA UM NOVA QUERY SEM A VIRGULA FINAL
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id = :id";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_carro = :id_carro";
 		$stmt = DB::prepare( $sql );
 		
 		
@@ -115,27 +115,27 @@ class Carro extends DB {
 
 	//endforeach;
 	public function readAll() {
-		$sql = "SELECT * FROM $this->table ORDER BY id ASC";
+		$sql = "SELECT * FROM $this->table ORDER BY modelo ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+	public function readLine( $id_carro ) {
+		$sql = "SELECT * FROM $this->table WHERE id_carro = :id_carro";
 		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
+		$stmt->bindParam( ':id_carro', $id_carro, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
 	}
 
 
 
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id = :id";
+		$sql = "DELETE FROM $this->table WHERE id_carro = :id_carro";
 		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
+		$stmt->bindParam( ':id_carro', $id_carro, PDO::PARAM_INT );
 		return $stmt->execute();
 	}
 	

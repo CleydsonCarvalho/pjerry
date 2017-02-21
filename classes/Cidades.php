@@ -1,7 +1,7 @@
 <?php
-class Rota extends DB {
+class Cidades extends DB {
 
-    protected $table = 'rotas';
+    protected $table = 'cidades';
 		
 	public function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
@@ -122,12 +122,21 @@ class Rota extends DB {
 	}
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+	public function buscaCidade( $estadoForm ) {
+		$sql = "SELECT * FROM $this->table WHERE estado = :estadoForm ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
-		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
+		$stmt->bindParam( ':estadoForm', $estadoForm, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
+	}
+	
+	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
+	public function cidadeId( $idCidade ) {
+		$sql = "SELECT * FROM $this->table WHERE idCidade = :idCidade ORDER BY nome ASC";
+		$stmt = DB::prepare( $sql );
+		$stmt->bindParam( ':idCidade', $idCidade, PDO::PARAM_INT );
+		$stmt->execute();
+		return $stmt->fetchAll();
 	}
 
 
