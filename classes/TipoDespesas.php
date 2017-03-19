@@ -1,7 +1,7 @@
 <?php
-class Despesas extends DB {
+class TipoDespesas extends DB {
 
-    protected $table = 'despesas';
+    protected $table = 'tipo_despesa';
 		
 	public function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
@@ -103,7 +103,7 @@ class Despesas extends DB {
 
 	//endforeach;
 	public function readAll() {
-		$sql = "SELECT * FROM $this->table ORDER BY data ASC";
+		$sql = "SELECT * FROM $this->table ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
@@ -111,7 +111,7 @@ class Despesas extends DB {
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
 	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id_despesa = :id";
+		$sql = "SELECT * FROM $this->table WHERE id_TipoDespesa = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
@@ -121,7 +121,7 @@ class Despesas extends DB {
 
 
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id_despesa = :id";
+		$sql = "DELETE FROM $this->table WHERE id_TipoDespesa = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();
