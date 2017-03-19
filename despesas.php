@@ -63,6 +63,20 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizar' ) {
 	$db_produto->update( $produto );
 }
 
+if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizarDespesa' ) {
+
+	$despesa = array_diff( $_POST, array( $_POST[ 'acao' ] ) );
+
+	$db_despesa->update( $despesa );
+}
+
+if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizarDespCarro' ) {
+
+	$despesa = array_diff( $_POST, array( $_POST[ 'acao' ] ) );
+
+	$db_despCarro->update( $despesa );
+}
+
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 
 	$id = $_GET[ 'id' ];
@@ -208,7 +222,17 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 							</td>
 
 							<td class="app-btn-acoes text-center">
-								<button type="button" class="btn btn-warning">Editar</button>
+								<button type="button" class="editar_despCarro btn btn-warning"
+								data-id="<?=$valueDespCarro->id_dc ?>"
+								data-id_carro="<?=<?=$valueDespCarro->id_carro ?>"
+								data-id_motorista="<?=<?=$valueDespCarro->id_motorista ?>"
+								data-id_tipoDespesa="<?=<?=$valueDespCarro->id_tipoDespesa ?>"
+								data-valor="<?=<?=$valueDespCarro->id_valor ?>"
+								data-data="<?=<?=$valueDespCarro->id_data ?>"
+								>
+								>Editar</button>
+								
+								
 								<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
 								<button type="button" class="btn btn-danger">Excluir</button>
 								</a>
@@ -268,10 +292,19 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 							
 							<td>
 								<?=$valueDespesas->data ?>
+
 							</td>
 
 							<td class="app-btn-acoes text-center">
-								<button type="button" class="btn btn-warning">Editar</button>
+							
+								<button type="button" class="editar_despGeral btn btn-warning"
+								data-id="<?=$valueDespesas->id_tipoDespesa ?>"
+								data-id_despesa="<?=$valueDespesas->id_despesa ?>"
+								data-descricao="<?=$valueDespesas->descricao ?>"
+								data-valor="<?=$valueDespesas->valor ?>"
+								data-data="<?=$valueDespesas->data ?>">
+								Editar</button>
+								
 								<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
 								<button type="button" class="btn btn-danger">Excluir</button>
 								</a>
@@ -291,8 +324,8 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 <?php
  $utilizador = number_format($totalDesp+$tDespCarro, 2,',','.');
 	
-  echo '<script>var utilizador = "'. $utilizador .'";
-  </script>';
+  echo '<script> var utilizador = "'. $utilizador .'";
+  		</script>';
 ?>
 
 <script>
@@ -546,8 +579,8 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 	
 	
 	
-		<!--- MODAL EDITAR DESPESAS EM GERAL -->
-	<div id="despesaGeral" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="despesaGeral">
+	<!--- MODAL EDITAR DESPESAS EM GERAL -->
+	<div id="editDespesaGeral" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="despesaGeral">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 
@@ -563,11 +596,99 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 					<div class="modal-body">
 						<div class="row">
 							
-							
+							<input type="hidden" id="id_despesa" name="id_despesa">
 							<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 app-margimBotomCamposFomr">
 								<label for="despesa">Despesa:</label>
-								<select name="id_tipoDespesa" class="form-control" required>
-									<option value="">Selecione a Despesa</option>
+								<select name="id_tipoDespesa" id="despesa_edit" class="form-control">
+									
+								</select>
+							</div>
+
+							<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 app-margimBotomCamposFomr">
+								<label for="descrição">Descrição:</label>
+
+								<input type="text" name="descricao" id="descricao_edit" class="form-control">
+									
+							</div>
+							
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+								<label for="valor">Valor:</label>
+								<div class="input-group">
+									<span class="input-group-addon mod">R$</span>
+									<input type="text" name="valor" id="valor_edit" class="form-control mod">
+								</div>
+							</div>
+
+
+
+							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-6 app-margimBotomCamposFomr">
+								<label for="data">Data da Despesa:</label>
+								<input type="date" name="data" class="form-control" id="data_edit">
+							</div>
+						</div>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						<button type="submit" name="acao" value="atualizarDespesa" class="btn btn-info">Atualizar</button>
+
+					</div>
+					
+				</form>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal-dialog -->
+	</div>
+	<!-- /.modal -->
+	
+	<!--- MODAL EDITAR DESPESAS CARRO -->
+	<div id="editDespesaCarro" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="editDespesaCarro">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+
+				<div class="custom modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3 class="modal-title">
+							<span class="fa fa-car" aria-hidden="true"></span>&nbsp; <strong> Despesa por Carro</strong>
+      				</h3>
+				
+				</div>
+
+				<form method="post" enctype="multipart/form-data">
+					<div class="modal-body">
+						<div class="row">
+
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+								<label for="carro">Seleione o Carro:</label>
+
+								<select name="id_carro" class="form-control" required>
+
+									<option value=""> Selecione o Carro </option>
+									<?php foreach($db_carro->readAll() as $key => $valueCarros){?>
+									<option value="<?= $valueCarros->id_carro?>">
+										<?= $valueCarros->modelo?>
+									</option>
+									<?php }?>
+								</select>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+								<label for="motorista">Motorista:</label>
+								<select name="id_motorista" class="form-control">
+
+									<option value="">Selecione o Motorista</option>
+
+									<?php foreach($db_funcionario->buscarMotorista() as $key => $valueMotorista){?>
+									<option value="<?= $valueMotorista->id_funcionario?>">
+										<?= $valueMotorista->nome?>
+									</option>
+									<?php }?>
+								</select>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+								<label for="despesa">Tipo de Despesa:</label>
+								<select name="id_tipoDespesa" class="form-control">
+									<option>Selecione a Despesa</option>
 									<?php foreach($db_tipoDesp->readAll() as $key => $valueTipoDespesas){?>
 									<option value="<?= $valueTipoDespesas->id_tipoDespesa?>">
 										<?= $valueTipoDespesas->nome?>
@@ -577,18 +698,12 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 								</select>
 							</div>
 
-							<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 app-margimBotomCamposFomr">
-								<label for="descrição">Descrição:</label>
 
-								<input type="text" name="descricao" class="form-control" required>
-									
-							</div>
-							
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
 								<label for="valor">Valor:</label>
 								<div class="input-group">
 									<span class="input-group-addon mod">R$</span>
-									<input type="text" name="valor" id="valor" class="form-control mod" required>
+									<input type="text" name="valor" id="valor" class="form-control mod">
 								</div>
 							</div>
 
@@ -596,13 +711,13 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-6 app-margimBotomCamposFomr">
 								<label for="data">Data da Despesa:</label>
-								<input type="date" name="data" class="form-control" id="data" required>
+								<input type="date" name="data" class="form-control" id="data">
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<button type="submit" name="acao" value="add_despesa" class="btn btn-info">Salvar</button>
+						<button type="submit" name="acao" value="addDc" class="btn btn-info">Salvar</button>
 
 					</div>
 				</form>
@@ -615,8 +730,53 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 	
 	
 	
+<script>
+	$( '.editar_despGeral' ).on( 'click', function () {
+		var id = $( this ).data( 'id' );
+		document.getElementById( 'id_despesa' ).value = $( this ).data( 'id_despesa' );
+		document.getElementById( 'descricao_edit' ).value = $( this ).data( 'descricao' );
+		document.getElementById( 'valor_edit' ).value = $( this ).data( 'valor' );
+		document.getElementById( 'data_edit' ).value = $( this ).data( 'data' );
+
+
+		$( '#editDespesaGeral' ).modal( 'show' );
+
+		listarDespesa();
+
+		function listarDespesa() {
+
+			$.ajax( {
+				type: "POST",
+				url: 'controller/controller_tipoDespesas.php?acao=listarTodos',
+				datatype: "json",
+
+				success: function ( data ) {
+					var todasDespesas = JSON.parse( data );
+
+					if ( todasDespesas != null ) {
+
+						var selectbox = $( '#despesa_edit' );
+						selectbox.find( 'option' ).remove();
+
+						$.each( todasDespesas, function ( key, value ) {
 	
-	<script>	
+							if ( value.id_tipoDespesa == id ) {
+
+								$( '<option selected>' ).val( value.id_tipoDespesa ).text( value.nome ).appendTo( selectbox );
+							} else {
+
+								$( '<option>' ).val( value.id_tipoDespesa ).text( value.nome ).appendTo( selectbox );
+							};
+						} );
+					}
+				}
+			} );
+		};
+	} );
+</script>	
+	
+	
+<script>	
 		
 		$( '#despesaGeral' ).on( 'shown.bs.modal', function () {
 			$( '#myInput' ).focus()

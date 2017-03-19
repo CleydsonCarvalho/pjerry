@@ -1,5 +1,7 @@
 <?php
-class TipoDespesas extends DB {
+require_once('DB.php');
+
+class TipoDespesas {
 
     protected $table = 'tipo_despesa';
 		
