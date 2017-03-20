@@ -1,5 +1,6 @@
 <?php
-class Carro extends DB {
+require_once('DB.php');
+class Carro {
 
     protected $table = 'carros';
 		

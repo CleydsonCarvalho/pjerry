@@ -1,5 +1,6 @@
 <?php
-class Funcionario extends DB {
+require_once('DB.php');
+class Funcionario {
 
     protected $table = 'funcionarios';
 		

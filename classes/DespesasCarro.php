@@ -56,7 +56,7 @@ class DespesasCarro extends DB {
 		// CRIA UM NOVA QUERY SEM A VIRGULA FINAL
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id_produto = :id_produto";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_dc = :id_dc";
 		$stmt = DB::prepare( $sql );
 		
 		
@@ -121,7 +121,7 @@ class DespesasCarro extends DB {
 
 
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id_despesa = :id";
+		$sql = "DELETE FROM $this->table WHERE id_dc = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();

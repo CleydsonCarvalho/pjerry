@@ -72,9 +72,9 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizarDespesa' ) {
 
 if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'atualizarDespCarro' ) {
 
-	$despesa = array_diff( $_POST, array( $_POST[ 'acao' ] ) );
+	$despesaC = array_diff( $_POST, array( $_POST[ 'acao' ] ) );
 
-	$db_despCarro->update( $despesa );
+	$db_despCarro->update( $despesaC );
 }
 
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
@@ -83,8 +83,15 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 	$db_tipoDesp->delete( $id );
 }
 
-?>
+if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirDespCarro' ) {
+	$db_despCarro->delete( $id = $_GET[ 'id' ] );
+}
 
+if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirDespesa' ) {
+	$db_despesa->delete( $id = $_GET[ 'id' ] );
+}
+
+?>
 
 <!doctype html>
 
@@ -220,31 +227,43 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 							<td>
 								<?=$valueDespCarro->data ?>
 							</td>
+							
 
 							<td class="app-btn-acoes text-center">
 								<button type="button" class="editar_despCarro btn btn-warning"
-								data-id="<?=$valueDespCarro->id_dc ?>"
-								data-id_carro="<?=<?=$valueDespCarro->id_carro ?>"
-								data-id_motorista="<?=<?=$valueDespCarro->id_motorista ?>"
-								data-id_tipoDespesa="<?=<?=$valueDespCarro->id_tipoDespesa ?>"
-								data-valor="<?=<?=$valueDespCarro->id_valor ?>"
-								data-data="<?=<?=$valueDespCarro->id_data ?>"
-								>
-								>Editar</button>
+								data-id_dc="<?=$valueDespCarro->id_dc ?>"
+								data-id_carro="<?=$valueDespCarro->id_carro ?>"
+								data-id_motorista="<?=$valueDespCarro->id_motorista ?>"
+								data-id_tipoDespesa="<?=$valueDespCarro->id_tipoDespesa ?>"
+								data-valor="<?=$valueDespCarro->valor ?>"
+								data-data="<?=$valueDespCarro->data ?>">
+								Editar</button>
 								
 								
-								<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
-								<button type="button" class="btn btn-danger">Excluir</button>
-								</a>
+								
+								<button type="button" class="excluir_despCarro btn btn-danger"
+								data-id_dc="<?=$valueDespCarro->id_dc ?>"
+								data-carro="<?= $carro->modelo ?>"
+								data-motorista="<?= $motorista->nome ?>"
+								data-data="<?=$valueDespCarro->data ?>">
+								Excluir</button>
+								
 
 							</td>
 						</tr>
+						
 						<?php }?>
 					</tbody>
+				
+							
+						
 				</table>
+				<div class="total pull-right">
+								<strong >Total: </strong> R$ 375,00
+							</div>
 			<hr class="hr-mg">
 			</div>
-			
+			<br>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 					<h3 class="text-center"><strong>DESPESAS EM GERAL</strong></h3>
 
@@ -305,21 +324,29 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 								data-data="<?=$valueDespesas->data ?>">
 								Editar</button>
 								
-								<a href="" onClick="return confirm('Deseja realmente deletar o produto!')">
-								<button type="button" class="btn btn-danger">Excluir</button>
-								</a>
+								<button type="button" class="excluir_despesa btn btn-danger"
+								data-id_despesa="<?=$valueDespesas->id_despesa ?>"
+								data-desp="<?= $despesas->nome ?>"
+								data-desc="<?=$valueDespesas->descricao ?>"
+								data-val="<?= $valueDespesas->valor ?>"
+								data-dat="<?=$valueDespesas->data ?>">
+								Excluir</button>
 
 							</td>
 						</tr>
 						<?php }?>
 					</tbody>
 				</table>
+				<div class="total pull-right">
+								<strong >Total: </strong> R$ 375,00
+							</div>
 			<hr class="hr-mg">
 			</div>
-
+<br>
 		</div>
 	</div>
 </div>
+	</div>
 
 <?php
  $utilizador = number_format($totalDesp+$tDespCarro, 2,',','.');
@@ -334,7 +361,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 	$( 'span.valorTotal' ).text(utilizador ) ;
 
 </script>
-	
 	
 	<!--- MODAL DE CADASTRO DESPESAS EM GERAL -->
 	<div id="despesaGeral" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="despesaGeral">
@@ -576,9 +602,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 	</div>
 	<!-- /.modal -->
 	
-	
-	
-	
 	<!--- MODAL EDITAR DESPESAS EM GERAL -->
 	<div id="editDespesaGeral" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="despesaGeral">
 		<div class="modal-dialog" role="document">
@@ -660,41 +683,24 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 						<div class="row">
 
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-								<label for="carro">Seleione o Carro:</label>
+								<label for="carro">Carro:</label>
+<input type="hidden" name="id_dc" id="idC_edit">
+							
+								<select name="id_carro" id="carroC_edit" class="form-control">
 
-								<select name="id_carro" class="form-control" required>
-
-									<option value=""> Selecione o Carro </option>
-									<?php foreach($db_carro->readAll() as $key => $valueCarros){?>
-									<option value="<?= $valueCarros->id_carro?>">
-										<?= $valueCarros->modelo?>
-									</option>
-									<?php }?>
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
 								<label for="motorista">Motorista:</label>
-								<select name="id_motorista" class="form-control">
+								<select name="id_motorista" id="motoristaC_edit" class="form-control">
 
-									<option value="">Selecione o Motorista</option>
-
-									<?php foreach($db_funcionario->buscarMotorista() as $key => $valueMotorista){?>
-									<option value="<?= $valueMotorista->id_funcionario?>">
-										<?= $valueMotorista->nome?>
-									</option>
-									<?php }?>
+									
 								</select>
 							</div>
 							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-								<label for="despesa">Tipo de Despesa:</label>
-								<select name="id_tipoDespesa" class="form-control">
-									<option>Selecione a Despesa</option>
-									<?php foreach($db_tipoDesp->readAll() as $key => $valueTipoDespesas){?>
-									<option value="<?= $valueTipoDespesas->id_tipoDespesa?>">
-										<?= $valueTipoDespesas->nome?>
-									</option>
-									<?php }?>
-
+								<label for="despesa">Despesa:</label>
+								<select name="id_tipoDespesa" id="tipoDespesaC_edit" class="form-control">
+									
 								</select>
 							</div>
 
@@ -703,7 +709,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 								<label for="valor">Valor:</label>
 								<div class="input-group">
 									<span class="input-group-addon mod">R$</span>
-									<input type="text" name="valor" id="valor" class="form-control mod">
+									<input type="text" name="valor" id="valorC_edit" class="form-control mod">
 								</div>
 							</div>
 
@@ -711,13 +717,13 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 
 							<div class="col-xs-12 col-sm-2 col-md-2 col-lg-6 app-margimBotomCamposFomr">
 								<label for="data">Data da Despesa:</label>
-								<input type="date" name="data" class="form-control" id="data">
+								<input type="date" name="data" class="form-control" id="dataC_edit">
 							</div>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-						<button type="submit" name="acao" value="addDc" class="btn btn-info">Salvar</button>
+						<button type="submit" name="acao" value="atualizarDespCarro" class="btn btn-info">Atualizar</button>
 
 					</div>
 				</form>
@@ -728,7 +734,95 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 	</div>
 	<!-- /.modal -->
 	
+	<!--MODAL EXCLUIR DESP-CARRO-->
+	<div id="excluir_despCarro" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			
+				<div class="custom modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+      					<strong class="size-text">
+							<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+							&nbsp; Excluir Despesa por Carro
+						</strong>
+      				</h4>
+				</div>
+				
+				<div class="modal-body">
+					<strong><label class="laber-txt">Deseja excluir a Despesa do carro ? </label></strong><br>
+					<span class="carro"></span><br>
+					<strong>Motorista: </strong><span class="motorista"></span><br>
+					<strong>Data: </strong><span class="data"></span>.
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					<a href="#" type="button" class="btn btn-info delete-yes">Confirmar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal -->
 	
+	
+	
+		<!--MODAL EXCLUIR DESPESA-->
+	<div id="excluir_despesa" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+			
+				<div class="custom modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">
+      					<strong class="size-text">
+							<i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+							&nbsp; Excluir Despesa
+						</strong>
+      				</h4>
+				</div>
+				
+				<div class="modal-body">
+					<strong><label class="laber-txt">Deseja excluir a Despesa ? </label></strong><br>
+					<span class="despesaG"></span> - <span class="descricaoG"></span> <br>
+					<strong>Valor: </strong><span class="valorG"></span><br>
+					<strong>Data: </strong><span class="dataG"></span>.
+				</div>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+					<a href="#" type="button" class="btn btn-info delete-yes">Confirmar</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /.modal -->
+	
+	
+	<script>
+	$( '.excluir_despCarro' ).on( 'click', function () {
+		var idC = $( this ).data( 'id_dc' );
+		$( 'span.carro' ).text( $( this ).data( 'carro' ) );
+		$( 'span.motorista' ).text( $( this ).data( 'motorista' ) );
+		$( 'span.data' ).text( $( this ).data( 'data' ) );
+		$( 'a.delete-yes' ).attr( 'href', 'despesas.php?acao=excluirDespCarro&id=' + idC );
+		$( '#excluir_despCarro' ).modal( 'show' );
+	} );
+</script>
+
+	<script>
+	$( '.excluir_despesa' ).on( 'click', function () {
+		var idP = $( this ).data( 'id_despesa' );
+		$( 'span.despesaG' ).text( $( this ).data( 'desp' ) );
+		$( 'span.descricaoG' ).text( $( this ).data( 'desc' ) );
+		$( 'span.valorG' ).text( $( this ).data( 'val' ) );
+		$( 'span.dataG' ).text( $( this ).data( 'dat' ) );
+		$( 'a.delete-yes' ).attr( 'href', 'despesas.php?acao=excluirDespesa&id=' + idP );
+		$( '#excluir_despesa' ).modal( 'show' );
+	} );
+		
+		
+</script>
 	
 <script>
 	$( '.editar_despGeral' ).on( 'click', function () {
@@ -774,8 +868,120 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 		};
 	} );
 </script>	
+
+<script>
+	$( '.editar_despCarro' ).on( 'click', function () {
+
+		var id_carro = $( this ).data( 'id_carro' );
+		var id_motorista = $( this ).data( 'id_motorista' );
+		var id_tipoDespesa = $( this ).data( 'id_tipoDespesa' );
+		
 	
+		document.getElementById( 'idC_edit' ).value = $( this ).data( 'id_dc' );
+		document.getElementById( 'valorC_edit' ).value = $( this ).data( 'valor' );
+		document.getElementById( 'dataC_edit' ).value = $( this ).data( 'data' );
+
+
+		$( '#editDespesaCarro' ).modal( 'show' );
+
+		listarDespesasC();
+		listarCarros();
+		listarMotoristaC();
+
+		function listarDespesasC() {
+
+			$.ajax( {
+				type: "POST",
+				url: 'controller/controller_tipoDespesas.php?acao=listarTodos',
+				datatype: "json",
+
+				success: function ( data ) {
+					var todasDespesas = JSON.parse( data );
+//console.log(todasDespesas);
+					if ( todasDespesas != null ) {
+
+						var selectbox = $( '#tipoDespesaC_edit' );
+						selectbox.find( 'option' ).remove();
+
+						$.each( todasDespesas, function ( key, value ) {
 	
+							if ( value.id_tipoDespesa == id_tipoDespesa ) {
+
+								$( '<option selected>' ).val( value.id_tipoDespesa ).text( value.nome ).appendTo( selectbox );
+							} else {
+
+								$( '<option>' ).val( value.id_tipoDespesa ).text( value.nome ).appendTo( selectbox );
+							};
+						} );
+					}
+				}
+			} );
+		};
+		
+		function listarCarros() {
+
+			$.ajax( {
+				type: "POST",
+				url: 'controller/controller_carros.php?acao=listarTodos',
+				datatype: "json",
+
+				success: function ( data ) {
+					var todosCarros = JSON.parse( data );
+
+					if ( todosCarros != null ) {
+
+						var selectbox = $( '#carroC_edit' );
+						selectbox.find( 'option' ).remove();
+
+						$.each( todosCarros, function ( key, value ) {
+	
+							if ( value.id_carro == id_carro ) {
+
+								$( '<option selected>' ).val( value.id_carro ).text( value.modelo ).appendTo( selectbox );
+							} else {
+
+								$( '<option>' ).val( value.id_carro ).text( value.modelo ).appendTo( selectbox );
+							};
+						} );
+					}
+				}
+			} );
+		};
+		
+		function listarMotoristaC () {
+
+			$.ajax( {
+				type: "POST",
+				url: 'controller/controller_funcionario.php?acao=listarMotoristas',
+				datatype: "json",
+
+				success: function ( data ) {
+					var todosMotoristas = JSON.parse( data );
+
+					if ( todosMotoristas != null ) {
+
+						var selectbox = $( '#motoristaC_edit' );
+						selectbox.find( 'option' ).remove();
+
+						$.each( todosMotoristas, function ( key, value ) {
+	
+							if ( value.id_funcionario == id_motorista ) {
+
+								$( '<option selected>' ).val( value.id_funcionario ).text( value.nome ).appendTo( selectbox );
+							} else {
+
+								$( '<option>' ).val( value.id_funcionario ).text( value.nome ).appendTo( selectbox );
+							};
+						} );
+					}
+				}
+			} );
+		};
+		
+		
+	} );
+</script>	
+		
 <script>	
 		
 		$( '#despesaGeral' ).on( 'shown.bs.modal', function () {
@@ -791,10 +997,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluirTipo' ) {
 		} )
 	</script>
 	
-	
-	
-	
-	<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 </body>
 
 </html>
