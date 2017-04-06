@@ -1,6 +1,11 @@
 .app-margimBotomCamposFomr{
 	margin-bottom: 15px;
 }
+
+.app-margimBotom{
+	margin-bottom: 25px;
+}
+
 .zerarMargimH{
 	margin-top: 0px;
 	margin-bottom: 0px;
@@ -39,12 +44,42 @@ spam.app-astericoRed {
 }
 .form-group.camposTabelas {
     margin-bottom: 0px;
-	min-width: 100px;
+	min-width: 80px;
 }
 
 th.app-btn-excluir {
-    background-color: #bdbdbd;
+   
     width: 20px;
 }
 .invisivel { display: none; }
-.visivel { visibility: visible; }
+.visivel { visibility: visible; 
+}
+
+.quant {
+    width: 95px;
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #fff;
+    opacity: 1;
+}
+
+.esp {
+    margin-top: 25px;
+}
+
+[uib-typeahead-popup].dropdown-menu {
+    
+    border-radius: 6px;
+
+	
+}
+
+.dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover {
+    
+    background-color: #0081c2;
+    
+}
+
+
+

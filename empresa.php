@@ -240,24 +240,66 @@ $empresa = new Empresa();
 				<p>Dados Cadastrais da Empresa.</p>
 				<hr>
 				<?php foreach($empresa->readAll() as $key => $value_empresa){ ?>
-				<address>
-				<strong>Empresa</strong><br> 
-				<em><h2 class="zerarMargimH"><?=$value_empresa->nome?></h2></em><br>
-				<strong>Cidade:</strong> <em><?=$value_empresa->cidade?> - <?=$value_empresa->estado?></em><br>
-				<strong>Endereço:</strong> <em><?=$value_empresa->endereco?></em><br>
-				<strong>Bairro:</strong> <em><?=$value_empresa->bairro?></em> <em>Nº <?=$value_empresa->numero?></em>/<em>Sul</em><br>
-				<strong>Contato Fixo:</strong> <em><?=$value_empresa->telefoneFixo?></em><br>
-				<strong>Contato Movel:</strong> <em><?=$value_empresa->telefoneCelular?>/</em><br>
-				<strong>E-mail:</strong> <em><?=$value_empresa->email?></em><br>
-				</address>
-			
-				<address>
-				<strong>Responsável</strong><br>
-				<em><?=$value_empresa->proprietario?></em>
-				</address>
+				
+				
+				<!--Novo Form-->
+				<form  method="post" enctype="multipart/form-data" autocomplete="off">
+
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
+							<label for="nome">
+								 Nome da Empresa</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->nome?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+							<label for="cnpj">CNPJ</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->cnpj?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-6 app-margimBotomCamposFomr">
+							<label for="endereco">Endereço e complemento</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->endereco?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 app-margimBotomCamposFomr">
+							<label for="bairro">Bairro</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->bairro?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+							<label for="numero">Número</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->numero?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+							<label for="regiao">Região</label>
+							<input class="form-control" value="<?=$value_empresa->regiao?>" readonly>
+								
+						</div>
+						<div class="col-xs-12 col-sm-8 col-md-8 col-lg-10 app-margimBotomCamposFomr">
+							<label for="proprietario">Proprietário</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->proprietario?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 app-margimBotomCamposFomr">
+							<label for="telefoneFixo">Telefone</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->telefoneFixo?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 app-margimBotomCamposFomr">
+							<label for="telefoneCelular">Contato Movel</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->telefoneCelular?>" readonly>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 app-margimBotomCamposFomr">
+							<label for="email">E-mail</label>
+							<input type="text" class="form-control" value="<?=$value_empresa->email?>" readonly>
+						</div>
+						
+					</div>
+
+				
+
+				</form>
+				
+				
+				
 			
 				<a href="empresa.php?acao=editar&id=<?=$value_empresa->id?>">
-				<button type="submit" class="btn btn-primary">Editar Informações</button><br><br><br>
+				<button type="submit" class="btn btn-primary pull-right">Editar Informações</button><br><br><br>
 				</a>
 			</div>
 			<?php } ?>

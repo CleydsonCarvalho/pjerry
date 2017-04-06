@@ -1,5 +1,6 @@
 <?php
-class Produtos extends DB {
+require_once 'DB.php';
+class Produtos {
 
     protected $table = 'produtos';
 		
@@ -80,17 +81,37 @@ class Produtos extends DB {
 	//foreach($user->readAllCliente() as $key => $value_users): ?
 
 	//endforeach;
-	public function readAllCliente() {
-		$sql = "SELECT * FROM $this->table WHERE tipo = '3' ORDER BY id DESC";
+	public function readProdutos() {
+		$sql = "SELECT id_produto, nome FROM $this->table  ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
-		return $stmt->fetchAll();
+		$produtos =  $stmt->fetchAll();
+		
+	
+		
+	return ($produtos); 
 	}
 	
-	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	//foreach($user->readAllTecnico() as $key => $value_users): ?
+	
+	public function lerProdutos($search) {
+		
+		
+		$sql = "SELECT id_produto, nome FROM $this->table WHERE nome LIKE '%".$search."%' LIMIT 0,3 ";
+		$stmt = DB::prepare( $sql );
+		$stmt->execute();
+		$produtos =  $stmt->fetchAll();
+		
+		//foreach($produtos as $key => $ValueProdutos){
+	    //$todosProdutos[] = array('id_produto'=>$ValueProdutos->id_produto, 'nome' =>$ValueProdutos->nome);
+		//}
+		
+	return ($produtos); 
+	}
+	
+	
+	
+	
 
-	//endforeach;
 	public function readAllTecnico() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '2' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
@@ -110,13 +131,15 @@ class Produtos extends DB {
 	}
 	
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+	public function lerProduto( $id ) {
+		$sql = "SELECT * FROM $this->table WHERE id_produto = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
 	}
+	
+	
 
 
 

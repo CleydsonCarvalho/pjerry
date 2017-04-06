@@ -34,6 +34,7 @@
 				
 
 					<ul class="dropdown-menu multi-level">
+					
 						<li><a href='empresa.php'><i class="fa fa-building-o margimDireitaIcon"></i> Empresa</a>
 						</li>
 
@@ -48,15 +49,21 @@
 
 						<li><a href="rotas.php"><i class="glyphicon glyphicon-road margimDireitaIcon"></i> Rotas</a>
 						</li>
+						
+						<li><a href="vale.php">&nbsp;<i class="fa fa-usd margimDireitaIcon"></i>&nbsp; Vale</a>
+						</li>
+						
+						<li><a href="despesas.php"><i class="fa fa-money margimDireitaIcon"></i> Despesas</a>
+						</li>
+						
 						<li class="divider"></li>
 						<li><a href="fornecedor.php"><i class="fa fa-truck margimDireitaIcon"></i> Fornecedor</a>
 						</li>
 						<li class="divider"></li>
 						<li><a href="produtos.php"><i class="fa fa-product-hunt margimDireitaIcon"></i> Produtos</a>
 						</li>
-						<li class="divider"></li>
-						<li><a href="despesas.php"><i class="fa fa-money margimDireitaIcon"></i> Despesas</a>
-						</li>
+						
+						
 					</ul>
 				</li>
 
