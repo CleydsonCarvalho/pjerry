@@ -47,29 +47,48 @@ include'menu.php';
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<h1>Efetuar Venda</h1>
 				<p>Cadastrar nova venda.</p>
-				<hr>
+				<hr class="corHr">
 			</div>
 		</div>
+		
+		
+				<div class="row" ng-hide="status">
+					<div class="col-xs-12 col-sm-11 col-md-11 col-lg-11 app-margimBotom">
+						<label for="cliente">Adicionar Cliente</label>
+						<input type="text" ng-model="buscarCliente" uib-typeahead="cliente as cliente.nome for cliente in clientesOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquisar por nome do cliente" autofocus autocomplete="off">
+					</div>
 
-		<div>
+					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotom">
+						<label for="cliente">&nbsp;</label>
+						<button type="submit" ng-click="SelecionarCliente()" class="btn btn-info" >Selecionar</button>
+					</div>
+				</div>
+				
+				<div class="row text-center" ng-show="status">
+					<div class=" col-xs-12 col-sm-11 col-md-11 col-lg-11 app-margimBotom">
+				<label for="cliente">&nbsp;</label>
+						<input type="text" ng-model="clienteSelecionado" class="form-control altCor text-center" readonly>
+					</div>
 
-			<pre>Model: {{buscarProduto.id_produto | json}} - {{buscarProduto.nome | json}}</pre>
-
-		</div>
+					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotom">
+					<label for="cliente">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+						<button type="submit" ng-click="editarCliente()" class="btn btn-warning" >Alterar</button>
+					</div>
+				</div>
 
 		<div class="row">
-			<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<h3 class="text-center">Produtos no Carrinho</h3>
-				<hr>
+				<hr class="corHr">
 				<div class="row">
 					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 app-margimBotomCamposFomr">
 						<label for="cliente">Produto</label>
-						<input type="text" ng-model="buscarProduto"  uib-typeahead="produto1 as produto1.nome for produto1 in produtosOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquise por nome ou código" autofocus autocomplete="off">
+						<input type="text" ng-model="buscarProduto"  uib-typeahead="produto1 as produto1.nome for produto1 in produtosOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquise por nome ou código do produto" autocomplete="off">
 					</div>
 
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-						<label for="cliente">Quantidade</label>
-						<input type="text" ng-init="quantidade=1" ng-model="quantidade" class="form-control text-center t"/>
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr text-center">
+						<label for="cliente" >Quantidade</label>
+						<input type="text" ng-init="quantidade=1" ng-model="quantidade" class="form-control text-center "/>
 					</div>
 
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
@@ -83,7 +102,7 @@ include'menu.php';
 						<thead>
 							<tr>
 								<th>Produto</th>
-								<th class="text-center">Preço</th>
+								<th >Preço</th>
 								<th class="quant text-center">Quant.</th>
 								<th>Total</th>
 								<th class="app-btn-excluir">Excluir</th>
@@ -92,7 +111,7 @@ include'menu.php';
 						<tbody>
 							<tr ng-repeat="produto in produtos">
 								<td class="nomedoProduto">{{produto.nome}}</td>
-								<td class="text-center">
+								<td >
 									R$ {{produto.preco}}
 								</td>
 								<td class="text-center">
@@ -118,22 +137,12 @@ include'menu.php';
 				</div>
 			</div>
 
-			<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<h3 class="text-center">Finalizar Venda</h3>
-				<hr>
-				<div class="row">
-					<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10 app-margimBotom">
-						<label for="cliente">&nbsp;</label>
-						<input type="text" class="form-control input-search" alt="lista-produtos" id="cliente" placeholder="Pesquisar nome do cliente">
-					</div>
+				<hr class="corHr">
+				
 
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotom">
-						<label for="cliente">&nbsp;</label>
-						<button type="submit" class="btn btn-info btn-block pull-right">+</button>
-					</div>
-				</div>
-
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
 					<label for="valor compra">Sub-total</label>
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
@@ -141,7 +150,7 @@ include'menu.php';
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
 					<label for="valor compra">Desconto:</label>
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
@@ -149,7 +158,7 @@ include'menu.php';
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
 					<label for="valor compra">Entrada</label>
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
@@ -157,7 +166,7 @@ include'menu.php';
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
 					<label for="valor compra">Pagamento:</label>
 					<select class="form-control">
 						<option>A Vista</option>
@@ -170,7 +179,7 @@ include'menu.php';
 					</select>
 				</div>
 
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
 					<label for="valor compra">Total</label>
 					<div class="input-group">
 						<span class="input-group-addon">R$</span>
@@ -178,20 +187,22 @@ include'menu.php';
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 text-center">
-					<label for="valor compra">CANCELAR &nbsp;\&nbsp; FINALIZAR</label>
-
-				</div>
-				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+				
+				<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+				<label>&nbsp;</label>
 					<button type="submit" class="btn btn-danger btn-block">Cancelar</button>
 				</div>
 
-				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+				<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
+				<label>&nbsp;</label>
 					<button type="submit" class="btn btn-success btn-block">Finzalizar</button>
 				</div>
+				
 			</div>
 		</div>
 	</div>
+	<br>
+
 </body>
 
 </html>

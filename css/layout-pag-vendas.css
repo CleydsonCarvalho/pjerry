@@ -81,5 +81,17 @@ th.app-btn-excluir {
     
 }
 
+hr.corHr {
+    border-top: 1px solid #ccc;
+}
+
+input.form-control.altCor.ng-pristine.ng-valid.ng-not-empty {
+    background-color: #e2e2e2;
+    border: 0px;
+	font-weight: bold;
+	color: #333;
+}
+
+
 
 

@@ -34,8 +34,6 @@ class Produtos {
 		return $stmt->execute();
 	}	
 
-
-	
 	public function update( $atualizar ) {
 
 		// PEGA OS INDICES DO ARRAY
@@ -86,8 +84,6 @@ class Produtos {
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		$produtos =  $stmt->fetchAll();
-		
-	
 		
 	return ($produtos); 
 	}

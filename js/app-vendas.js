@@ -8,20 +8,42 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter)
 	$scope.listarProdutos = function () {
 
 		$http.post('/controller/controller_vendas.php?acao=listarProdutos')
-			.then(function (data) {
+			.then(function (produtos) {
 
-				$scope.produtosOK = data.data;
+				$scope.produtosOK = produtos.data;
 
 			});
+	};
+	
+	$scope.listarClientes = function () {
+
+		$http.post('/controller/controller_clientes.php?acao=listarClientes')
+			.then(function (clientes) {
+
+				$scope.clientesOK = clientes.data;
+
+			});
+	
+		console.log("ok");
+	};
+	
+	$scope.SelecionarCliente = function (){
+	
+		$scope.clienteSelecionado = $scope.buscarCliente.nome;
+		$scope.status=true;
+	};
+	
+	$scope.editarCliente = function (){
+		$scope.status=false;
 	};
 
 	$scope.listarProduto = function (id) {
 
 		$http.post('/controller/controller_vendas.php?acao=lerProduto&id=' + id)
-			.then(function (data) {
+			.then(function (produto) {
 
-				var nome = data.data[0].nome;
-				var preco = data.data[0].valor_venda;
+				var nome = produto.data[0].nome;
+				var preco = produto.data[0].valor_venda;
 				var quantidade = $scope.quantidade;
 				var total = preco * quantidade;
 				
@@ -45,7 +67,7 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter)
 		
 			};
 	
-
+	$scope.listarClientes();
 	$scope.listarProdutos();
 
 });
