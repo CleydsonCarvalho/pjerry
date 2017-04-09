@@ -13,6 +13,14 @@ if(isset($_GET['acao']) && $_GET['acao'] == "listarClientes"){
 }
 
 
+	
+if(isset($_GET['acao']) && $_GET['acao'] == "todosClientes"){
+	
+	$clientes = $db_clientes->readAll();
+	echo json_encode ($clientes); 
+}
+
+
 //if(isset($_GET['acao']) && $_GET['acao'] == "lerProduto"){
 //$id = $_GET['id'];
 	//$data = file_get_contents("php://input");

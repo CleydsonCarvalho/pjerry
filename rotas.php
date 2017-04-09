@@ -50,31 +50,7 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'gravarCidade' ) {
 
 }
 
-if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'salvar' ) {
 
-	//$buscaUsers = $users->readLine( $id = $_POST[ 'id' ] );
-
-	// CAMPOS NEGADOS
-	$remover = array(
-		$_POST[ 'acao' ],
-	);
-	// RETIRA DO ARRAY Os CAMPOS NEGADOS
-	$resultado = array_diff( $_POST, $remover );
-	$atualizar = array_filter( $resultado );
-
-	$users->update( $atualizar );
-	//var_dump($atualizar);
-
-
-}
-
-if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
-	$users->delete( $id = $_GET[ 'id' ] );
-	$tipo_clientes->deletex( $id = $_GET[ 'id' ] );
-	$sistemacliente->deletex( $id = $_GET[ 'id' ] );
-
-
-}
 ?>
 
 <!doctype html>
@@ -145,13 +121,13 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 				<form method="post" enctype="multipart/form-data">
 
 					<div class="row">
-						<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 app-margimBotomCamposFomr">
+						<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9 app-margimBotomCamposFomr">
 							<label for="nome">
 								<spam class="app-astericoRed">*</spam> Nome da Rota:</label>
 							<input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" required>
 						</div>
 
-						<div class="col-xs-12 col-sm-2 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
 							<label for="estado">
 								<spam class="app-astericoRed">*</spam> Estado:</label>
 
@@ -165,12 +141,21 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 							</select>
 
 						</div>
+						
+						
+						<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotomCamposFomr">
+							<label for="estado">&nbsp;</label>
+								
+<button type="submit" name="acao" value="gravarEstado" class="btn btn-primary btn-block">Gravar </button>
+						</div>
+						
+						
 						<div>
 							<spam class="app-astericoRed">*</spam> <em>Preenchimento obrigatório.</em>
 						</div>
 					</div>
 
-					<button type="submit" name="acao" value="gravarEstado" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
+					
 				</form><br><br><br><br>
 
 				<!--Tabela de Clientes-->

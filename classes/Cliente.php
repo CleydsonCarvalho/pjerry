@@ -64,7 +64,7 @@ class Cliente {
 	
 	
 	public function lerClientes() {
-		$sql = "SELECT id, nome FROM $this->table  ORDER BY nome ASC";
+		$sql = "SELECT nome FROM $this->table  ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll(); 

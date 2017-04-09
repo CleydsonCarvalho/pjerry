@@ -86,11 +86,24 @@ hr.corHr {
 }
 
 input.form-control.altCor.ng-pristine.ng-valid.ng-not-empty {
-    background-color: #e2e2e2;
+    background-color: #eee;
     border: 0px;
-	font-weight: bold;
 	color: #333;
 }
+
+
+
+.pMod {
+    font-size: 17px;
+    margin-top: 6px;
+    margin-bottom: -12px;
+
+}
+
+.esp {
+    margin-top: 14px;
+}
+
 
 
 

@@ -45,17 +45,61 @@ include'menu.php';
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<h1>Efetuar Venda</h1>
-				<p>Cadastrar nova venda.</p>
+				<p class="pMod">Cadastrar nova venda</p>
 				<hr class="corHr">
 			</div>
 		</div>
-		
-		
+	
+		<form method="post" enctype="multipart/form-data" autocomplete="off">
 				<div class="row" ng-hide="status">
-					<div class="col-xs-12 col-sm-11 col-md-11 col-lg-11 app-margimBotom">
-						<label for="cliente">Adicionar Cliente</label>
-						<input type="text" ng-model="buscarCliente" uib-typeahead="cliente as cliente.nome for cliente in clientesOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquisar por nome do cliente" autofocus autocomplete="off">
+				
+					<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 app-margimBotom">
+						<label for="cliente">Cliente:</label>
+						<input type="text" ng-model="buscarCliente" uib-typeahead="cliente as cliente.nome for cliente in clientesOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquisar por nome do cliente" autofocus autocomplete="off" ng-blur="findCliente()" required>
+					</div>
+					
+					
+					
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotom">
+						<label for="cliente">CPF</label>
+						<input type="text" ng-model="cpfCliente" class="form-control altCor" placeholder="CPF" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotom">
+						<label for="cliente">Cidade</label>
+						<input type="text" ng-model="cidadeCliente" class="form-control altCor" placeholder="Cidade" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotom">
+						<label for="cliente">Estado</label>
+						<input type="text" ng-model="estadoCliente" class="form-control altCor" placeholder="Estado" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotom">
+						<label for="cliente">Status</label>
+						<input type="text" ng-model="estatusCliente" class="form-control altCor" placeholder="Estatus" readonly>
+					</div>
+					
+					
+					
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 app-margimBotom">
+						<label for="cliente">Vendedor:</label>
+						
+						<input type="text" ng-model="buscarCliente" uib-typeahead="cliente as cliente.nome for cliente in clientesOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquisar por nome do cliente" autofocus autocomplete="off" required>
+					</div>
+					
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotom">
+						<label for="cliente">Data da Venda:</label>
+						<input type="date" ng-model="dataVenda" class="form-control input-search" placeholder="Data" required>
+					</div>
+					
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotom">
+						<label for="cliente">Rota:</label>
+						
+						<select class="form-control" ng-model="buscarRota" required >
+							<option value="" >Selecione a Rota</option>
+							<option ng-repeat="rota in rotas" ng-value="{{rota}}">{{rota.nome}}</option>
+						</select>
 					</div>
 
 					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotom">
@@ -63,37 +107,60 @@ include'menu.php';
 						<button type="submit" ng-click="SelecionarCliente()" class="btn btn-info" >Selecionar</button>
 					</div>
 				</div>
+		</form>
+			
+			
 				
-				<div class="row text-center" ng-show="status">
-					<div class=" col-xs-12 col-sm-11 col-md-11 col-lg-11 app-margimBotom">
-				<label for="cliente">&nbsp;</label>
-						<input type="text" ng-model="clienteSelecionado" class="form-control altCor text-center" readonly>
+					
+					
+					
+					
+				<!--Div Selecionado-->
+				<div class="row meu" ng-show="status">
+					
+				<div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 app-margimBotom">
+						<label for="cliente">Cliente</label>
+						<input type="text" ng-model="clienteSelecionado" class="form-control altCor" readonly>
 					</div>
-
+					
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotom">
+						<label for="cliente">Data da Venda</label>
+						<input type="date" ng-model="dataVenda" class="form-control altCor" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotom">
+						<label for="cliente">Rota</label>
+						
+						<input type="text" ng-model="rotaSelecionado" class="form-control altCor" readonly>
+					</div>	
+					
 					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotom">
 					<label for="cliente">&nbsp;&nbsp;&nbsp;&nbsp;</label>
-						<button type="submit" ng-click="editarCliente()" class="btn btn-warning" >Alterar</button>
+						<button type="submit" ng-click="editarCliente()" class="btn btn-warning" >
+						&nbsp;<Spam class="fa fa-pencil-square-o"></spam>&nbsp;Editar&nbsp;&nbsp;</button>
 					</div>
 				</div>
+				
+
 
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<h3 class="text-center">Produtos no Carrinho</h3>
-				<hr class="corHr">
+				
+				<hr class="corHr esp">
 				<div class="row">
-					<div class="col-xs-12 col-sm-8 col-md-8 col-lg-8 app-margimBotomCamposFomr">
+					<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10 app-margimBotomCamposFomr">
 						<label for="cliente">Produto</label>
 						<input type="text" ng-model="buscarProduto"  uib-typeahead="produto1 as produto1.nome for produto1 in produtosOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquise por nome ou código do produto" autocomplete="off">
 					</div>
 
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr text-center">
+					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotomCamposFomr text-center">
 						<label for="cliente" >Quantidade</label>
 						<input type="text" ng-init="quantidade=1" ng-model="quantidade" class="form-control text-center "/>
 					</div>
 
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotomCamposFomr">
 						<label for="cliente">&nbsp;</label>
-						<button type="submit" ng-click="listarProduto(buscarProduto.id_produto)" class="btn btn-primary btn-block pull-right">Adicionar</button>
+						<button type="submit" ng-click="listarProduto(buscarProduto.id_produto)" class="btn btn-primary">Adicionar</button>
 					</div>
 				</div>
 

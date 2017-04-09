@@ -1,5 +1,6 @@
 <?php
-class Estados extends DB {
+require_once('DB.php');
+class Estados {
 
     protected $table = 'estados';
 		
@@ -84,6 +85,13 @@ class Estados extends DB {
 	//PRECISA USAR O foreach PARA LER TODOS
 	public function readAll() {
 		$sql = "SELECT * FROM $this->table ORDER BY estado DESC";
+		$stmt = DB::prepare( $sql );
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+	
+	public function lerEstados() {
+		$sql = "SELECT * FROM $this->table ORDER BY estado ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();

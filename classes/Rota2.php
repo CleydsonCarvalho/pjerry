@@ -102,7 +102,7 @@ class Rotas {
 	
 	
 	public function readAll() {
-		$sql = "SELECT * FROM $this->table";
+		$sql = "SELECT * FROM $this->table ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();

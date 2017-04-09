@@ -88,6 +88,13 @@ if(isset($acao) && $acao == "listarRotas"){
 	print json_encode($dadosRotas);	
 }
 
+if(isset($acao) && $acao == "lerRotas"){
+
+	$dados = $db_rota->readAll(); 
+		
+	print json_encode($dados);	
+}
+
 ?>
 
 
