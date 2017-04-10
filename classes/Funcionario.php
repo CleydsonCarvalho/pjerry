@@ -13,16 +13,10 @@ class Funcionario {
 		$k = implode( ',', array_values( $indices ) );
 		// TRANSFORMA PRO FORMATO DE QUERY = :nome, :email, :etc
 		$v = ':' . implode( ',:', array_values( $indices ) );
-		// COMBINA OS ARRAYS PARA GERAR OS BINDPARAM
+
 		$params = array_combine( $indices, $valores );		
 		$sql = "INSERT INTO $this->table ($k) VALUES ($v)";
 		$stmt = DB::prepare( $sql );
-		
-	//	foreach ( $params as $key => & $val ):
-	//		$stmt->bindParam( $key, $val );
-	//	endforeach;
-		
-		
 		
 		
 		foreach ( $params as $key => & $val ):
@@ -40,8 +34,6 @@ class Funcionario {
 		return $stmt->execute();
 	}	
 
-
-	
 	public function update( $atualizar ) {
 
 		// PEGA OS INDICES DO ARRAY
@@ -82,17 +74,20 @@ class Funcionario {
 
 }
 	
-	//PRECISA USAR O foreach PARA LER TODOS
 	public function buscarMotorista() {
 		$sql = "SELECT * FROM $this->table WHERE funcao = 'Motorista' ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	//PRECISA USAR O foreach PARA LER TODOS
-	//foreach($user->readAllCliente() as $key => $value_users): ?
+	
+	public function buscarVendedores (){
+		$sql = "SELECT * FROM $this->table WHERE funcao = 'Vendedor' ORDER BY nome ASC";
+		$stmt = DB::prepare( $sql );
+		$stmt->execute();
+		return $stmt->fetchAll();	
+	}
 
-	//endforeach;
 	public function readAllCliente() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '3' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
@@ -100,10 +95,7 @@ class Funcionario {
 		return $stmt->fetchAll();
 	}
 	
-	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	//foreach($user->readAllTecnico() as $key => $value_users): ?
 
-	//endforeach;
 	public function readAllTecnico() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '2' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );

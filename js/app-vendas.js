@@ -1,9 +1,18 @@
 
-angular.module('app', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']);
+angular.module('app', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngCurrencyMask']);
+
 angular.module('app').controller('app-vendas', function ($scope, $http, $filter, $interval) {
 
 	$scope.demo = "demo";
 	$scope.produtos = [];
+	$scope.status = false;
+	$scope.subtotal = 0;
+	$scope.entrada = 0;
+	
+	$scope.parcelaS = false;
+	
+	
+	
 
 	$scope.listarProdutos = function () {
 
@@ -39,14 +48,36 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 		
 	};
 	
+	$scope.buscarVendedores = function () {
+		
+			$http.post('/controller/controller_vendas.php?acao=buscarVendedores')
+			.then(function (funcionarios) {
+
+			$scope.vendedores = funcionarios.data;
+				console.log($scope.vendedores);
+			
+
+		});
+		
+	};
+	
+	$scope.SelecionarCliente = function (){
+	
+		$scope.clienteSelecionado = $scope.buscarCliente.nome;
+		
+		$scope.rotaSelecionado = $scope.buscarRota.nome;
+		$scope.vendedorSelecionado = $scope.buscarVendedor.nome;
+		$scope.status=true;
+		
+	};
+	
 	$scope.findCliente = function (){
 	
 		angular.forEach($scope.todosClientes, function(value, key){
       	if(value.nome==$scope.buscarCliente.nome){
 			$scope.cpfCliente = value.cpf;
-			$scope.cidadeCliente = value.cidade ;
-         	$scope.estadoCliente = value.estado;
-			$scope.estatusCliente = value.status;
+			
+			$scope.statusCliente = value.status;
 			
 		
 		
@@ -54,38 +85,34 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
   });
 	};
 	
-	
-	$scope.SelecionarCliente = function (){
-	
-		$scope.clienteSelecionado = $scope.buscarCliente.nome;
-		
-		$scope.rotaSelecionado = $scope.buscarRota.nome;
-		$scope.status=true;
-		
-	};
-	
 	$scope.editarCliente = function (){
 		$scope.status=false;
 	};
 
 	$scope.listarProduto = function (id) {
-
+				
+				
+					
 		$http.post('/controller/controller_vendas.php?acao=lerProduto&id=' + id)
 			.then(function (produto) {
 
+			
 				var nome = produto.data[0].nome;
 				var preco = produto.data[0].valor_venda;
 				var quantidade = $scope.quantidade;
 				var total = preco * quantidade;
-				
-				var add = {
+				$scope.subtotal = $scope.subtotal + total; 
+				$scope.sub_total = $scope.subtotal; 
+				$scope.total = $scope.subtotal - $scope.entrada;
+
+				var produto_add = {
 					nome: nome,
 					preco: preco,
 					quantidade: quantidade,
 					total: total
 				};
 
-				$scope.produtos.push(add);
+				$scope.produtos.push(produto_add);
 				$scope.buscarProduto = "";
 				$scope.quantidade = 1;
 
@@ -110,10 +137,32 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 		
 			};
 	
+	$scope.calcularTotal = function (){
+			$scope.total = $scope.subtotal - $scope.entrada;
+	};
+	$scope.calcParcelas = function(){
+		
+		if($scope.select === undefined){
+			$scope.parcelaS = false;
+			
+		}else{
+			$scope.parcelaS = true;
+			var valorParcelas = $scope.total / $scope.select;
+			$scope.valorParcelas = valorParcelas.toFixed(2);
+		
+
+			
+			
+		}
+		
+	};
+	
 	$scope.listarClientes();
 	$scope.listarProdutos();
 	$scope.listarRotas();
 	$scope.todosClientes();
+	$scope.buscarVendedores();
+	
 	//$interval($scope.findCliente, 100, false);
 	
 
