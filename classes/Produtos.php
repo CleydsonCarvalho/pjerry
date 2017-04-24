@@ -36,23 +36,16 @@ class Produtos {
 
 	public function update( $atualizar ) {
 
-		// PEGA OS INDICES DO ARRAY
 		$indices = array_keys( $atualizar );
-		// PEGA OS VALORES DO ARRAY 
 		$valores = array_values( $atualizar );
-		// COMBINA OS ARRAYS PARA GERAR OS BINDPARAM
 		$params = array_combine( $indices, $valores );
-		// SEPARA POR IGUAL DOIS PONTOS PRA FORMA A QUERY EX: =:nome,   
 		$separadoPorDoisPontos = ':' . implode( '=:', $indices );
-		// COMBINA OS INDICES COM A $separadoPorDoisPontos EX: nome=:nome,
 		$c = array_combine( $indices, explode( '=', $separadoPorDoisPontos ) );
 
 		$query = null;
-		// RETIRA DA QUERY A ULTIMA VIRGULA EX: nome=:nome, email=:email, senha=:senha
 		foreach ( $c as $key => $value ) {
 			$query .= $key . '=' . $value . ',';
 		}
-		// CRIA UM NOVA QUERY SEM A VIRGULA FINAL
 		$novaQuery = rtrim( $query, ',' );
 
 		$sql = "UPDATE $this->table SET $novaQuery WHERE id_produto = :id_produto";
@@ -67,6 +60,16 @@ class Produtos {
 		return $stmt->execute();
 
 }
+	
+	public function atualizar_estoque( $id_produto, $quantidade  ) {
+		
+		$sql = "UPDATE $this->table SET quantidade = :quantidade WHERE id_produto = :id_produto";
+		$stmt = DB::prepare( $sql );	
+		$stmt->bindParam( ':id_produto', $id_produto, PDO::PARAM_INT );
+		$stmt->bindParam( ':quantidade', $quantidade, PDO::PARAM_INT );		
+		return $stmt->execute();
+}
+
 	
 	//PRECISA USAR O foreach PARA LER TODOS
 	public function readAllAdmin() {

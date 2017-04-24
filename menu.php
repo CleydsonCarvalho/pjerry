@@ -79,7 +79,7 @@
 						<li><a href='vendas-adicionar.php'><i class="fa fa-plus margimDireitaIcon"></i> Adiconar</a>
 						</li>
 
-						<li><a href="#"><i class="fa fa-search margimDireitaIcon"></i> Procurar</a>
+						<li><a href="listar-vendas.php"><i class="fa fa-search margimDireitaIcon"></i> Listar Vendas</a>
 						</li>
 					</ul>
 				</li>

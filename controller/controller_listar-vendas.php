@@ -2,14 +2,83 @@
 <?php
 require_once '../classes/Produtos.php';
 require_once '../classes/Funcionario.php';
+require_once '../classes/Cliente.php';
 require_once '../classes/Vendas.php';
 require_once '../classes/Produtos_Vendidos.php';
+require_once '../classes/Rota.php';
 
 
 $db_produtos = new Produtos ();
 $db_funcionarios = new Funcionario ();
 $db_venda = new Vendas ();
 $db_produtos_vendidos = new Produtos_Vendidos ();
+$db_clientes = new Cliente ();
+$db_rota = new Rota ();
+
+
+
+if (1==1 ) {
+
+	$vendas = $db_venda->readAll();
+	
+	$result = array();
+	$count = count( $vendas );
+	
+	for ( $i = 0; $i < $count; $i++ ) {
+
+		$vendaSelecionado = $vendas[ $i ];
+		
+		$cliente = $db_clientes->lerCliente($vendaSelecionado->id_cliente);
+		$vendedor = $db_funcionarios->lerFuncionario ($vendaSelecionado->id_vendedor);
+		$rota = $db_rota->lerRota ($vendaSelecionado->id_rota);
+
+		$produto = Array(
+			
+			'id_venda' => $vendaSelecionado->id_venda,
+			'id_cliente' => $vendaSelecionado->id_cliente,
+			'nome_cliente' => $cliente->nome,
+			'id_vendedor' => $vendaSelecionado->id_vendedor,
+			'nome_vendedor' => $vendedor->nome,
+			'data_venda' => $vendaSelecionado->data_venda,
+			'id_rota' => $vendaSelecionado->id_rota,
+			'nome_rota' => $rota->nome,
+			'sub_total' => $vendaSelecionado->sub_total,
+			'entrada' => $vendaSelecionado->entrada,
+			'total' => $vendaSelecionado->total,
+			
+			'modo_pagamento' => $vendaSelecionado->modo_pagamento,
+			'quantidade_parcelas' => $vendaSelecionado->quantidade_parcelas,
+			'valor_prestacao' => $vendaSelecionado->valor_prestacao,
+			'data_prestacao1' => $vendaSelecionado->data_prestacao1,
+			'data_prestacao2' => $vendaSelecionado->data_prestacao2,
+			'data_prestacao3' => $vendaSelecionado->data_prestacao3,
+			'data_prestacao4' => $vendaSelecionado->data_prestacao4,
+			'data_prestacao5' => $vendaSelecionado->data_prestacao5,
+			'data_prestacao6' => $vendaSelecionado->data_prestacao6,
+			'data_registro'	  => $vendaSelecionado->data_registro
+		);
+
+
+	array_push($result,$produto);
+		
+	};
+	
+	print json_encode( $result );
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 	
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "listarProdutos" ) {
 

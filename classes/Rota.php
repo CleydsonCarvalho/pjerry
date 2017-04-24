@@ -1,9 +1,10 @@
 <?php
 class Rota extends DB {
 
-    protected $table = 'rotas';
-		
-	public function create( $criar ) {
+	protected $table = 'rotas';
+
+	public
+	function create( $criar ) {
 		// PEGA OS INDICES DO ARRAY
 		$indices = array_keys( $criar );
 		// PEGA OS VALORES DO ARRAY  
@@ -13,35 +14,36 @@ class Rota extends DB {
 		// TRANSFORMA PRO FORMATO DE QUERY = :nome, :email, :etc
 		$v = ':' . implode( ',:', array_values( $indices ) );
 		// COMBINA OS ARRAYS PARA GERAR OS BINDPARAM
-		$params = array_combine( $indices, $valores );		
+		$params = array_combine( $indices, $valores );
 		$sql = "INSERT INTO $this->table ($k) VALUES ($v)";
 		$stmt = DB::prepare( $sql );
-		
-	//	foreach ( $params as $key => & $val ):
-	//		$stmt->bindParam( $key, $val );
-	//	endforeach;
-		
-		
-		
-		
+
+		//	foreach ( $params as $key => & $val ):
+		//		$stmt->bindParam( $key, $val );
+		//	endforeach;
+
+
+
+
 		foreach ( $params as $key => & $val ):
-			
-		if($key == 'senha'){
-				$senha = md5($val);
-				$stmt->bindParam( $key, $senha);
-				
+
+			if ( $key == 'senha' ) {
+				$senha = md5( $val );
+				$stmt->bindParam( $key, $senha );
+
 			} else {
-				
+
 				$stmt->bindParam( $key, $val );
 			}
 		endforeach;
-		
+
 		return $stmt->execute();
-	}	
+	}
 
 
-	
-	public function update( $atualizar ) {
+
+	public
+	function update( $atualizar ) {
 
 		// PEGA OS INDICES DO ARRAY
 		$indices = array_keys( $atualizar );
@@ -64,25 +66,26 @@ class Rota extends DB {
 
 		$sql = "UPDATE $this->table SET $novaQuery WHERE id = :id";
 		$stmt = DB::prepare( $sql );
-		
-		
+
+
 		foreach ( $params as $key => & $val ):
-			
-		if($key == 'senha'){
-				$senha = md5($val);
-				$stmt->bindParam( $key, $senha);
-				
+
+			if ( $key == 'senha' ) {
+				$senha = md5( $val );
+				$stmt->bindParam( $key, $senha );
+
 			} else {
-				
+
 				$stmt->bindParam( $key, $val );
 			}
 		endforeach;
 		return $stmt->execute();
 
-}
-	
+	}
+
 	//PRECISA USAR O foreach PARA LER TODOS
-	public function readAllAdmin() {
+	public
+	function readAllAdmin() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '1' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
@@ -92,38 +95,50 @@ class Rota extends DB {
 	//foreach($user->readAllCliente() as $key => $value_users): ?
 
 	//endforeach;
-	public function readAllCliente() {
+	public
+	function readAllCliente() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '3' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	
+
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
 	//foreach($user->readAllTecnico() as $key => $value_users): ?
 
 	//endforeach;
-	public function readAllTecnico() {
+	public
+	function readAllTecnico() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '2' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	
+
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
 	//foreach($user->readId($id = $resultado de outra class->tipo_empresa ) as $key => $value): ?
 
 	//endforeach;
-	public function readAll() {
+	public
+	function readAll() {
 		$sql = "SELECT * FROM $this->table ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	
+
 	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+	public
+	function readLine( $id ) {
+		$sql = "SELECT * FROM $this->table WHERE idRota = :id";
+		$stmt = DB::prepare( $sql );
+		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
+		$stmt->execute();
+		return $stmt->fetch();
+	}
+	
+	public function lerRota ( $id ) {
+		$sql = "SELECT * FROM $this->table WHERE idRota = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
@@ -132,13 +147,14 @@ class Rota extends DB {
 
 
 
-	public function delete( $id ) {
+	public
+	function delete( $id ) {
 		$sql = "DELETE FROM $this->table WHERE id = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();
 	}
-	
-	
+
+
 
 }

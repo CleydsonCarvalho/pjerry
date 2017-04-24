@@ -75,7 +75,7 @@ class Cliente {
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetchAll();
+		return $stmt->fetch();
 	}
 	
 	public function readAllAdmin() {
@@ -111,7 +111,7 @@ class Cliente {
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
-		return $stmt->fetch();
+		return $stmt->fetchAll();
 	}
 
 	public function delete( $id ) {

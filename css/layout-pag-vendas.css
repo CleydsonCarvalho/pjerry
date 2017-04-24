@@ -1,5 +1,5 @@
 .app-margimBotomCamposFomr{
-	margin-bottom: 15px;
+	margin-bottom: 8px;
 }
 
 .app-margimBotom{
@@ -117,6 +117,35 @@ input.form-control.altCor.ng-pristine.ng-valid.ng-not-empty {
 .fontMod {
     font-size: 16px;
 }
+
+select[readonly] {
+  background: #eee; /*Simular campo inativo*/
+  pointer-events: none;
+  touch-action: none;
+}
+
+  .full button span {
+    background-color: limegreen;
+    border-radius: 32px;
+    color: black;
+  }
+  .partially button span {
+    background-color: orange;
+    border-radius: 32px;
+    color: black;
+  }
+
+.custom.modal-header {
+    background: #5bc0de;
+    color: #fff;
+}
+
+.mP {
+    margin-bottom: 4px;
+    margin-top: 4px;
+}
+
+
 
 
 

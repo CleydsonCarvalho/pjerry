@@ -1,5 +1,4 @@
 <?php
-
 function __autoload( $class_name ) {
 	require_once 'classes/' . $class_name . '.php';
 }
@@ -19,7 +18,9 @@ if ( isset( $_POST[ 'acao' ] ) && $_POST[ 'acao' ] == 'cadastrar' ) {
 	if ( $nColunas > $nColunas ) {
 		$erro = 'sim';
 	} else {
-		$cliente->create( $criar );
+	//$cliente->create( $criar );
+		print_r($criar);
+		
 	}
 }
 
@@ -40,6 +41,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 	$cliente->delete( $id = $_GET[ 'id' ] );
 }
 ?>
+
 <!doctype html>
 <html>
 
@@ -60,11 +62,13 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 
 	<script src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jquery.quick.search.js"></script>
+	
 
 	<title>Sistema de Vendas</title>
 </head>
 
 <body>
+
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
@@ -72,7 +76,8 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 			</div>
 		</div>
 	</div>
-	<?php 
+
+<?php 
  include'menu.php';	
 ?>
 	<!--Cadastro-->
@@ -82,6 +87,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 				<h1>Cadastro Cliente</h1>
 				<p>Forneça Alguns Informações Sobre o Novo Cliente.</p>
 				<hr>
+				
 				<form method="post" enctype="multipart/form-data" autocomplete="off">
 					<div class="row">
 						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
@@ -175,7 +181,9 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == 'excluir' ) {
 					</div>
 
 					<button type="submit" name="acao" value="cadastrar" class="btn btn-primary btn-lg pull-right">Gravar Dados</button>
-				</form><br><br><br><br>
+				</form> 
+				
+				<br><br><br><br>
 
 
 				<!--Tabela de Clientes-->

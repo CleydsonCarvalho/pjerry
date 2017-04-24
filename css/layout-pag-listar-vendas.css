@@ -1,0 +1,79 @@
+.app-margimBotomCamposFomr{
+	margin-bottom: 13px;
+}
+.zerarMargimH{
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 8px;
+    line-height: 1.42857143;
+	vertical-align: middle;
+    
+}
+@media screen and (max-width: 992px){
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid rgba(0,0,0,.0001);
+}
+}
+.app-buscarProduto{
+	margin-bottom: 20px;
+}
+
+
+
+.zerarMargimH.app-total-dispesas {
+background-color: #d9534f;
+    color: #fff;
+    padding: 11px;
+    text-align: center;
+	border-radius: 6px;
+}
+thead {
+    background-color: rgb(215, 226, 236) !important;
+}
+th.app-btn-acoes {
+    width: 238px;
+}
+
+
+.custom.modal-header {
+    background: #5bc0de;
+    color: #fff;
+}
+
+.index {
+    width: 45px;
+}
+.btn-excluir.text-center {
+    width: 70px;
+}
+
+.hr-mg {
+    margin-top: -14px;
+}
+
+.hr-top {
+    margin-top: 2px;
+}
+
+.total {
+    font-size: 18px;
+}
+
+.corHr {
+    border-top: 1px solid #ccc;
+}
+
+.esp {
+    margin-top: 20px;
+	margin-bottom: 25px;
+}
+
+.mod{
+	border: 0px;
+}
