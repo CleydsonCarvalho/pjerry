@@ -1,6 +1,6 @@
 angular.module('app', ['ngAnimate', 'ngSanitize', 'ui.bootstrap', 'ngCurrencyMask']);
 
-angular.module('app').controller('openModal', function ($scope, $uibModalInstance, $filter) {
+angular.module('app').controller('openModal', function ($scope, $http, $uibModalInstance, $filter) {
 	
 	$scope.valor_prestacao = $filter('currency')(0, "R$ ");
 	$scope.sub_total = $filter('currency')($scope.dadosModal.sub_total, "R$ ");
@@ -10,11 +10,27 @@ angular.module('app').controller('openModal', function ($scope, $uibModalInstanc
 	$scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
 	$scope.prestacao2 = $filter('date')($scope.dadosModal.data_prestacao2, "dd/MM/yyyy");
 	$scope.prestacao3 = $filter('date')($scope.dadosModal.data_prestacao3, "dd/MM/yyyy");
-	$scope.prestacao4 = $filter('date')($scope.dadosModal.data_prestacao4, "dd/MM/yyyy");
-	$scope.prestacao5 = $filter('date')($scope.dadosModal.data_prestacao5, "dd/MM/yyyy");
-	$scope.prestacao6 = $filter('date')($scope.dadosModal.data_prestacao6, "dd/MM/yyyy");
-		
 	
+		
+	var id = $scope.dadosModal.id_venda;
+console.log(id);
+	$scope.buscarVendidos = function () {
+
+		$http.post('/controller/controller_listar-vendas.php?acao=buscarVendidos&id='+id)
+			.then(function (vendidos) {
+
+				$scope.vendidosOk = vendidos.data;
+
+				
+
+			});
+
+
+
+		
+	};
+$scope.buscarVendidos();
+
 	$scope.cadastrar = function () {
 		console.log($scope.dadosModal);
 	};
@@ -35,7 +51,7 @@ angular.module('app').controller('app-listar-vendas', function ($scope, $http, $
 
 				$scope.vendasOk = vendas.data;
 
-console.log($scope.vendasOk);
+
 
 			});
 

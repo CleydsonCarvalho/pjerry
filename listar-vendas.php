@@ -111,88 +111,68 @@
 						<input type="text" class="form-control text-center mod" ng-model="prestacao3" readonly>
 					</div>
 					
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-						<label for="representante">&nbsp;4ª&nbsp; Prestação</label>
-						<input type="text" class="form-control text-center mod" ng-model="prestacao4" readonly>
-					</div>
-
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-
-						<label for="numero">&nbsp;5ª&nbsp; Prestação</label>
-						<input type="text" class="form-control text-center mod" ng-model="prestacao5" readonly>
-					</div>
-					
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-
-						<label for="numero">&nbsp;6ª&nbsp; Prestação</label>
-						<input type="text" class="form-control text-center mod" ng-model="prestacao6" readonly>
-					</div>
-					
-				<hr class="hr-mg">
-						<div class="form-group">
-					<input type="text" class="form-control input-search" alt="lista-clientes" placeholder="Buscar na Lista">
-				</div>
+<div class="row">
 				
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">					
+			
+			
 				<div class="table-responsive">
 					<table class="table table-hover lista-clientes" id="tabela">
 						<thead>
 							<tr>
 								<th>Nº</th>
-								<th>Cliente</th>
+								<th>Produto</th>
 								
-								<th class="text-center">Data</th>
+								<th class="text-center">Valor</th>
 								
-								<th>Pagamento</th>
+								<th class="text-center">Quantidade</th>
 								<th>Total</th>
 								
 							</tr>
 						</thead>
 						
 						<tbody>
-							<tr ng-repeat="venda in vendasOk">
+							<tr ng-repeat="produto in vendidosOk">
 								<td scope="row">
 									{{$index+1}}.
 								</td>
 								
 								<td>
-									{{venda.nome_cliente}}
+									{{produto.nome_produto}}
 								</td>
 		
 								<td class="text-center">
 								
 								
-								{{ venda.data_venda | date : 'dd/MM/yyyy'}}
+								R$ {{ produto.valor_produto | currency}}
+								</td>
+								
+								<td class="text-center">
+									{{produto.quantidade}}
 								</td>
 								
 								<td>
-									{{venda.modo_pagamento}}
-								</td>
-								
-								<td>
-								R$ {{ venda.total | currency : "" }}
+								R$ {{ produto.total_produto | currency }}
 									
 								</td>
-								
-							
-								
+
 							</tr>
 						</tbody>
 					</table>
 					
-					<div class="total pull-right">
-						<strong>Total: </strong> R$ 375,00
-					</div>
-					<hr class="hr-mg">
+				
 					
 				</div>
-				<br>
+</div>
+</div>
+				
 			</div>
 					
 				</div>
 				
 				<div class="modal-footer">
-					<button class="btn btn-danger" type="button" ng-click="cancel()">Cancel</button>
-					<button class="btn btn-info" type="button" ng-click="cadastrar()">cadastrar</button>
+					<button class="btn btn-info" type="button" ng-click="cancel()">Fechar</button>
+					
 				</div>
 				
 			</form>

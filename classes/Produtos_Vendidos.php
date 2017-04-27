@@ -60,8 +60,16 @@ class Produtos_Vendidos {
 		return $stmt->fetchAll();
 	}
 
+		public function buscarVendidos( $id ) {
+		$sql = "SELECT * FROM $this->table WHERE id_venda = :id";
+		$stmt = DB::prepare( $sql );
+		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+
 	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+		$sql = "SELECT * FROM $this->table WHERE id_venda = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();

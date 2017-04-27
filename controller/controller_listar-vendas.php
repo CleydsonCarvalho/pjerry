@@ -17,7 +17,7 @@ $db_rota = new Rota ();
 
 
 
-if (1==1 ) {
+if ( isset($_GET['acao']) && $_GET['acao'] == 'listarVendas' ) {
 
 	$vendas = $db_venda->readAll();
 	
@@ -64,11 +64,47 @@ if (1==1 ) {
 	};
 	
 	print json_encode( $result );
-	
-	
 }
 
+if ( isset($_GET['acao']) && $_GET['acao'] == 'buscarVendidos' ) {
+	
+	$vendidos = $db_produtos_vendidos->buscarVendidos( $_GET['id'] );
 
+	
+	$produtos = array();
+	$count = count( $vendidos );
+	
+	for ( $i = 0; $i < $count; $i++ ) {
+
+		$produtoSelecionado = $vendidos[ $i ];
+		
+		
+		$produto = $db_produtos->produtoVendido ($produtoSelecionado->id_produto);
+		
+
+		$produtosprodutos = Array(
+			
+			'id_vendidos' => $produtoSelecionado->id_vendidos,
+			'id_venda' => $produtoSelecionado->id_venda,
+			'id_produto' => $produtoSelecionado->id_produto,
+			'nome_produto' => $produto->nome,
+			'valor_produto' => $produtoSelecionado->valor_produto,
+			'quantidade' => $produtoSelecionado->quantidade,
+			'total_produto' => $produtoSelecionado->total_produto
+			
+		);
+
+
+	array_push($produtos, $produtosprodutos);
+		
+	};
+	
+	print json_encode ( $produtos );
+
+
+
+
+}
 
 
 

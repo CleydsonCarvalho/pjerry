@@ -137,6 +137,14 @@ class Produtos {
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+
+		public function produtoVendido( $id ) {
+		$sql = "SELECT * FROM $this->table WHERE id_produto = :id";
+		$stmt = DB::prepare( $sql );
+		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
+		$stmt->execute();
+		return $stmt->fetch();
+	}
 	
 	
 
