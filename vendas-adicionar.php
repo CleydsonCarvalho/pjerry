@@ -254,7 +254,7 @@ include'menu.php';
 		<br>
 		<div class="text-center alert-warning" uib-alert close="closeAlert()" ng-if="statusAlert" dismiss-on-timeout="8000">
 			<alert>
-				A quantidade <strong>{{quant}}</strong> do produto selecionado e menor do que a quantidade <strong>{{quantidade_produto}}</strong> de produto em estoque!
+				A quantidade <strong>{{quant}}</strong> do produto selecionado e maior do que a quantidade <strong>{{quantidade_produto}}</strong> de produto em estoque!
 			</alert>
 
 		</div>
@@ -267,7 +267,7 @@ include'menu.php';
 				<div class="row">
 					<div class="col-xs-12 col-sm-10 col-md-10 col-lg-10 app-margimBotomCamposFomr">
 						<label for="cliente">Produto</label>
-						<input type="text" ng-model="buscarProduto" uib-typeahead="produto1 as produto1.nome for produto1 in produtosOK | filter:$viewValue | limitTo:8" class="form-control input-search" placeholder="Pesquise por nome do produto ou código" autocomplete="off" ng-disabled="sBuscProd">
+						<input type="text" ng-model="buscarProduto" uib-typeahead="produto1 as produto1.nome for produto1 in produtosOK | filter:$viewValue | limitTo:5" class="form-control input-search" placeholder="Pesquise por nome do produto ou código" autocomplete="off" ng-disabled="sBuscProd">
 					</div>
 
 					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 app-margimBotomCamposFomr text-center">
@@ -339,9 +339,7 @@ include'menu.php';
 							<option value="1">1X</option>
 							<option value="2">2X</option>
 							<option value="3">3X</option>
-							<option value="4">4X</option>
-							<option value="5">5X</option>
-							<option value="6">6X</option>
+							
 						</select>
 					</div>
 

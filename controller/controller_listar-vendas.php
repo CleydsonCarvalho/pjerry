@@ -52,9 +52,6 @@ if ( isset($_GET['acao']) && $_GET['acao'] == 'listarVendas' ) {
 			'data_prestacao1' => $vendaSelecionado->data_prestacao1,
 			'data_prestacao2' => $vendaSelecionado->data_prestacao2,
 			'data_prestacao3' => $vendaSelecionado->data_prestacao3,
-			'data_prestacao4' => $vendaSelecionado->data_prestacao4,
-			'data_prestacao5' => $vendaSelecionado->data_prestacao5,
-			'data_prestacao6' => $vendaSelecionado->data_prestacao6,
 			'data_registro'	  => $vendaSelecionado->data_registro
 		);
 
@@ -100,35 +97,202 @@ if ( isset($_GET['acao']) && $_GET['acao'] == 'buscarVendidos' ) {
 	};
 	
 	print json_encode ( $produtos );
-
-
-
-
 }
 
-
-
-
-
-
-
-
-
-
-	
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "listarProdutos" ) {
 
 	$produtos = $db_produtos->readProdutos();
 	echo json_encode( $produtos );
 }
 
+if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "atualizarProduto" ) {
+
+	$id = $_GET[ 'id' ];
+	$produtoForm = json_decode( file_get_contents( "php://input" ) );
+	$id_vendidos = $produtoForm->id_vendidos;
+
+	$id_produto = $produtoForm->id_produto;
+
+	$quantidade = $produtoForm->quantidade;
+
+	$produto_anterior = $produtoForm->produto_anterior;
+	$quantidade_anterior = $produtoForm->quantidade_anterior;
+
+	$produtoAnterior = $db_produtos->readProduto($produto_anterior);
+	$quantProd = $produtoAnterior->quantidade;
+
+	if ($id_produto == $produto_anterior && $quantidade == $quantidade_anterior){
+			
+			echo json_encode( 'O produto não foi alterado!');
+	}
+
+	elseif ($id_produto == $produto_anterior && $quantidade == 0) {
+
+		
+		$updateQuantidade = $quantProd + $quantidade_anterior;
+
+		$db_produtos->atualizar_estoque($produto_anterior, $updateQuantidade);
+		$db_produtos_vendidos->delete($id_vendidos);
+
+		echo json_encode( 'Atualizou quantidade menor');
+		
+	}
+
+	elseif ($id_produto == $produto_anterior && $quantidade > $quantidade_anterior) {
+
+		$novaQuantidade = $quantidade - $quantidade_anterior;
+		
+		if ($quantProd >= $novaQuantidade) {
+
+			$updateQuantidade = $quantProd - $novaQuantidade;
+
+			$db_produtos->atualizar_estoque($produto_anterior, $updateQuantidade);
+
+			$produto = Array(
+				'id_vendidos'=> $produtoForm->id_vendidos,
+				'id_venda' => $produtoForm->id_venda,
+				'id_produto' => $produtoForm->id_produto,
+				'valor_produto' => $produtoForm->valor_produto,
+				'quantidade' => $produtoForm->quantidade,
+				'total_produto' => $produtoForm->total_produto
+			);
+
+			$db_produtos_vendidos->atualizar($produto);
+			echo json_encode( 'Atualizou quantidade maior');
+		}
+		else {
+
+			echo json_encode( 'Não Pode Alterar');
+		}
+	}
+
+	elseif ($id_produto == $produto_anterior && $quantidade < $quantidade_anterior) {
+
+		$novaQuantidade = $quantidade_anterior - $quantidade;
+		$updateQuantidade = $quantProd + $novaQuantidade;
+
+		$db_produtos->atualizar_estoque($produto_anterior, $updateQuantidade);
+
+		$produto = Array(
+				'id_vendidos'=> $produtoForm->id_vendidos,
+				'id_venda' => $produtoForm->id_venda,
+				'id_produto' => $produtoForm->id_produto,
+				'valor_produto' => $produtoForm->valor_produto,
+				'quantidade' => $produtoForm->quantidade,
+				'total_produto' => $produtoForm->total_produto
+			);
+
+		$db_produtos_vendidos->atualizar($produto);
+		echo json_encode( 'Atualizou quantidade menor');
+		
+	}
+	elseif ($id_produto != $produto_anterior) {
+
+
+
+
+
+
+
+		$updateQuantidade = $quantProd + $quantidade_anterior;
+
+		
+
+		$produtoNovo = $db_produtos->readProduto($id_produto);
+
+
+		if ($produtoNovo->quantidade >= $quantidade) {
+
+			$updateQuantidade = $quantProd + $quantidade_anterior;
+
+			$db_produtos->atualizar_estoque($produto_anterior, $updateQuantidade);
+
+			$updateQuantidade = $produtoNovo->quantidade - $quantidade;
+			$db_produtos->atualizar_estoque($id_produto, $updateQuantidade);
+
+			$produto = Array(
+				'id_vendidos'=> $produtoForm->id_vendidos,
+				'id_venda' => $produtoForm->id_venda,
+				'id_produto' => $produtoForm->id_produto,
+				'valor_produto' => $produtoForm->valor_produto,
+				'quantidade' => $produtoForm->quantidade,
+				'total_produto' => $produtoForm->total_produto
+			);
+
+			$db_produtos_vendidos->atualizar($produto);
+			echo json_encode( 'Atualizou Produto Diferente');
+		}
+		else {
+
+			echo json_encode( 'Não Pode Alterar');
+		}
+
+		
+	}
+	
+	else{
+
+		echo json_encode( "Erro ao validar o produto");
+	}
+
+	//echo json_encode( $quantProd);
+}
+
+if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "deletarProduto" ) {
+
+	$id = $_GET[ 'id' ];
+	$produtoForm = json_decode( file_get_contents( "php://input" ) );
+
+	$id_produto = $produtoForm->id_produto;
+
+	$quantidade = $produtoForm->quantidade;
+
+	$produtoNovo = $db_produtos->readProduto($id_produto);
+
+	$novaQuantidade = $produtoNovo->quantidade;
+
+	$updateQuantidade = $novaQuantidade + $quantidade;
+
+	$db_produtos->atualizar_estoque($id_produto, $updateQuantidade);
+
+
+
+	$produtos = $db_produtos_vendidos->delete($id);
+	
+	echo json_encode( 'Deletou o produto com id '+$id_produto );
+}
+
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "lerProduto" ) {
 
 	$id = $_GET[ 'id' ];
 
-	$produto = $db_produtos->lerProduto( $id );
+	$produto = $db_produtos->readProduto($id);
 	echo json_encode( $produto );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "buscarVendedores" ) {
 
@@ -314,77 +478,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarVenda" ) {
 		);
 	}
 	
-	elseif($dadosVenda->quantidade_parcelas ==4){
-		
-		$venda = Array(
-			'id_cliente' => $dadosVenda->id_cliente,
-			'id_vendedor' => $dadosVenda->id_vendedor,
-			'data_venda' => $dadosVenda->data_venda,
-			'id_rota' => $dadosVenda->id_rota,
-			'sub_total' => $dadosVenda->sub_total,
-			'entrada' => $dadosVenda->entrada,
-			'total' => $dadosVenda->total,
-			'modo_pagamento' => $dadosVenda->modo_pagamento,
-
-			'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
-			'valor_prestacao' => $dadosVenda->valor_prestacao,
-			'data_prestacao1' => $dadosVenda->data_prestacao1,
-			'data_prestacao2' => $dadosVenda->data_prestacao2,
-			'data_prestacao3' => $dadosVenda->data_prestacao3,
-			'data_prestacao4' => $dadosVenda->data_prestacao4,
-			'data_registro' => $data
-
-		);	
-	}
 	
-	elseif($dadosVenda->quantidade_parcelas ==5){
-		
-		$venda = Array(
-			'id_cliente' => $dadosVenda->id_cliente,
-			'id_vendedor' => $dadosVenda->id_vendedor,
-			'data_venda' => $dadosVenda->data_venda,
-			'id_rota' => $dadosVenda->id_rota,
-			'sub_total' => $dadosVenda->sub_total,
-			'entrada' => $dadosVenda->entrada,
-			'total' => $dadosVenda->total,
-			'modo_pagamento' => $dadosVenda->modo_pagamento,
-
-			'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
-			'valor_prestacao' => $dadosVenda->valor_prestacao,
-			'data_prestacao1' => $dadosVenda->data_prestacao1,
-			'data_prestacao2' => $dadosVenda->data_prestacao2,
-			'data_prestacao3' => $dadosVenda->data_prestacao3,
-			'data_prestacao4' => $dadosVenda->data_prestacao4,
-			'data_prestacao5' => $dadosVenda->data_prestacao5,
-			'data_registro' => $data
-
-		);
-	}
-	
-	elseif($dadosVenda->quantidade_parcelas ==6){
-		
-		$venda = Array(
-			'id_cliente' => $dadosVenda->id_cliente,
-			'id_vendedor' => $dadosVenda->id_vendedor,
-			'data_venda' => $dadosVenda->data_venda,
-			'id_rota' => $dadosVenda->id_rota,
-			'sub_total' => $dadosVenda->sub_total,
-			'entrada' => $dadosVenda->entrada,
-			'total' => $dadosVenda->total,
-			'modo_pagamento' => $dadosVenda->modo_pagamento,
-
-			'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
-			'valor_prestacao' => $dadosVenda->valor_prestacao,
-			'data_prestacao1' => $dadosVenda->data_prestacao1,
-			'data_prestacao2' => $dadosVenda->data_prestacao2,
-			'data_prestacao3' => $dadosVenda->data_prestacao3,
-			'data_prestacao4' => $dadosVenda->data_prestacao4,
-			'data_prestacao5' => $dadosVenda->data_prestacao5,
-			'data_prestacao6' => $dadosVenda->data_prestacao6,
-			'data_registro' => $data
-
-		);	
-	}
 	
 	else {echo "Deu erro";};
 
@@ -420,7 +514,6 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarProdutos" ) {
 		$prod = $db_produtos->lerProduto($produtoSelecionado->id_produto)[0];
 		print_r( $prod );
 	};
-
 }
 
 ?>

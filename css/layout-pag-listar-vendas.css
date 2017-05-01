@@ -69,6 +69,12 @@ th.app-btn-acoes {
     border-top: 1px solid #ccc;
 }
 
+.modHr {
+    border-top: 1px solid #ccc;
+     margin-top: 0px;
+
+}
+
 .esp {
     margin-top: 20px;
 	margin-bottom: 25px;
@@ -77,3 +83,40 @@ th.app-btn-acoes {
 .mod{
 	border: 0px;
 }
+
+.textRed {
+    color: #a94442;
+}
+
+.borderTable0 {
+    margin-bottom: 0px;
+}
+
+.largBt {
+    width: 95px;
+}
+
+
+
+/* Animação Fade*/
+.animate-if {
+  background:white;
+
+  padding:10px;
+}
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s;
+}
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  opacity:0;
+}
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  opacity:1;
+}
+
+/* Fim*/

@@ -30,6 +30,8 @@
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	
+
+	<!---********************************** Modal Detalhes *******************************************-->
 	<script type="text/ng-template" id="detalhesModal.html">
 		<div class="custom modal-header">
 			<button type="button" class="close" data-dismiss="modal" ng-click="cancel()">&times;</button>
@@ -47,12 +49,12 @@
 				
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
 						<label for="nome">
-						 Nome do Cliente</label>
+						 Cliente</label>
 						<input type="text" class="form-control mod" ng-model="dadosModal.nome_cliente" readonly>
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-						<label for="cnpj">&nbsp;Nome do Vendedor</label>
+						<label for="cnpj">&nbsp;Vendedor</label>
 						<input type="text" class="form-control mod" ng-model="dadosModal.nome_vendedor" readonly>
 					</div>
 					
@@ -74,7 +76,7 @@
 					</div>
 
 					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
-						<label for="endereço2">&nbsp;Total Parcelas</label>
+						<label for="endereço2">&nbsp;Quant. Parcelas</label>
 						<input type="text" class="form-control mod" ng-model="dadosModal.quantidade_parcelas" readonly>
 					</div>
 					
@@ -178,8 +180,240 @@
 			</form>
 		</div>
 	</script>
-	
-	
+<!--- Fim do Modal Detalhes -->	
+
+<!---*********************************** Modal Editar **************************-->
+	<script type="text/ng-template" id="editarModal.html">
+		<div class="custom modal-header">
+			<button type="button" class="close" data-dismiss="modal" ng-click="cancel()">&times;</button>
+			<h4 class="modal-title">
+				<strong class="size-text">
+					<i class="fa fa-pencil" aria-hidden="true"></i>
+					&nbsp; Editar da Venda
+				</strong>
+			</h4>
+		</div>
+		
+		<div class="modal-body">
+			<form method="post" enctype="multipart/form-data" autocomplete="off">
+				<div class="row">
+				
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+						<label class="textRed" for="nome">
+						 Cliente</label>
+						<input type="text" class="form-control mod" ng-model="dadosModal.nome_cliente" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
+						<label class="textRed" for="cnpj">&nbsp;Vendedor</label>
+						<input type="text" class="form-control mod" ng-model="dadosModal.nome_vendedor" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="cnpj">&nbsp;Rota</label>
+						<input type="text" class="form-control mod" ng-model="dadosModal.nome_rota" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="cnpj">&nbsp;Data Venda</label>
+						<input type="text" class="form-control mod" ng-model="dadosModal.data_venda" readonly>
+					</div>
+					
+					
+					
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="endereço1">&nbsp;Tipo de Pagamento</label>
+						<input type="text" class="form-control mod" ng-model="dadosModal.modo_pagamento" readonly>
+					</div>
+
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="endereço2">&nbsp;Total Parcelas</label>
+						<input type="text" class="form-control mod" ng-model="dadosModal.quantidade_parcelas" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="representante">&nbsp;Sub-Total</label>
+						<input type="text" class="form-control mod" ng-model="sub_total" readonly>
+					</div>
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="numero">&nbsp;Entrada</label>
+						<input type="text" class="form-control mod" ng-model="entrada" readonly>
+					</div>
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="bairro">&nbsp;Total</label>
+						<input type="text" class="form-control mod" ng-model="total" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+						<label class="textRed" for="numero">&nbsp;Valor Prestação</label>
+						<input type="text" class="form-control mod" ng-model="valor_prestacao" readonly>
+					</div>
+					
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+					<label class="textRed" for="numero">&nbsp;1ª&nbsp; Prestação</label>
+						<input type="text" class="form-control text-center mod" ng-model="prestacao1" readonly>
+					</div>
+
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+						<label class="textRed"  for="estado">&nbsp;2ª&nbsp; Prestação</label>
+						<input type="text" class="form-control text-center mod" ng-model="prestacao2" readonly>
+					</div>
+
+					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
+						<label class="textRed" for="representante">&nbsp;3ª&nbsp; Prestação</label>
+						<input type="text" class="form-control text-center mod" ng-model="prestacao3" readonly>
+					</div>
+					
+<div class="row">			
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">					
+		<div class="table-responsive">
+			<table class="table table-hover lista-clientes borderTable0" id="tabela">
+				<thead>
+					<tr>
+						<th>Nº</th>
+						<th>Produto</th>		
+						<th class="text-center">Valor</th>		
+						<th class="text-center">Quantidade</th>
+						<th>Total</th>
+						<th class="largBt text-center">Ações</th>			
+					</tr>
+				</thead>
+						
+				<tbody>
+					<tr ng-repeat="produto in vendidosOk" style="cursor:pointer">
+						<td scope="row">
+							{{$index+1}}.
+						</td>
+								
+						<td>
+							<div>
+							{{produto.nome_produto}}
+							</div>
+						</td>
+		
+						<td class="text-center">
+							R$ {{ produto.valor_produto | currency}}
+						</td>
+								
+						<td class="text-center">
+							{{produto.quantidade}}
+						</td>
+								
+						<td>
+							R$ {{ produto.total_produto | currency }}		
+						</td>
+
+						<td>
+							<button class="btn btn-warning" type="button" ng-click="atualizar(produto, $index)" ng-disabled="produtoAdicionar">
+								<i class="fa fa-pencil" aria-hidden="true"></i>
+							</button>
+							<button class="btn btn-danger" type="button" ng-click="deletarProduto(produto)">
+								<i class="fa fa-trash-o" aria-hidden="true"></i>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+			</table>	
+		</div>
+
+		<div ng-if="produtoUpdate" >
+
+				<h4>
+					<label > Editar Produto</label>
+				</h4>
+
+				<hr class="modHr">
+
+				<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">	
+					<label>Produto</label>
+					<input type="text" uib-typeahead="produto as produto.nome for produto in produtosOK | filter:$viewValue | limitTo:3" class="form-control" ng-model="nomeProduto" autocomplete="off" ng-change="setCheck()">
+				</div>
+
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 text-center">	
+					<label>Quantidade</label>
+					<input type="text" class="form-control text-center" ng-model="produtoUpdate.quantidade"  ng-change="setCheck()" >
+				</div>
+				
+
+			<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" >
+				<label>&nbsp</label>
+				<button type="submit" class="btn btn-success btn-block" type="button" ng-click="salvar(nomeProduto.id_produto)" ng-if="!check">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</button>
+
+
+				<button type="submit" class="btn btn-danger btn-block" type="button" ng-click="exitDiv()" ng-if="check">
+					<span class="fa fa-sign-out" aria-hidden="true"></span>
+				</button>
+			</div>
+		</div>
+
+		<div ng-if="produtoAdicionar" class="animate-if">
+
+				<h4>
+					<label > Adicionar Produto</label>
+				</h4>
+
+				<hr class="modHr">
+
+				<div class="text-center alert-warning" uib-alert close="closeAlert()" ng-if="statusAlert" dismiss-on-timeout="8000">
+					<alert>
+						A quantidade <strong>{{add.quantidade}}</strong> do produto selecionado e maior do que a quantidade <strong>{{quantidadeProd}}</strong> de produto em estoque!
+					</alert>
+
+				</div>
+
+				<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">	
+					<label>Produto</label>
+					<input type="text" uib-typeahead="produto as produto.nome for produto in produtosOK | filter:$viewValue | limitTo:3" class="form-control" ng-model="add.produto" autocomplete="off" ng-change="setCheck()">
+				</div>
+
+				<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 text-center">	
+					<label>Quantidade</label>
+					<input type="text" ng-init="add.quantidade=1" ng-model="add.quantidade" class="form-control text-center "/>
+				</div>
+				
+
+			<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1" >
+				<label>&nbsp</label>
+				<button type="submit" class="btn btn-success btn-block" type="button" ng-click="addProduto(add)" ng-if="!check">
+					<i class="fa fa-check" aria-hidden="true"></i>
+				</button>
+
+
+				<button type="submit" class="btn btn-danger btn-block" type="button" ng-click="exitAdd()" ng-if="check">
+					<span class="fa fa-sign-out" aria-hidden="true"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+				
+			</div>
+					
+				</div>
+				
+				<div class="modal-footer">
+					<button class="btn btn-info" type="button" ng-click="adicionarProduto()" ng-disabled="produtoUpdate">
+								Adicionar Produto <i class="fa fa-cart-plus" aria-hidden="true"></i>
+							</button>
+					
+				</div>
+
+			
+					
+					
+			
+				
+			</form>
+
+		</div>
+	</script>
+<!-- Fim do Modal Editar -->
+
+
+
+
 </head>
 
 <body ng-controller="app-listar-vendas">
@@ -258,7 +492,7 @@ include'menu.php'
 									Detalhes
 									</button>
 									
-									<button type="button" class="btn btn-warning">
+									<button type="button" class="btn btn-warning" ng-click="editar(venda)">
 									Editar
 									</button>
 								

@@ -224,10 +224,8 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 			valor_prestacao: $scope.valorParcelas,
 			data_prestacao1: $scope.parcela[0],
 			data_prestacao2: $scope.parcela[1],
-			data_prestacao3: $scope.parcela[2],
-			data_prestacao4: $scope.parcela[3],
-			data_prestacao5: $scope.parcela[4],
-			data_prestacao6: $scope.parcela[5]
+			data_prestacao3: $scope.parcela[2]
+			
 
 		};
 

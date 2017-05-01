@@ -41,7 +41,7 @@ class Produtos_Vendidos {
 		}
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id_vale = :id_vale";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_vendidos = :id_vendidos";
 		$stmt = DB::prepare( $sql );
 
 		foreach ( $params as $key => & $val ) {
@@ -50,7 +50,31 @@ class Produtos_Vendidos {
 
 		};
 		return $stmt->execute();
+	}
 
+	public function atualizar( $atualizar  ) {
+
+		$indices = array_keys( $atualizar );
+		$valores = array_values( $atualizar );
+		$params = array_combine( $indices, $valores );
+		$separadoPorDoisPontos = ':' . implode( '=:', $indices );
+		$c = array_combine( $indices, explode( '=', $separadoPorDoisPontos ) );
+
+		$query = null;
+		foreach ( $c as $key => $value ) {
+			$query .= $key . '=' . $value . ',';
+		}
+		$novaQuery = rtrim( $query, ',' );
+
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_vendidos = :id_vendidos";
+		$stmt = DB::prepare( $sql );
+
+		foreach ( $params as $key => & $val ) {
+
+			$stmt->bindParam( $key, $val );
+
+		};
+		return $stmt->execute();
 	}
 
 	public function readAll() {
@@ -60,7 +84,7 @@ class Produtos_Vendidos {
 		return $stmt->fetchAll();
 	}
 
-		public function buscarVendidos( $id ) {
+	public function buscarVendidos( $id ) {
 		$sql = "SELECT * FROM $this->table WHERE id_venda = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
@@ -85,7 +109,7 @@ class Produtos_Vendidos {
 	}
 
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id_vale = :id";
+		$sql = "DELETE FROM $this->table WHERE id_vendidos = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();
