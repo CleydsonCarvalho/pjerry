@@ -259,7 +259,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "deletarProduto" ) {
 
 	$produtos = $db_produtos_vendidos->delete($id);
 	
-	echo json_encode( 'Deletou o produto com id '+$id_produto );
+	echo json_encode( 'Deletou o produto com id '.$id_produto );
 }
 
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "lerProduto" ) {
@@ -268,6 +268,27 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "lerProduto" ) {
 
 	$produto = $db_produtos->readProduto($id);
 	echo json_encode( $produto );
+}
+
+if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "adicionarProduto" ) {
+
+	
+	$dadosProduto = json_decode( file_get_contents( "php://input" ) );
+
+	$produtoSelecionado = $db_produtos->readProduto($dadosProduto->id_produto);
+
+	$quantidadeUpdate = $produtoSelecionado->quantidade - $dadosProduto->quantidade;
+	$id = $dadosProduto->id_produto;
+
+	$dadosProduto = (array) $dadosProduto;
+
+	$db_produtos->atualizar_estoque($id, $quantidadeUpdate);
+
+	$db_produtos_vendidos->create( $dadosProduto );
+	
+		
+		print json_encode('O produto foi adicionado');
+	
 }
 
 

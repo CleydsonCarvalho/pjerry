@@ -117,11 +117,9 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 		.then(function (produtoDeletado) {
 
 			$scope.produtoDeletar = produto.id_vendidos;
-			console.log(produtoDeletado.data );	
 			$scope.buscarVendidos();
-		});
-
-		//console.log(produto);
+			console.log(produtoDeletado.data);
+		});	
 	}
 
 	$scope.adicionarProduto = function (){
@@ -137,18 +135,46 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 			$scope.quantidadeProd = produtoFind.data.quantidade;
 			var quantidadeForm = add.quantidade;
 
+			
 			if (parseInt(quantidadeForm) > parseInt($scope.quantidadeProd)){
 				$scope.statusAlert = true;
 			}else{
-				console.log( 'Pode Adicionar' );	
+
+				var total = produtoFind.data.valor_venda * add.quantidade;
+				var produto = {id_venda: $scope.dadosModal.id_venda, 
+							   id_produto: produtoFind.data.id_produto,
+						       valor_produto: produtoFind.data.valor_venda,
+						       quantidade: add.quantidade,
+						       total_produto: total 
+						  	   }
+
+
+			$http.post('/controller/controller_listar-vendas.php?acao=adicionarProduto', produto)
+			.then(function (produtoAdd) {
+
+
+						  console.log(produtoAdd.data);
+
+					//$scope.add.produto = "";
+					
+
+					$scope.buscarVendidos();
+				});
+
+
+	
+					
 			}
 
 			
 			
 			//$scope.statusAlert = true;
-		//console.log(add.produto);
+		
 		
 		});
+$scope.check = true;
+
+$scope.produtoAdicionar = false;
 
 		
 	}
