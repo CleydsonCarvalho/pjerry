@@ -1,5 +1,6 @@
 <?php
 require_once 'DB.php';
+
 class Produtos_Vendidos {
 
 	protected $table = 'produtos_vendidos';

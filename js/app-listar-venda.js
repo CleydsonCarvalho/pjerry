@@ -138,7 +138,9 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 			
 			if (parseInt(quantidadeForm) > parseInt($scope.quantidadeProd)){
 				$scope.statusAlert = true;
-			}else{
+			}
+
+			else{
 
 				var total = produtoFind.data.valor_venda * add.quantidade;
 				var produto = {id_venda: $scope.dadosModal.id_venda, 
@@ -152,26 +154,40 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 			$http.post('/controller/controller_listar-vendas.php?acao=adicionarProduto', produto)
 			.then(function (produtoAdd) {
 
+					
+					$scope.sub_total = $filter('currency')(produtoAdd.data.sub_total.toFixed(2), "R$ ");
 
-						  console.log(produtoAdd.data);
 
-					//$scope.add.produto = "";
+
+					$scope.valor_prestacao = $filter('currency')(produtoAdd.data.valor_prestacao.toFixed(2), "R$ ");
+
 					
 
+					$scope.total = $filter('currency')(produtoAdd.data.total.toFixed(2), "R$ ");
+
 					$scope.buscarVendidos();
+
+					console.log('O produto foi adicionado');
+				
 				});
 
+	
 
+
+	
+	
 	
 					
 			}
 
 			
 			
-			//$scope.statusAlert = true;
+			
 		
 		
 		});
+
+	$scope.statusAlert = false;	
 $scope.check = true;
 
 $scope.produtoAdicionar = false;

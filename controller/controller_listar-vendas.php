@@ -275,21 +275,66 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "adicionarProduto" ) {
 	
 	$dadosProduto = json_decode( file_get_contents( "php://input" ) );
 
-	$produtoSelecionado = $db_produtos->readProduto($dadosProduto->id_produto);
-
-	$quantidadeUpdate = $produtoSelecionado->quantidade - $dadosProduto->quantidade;
 	$id = $dadosProduto->id_produto;
+	$id_venda = $dadosProduto->id_venda;
 
-	$dadosProduto = (array) $dadosProduto;
-
+	$produtoSelecionado = $db_produtos->readProduto($id);
+	$quantidadeUpdate = $produtoSelecionado->quantidade - $dadosProduto->quantidade;
 	$db_produtos->atualizar_estoque($id, $quantidadeUpdate);
-
+	
+	$dadosProduto = (array) $dadosProduto;
 	$db_produtos_vendidos->create( $dadosProduto );
-	
+
+
+
+
+
+$produtos_vendidos = $db_produtos_vendidos->buscarVendidos ($id_venda);
+	$venda = $db_venda->readLine($id_venda);
+
+	$entrada = $venda->entrada;
+	$parcelas = $venda->quantidade_parcelas;
+	$sub_total = 0;
+	$total = 0;
+
+	foreach ($produtos_vendidos as $produto) {
+
+		$sub_total += $produto->total_produto;
+
+	}
+
+	$total = $sub_total - $entrada;
+	$v_prestação = $total / $parcelas;
+
+	$venda = array(  'id_venda' => $venda->id_venda,
+				     'id_cliente' => $venda->id_cliente,
+					 'id_vendedor' => $venda->id_vendedor,
+					 'data_venda' => $venda->data_venda,
+					 'id_rota' => $venda->id_rota,
+					 'sub_total' => $sub_total,
+	      			 'entrada' => $venda->entrada,
+					 'total' => $total,
+					 'modo_pagamento' => $venda->modo_pagamento,
+					 'quantidade_parcelas' => $venda->quantidade_parcelas,
+					 'valor_prestacao' => $v_prestação,
+					 'data_prestacao1' => $venda->data_prestacao1,
+					 'data_prestacao2' => $venda->data_prestacao2,
+					 'data_prestacao3' => $venda->data_prestacao3,
+					 'data_registro' => $venda->data_registro
+	 );
+
+
+
+
+
+
+	$db_venda->update($venda);
 		
-		print json_encode('O produto foi adicionado');
 	
+		print json_encode($venda);	
 }
+
+
 
 
 
@@ -326,7 +371,6 @@ if(isset($_GET['acao']) && $_GET['acao'] == "calcularParcelas"){
 	$result = array();	
 	// DATA PARA A PRIMEIRA PARCELA A PAGAR
 /////////// ANO, MÊS, DIA
-	
 $DP =  explode ('-', $_GET['data']);
 
 // QUANTIDADE DE PARCELAS

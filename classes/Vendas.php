@@ -41,7 +41,7 @@ class Vendas {
 		}
 		$novaQuery = rtrim( $query, ',' );
 
-		$sql = "UPDATE $this->table SET $novaQuery WHERE id_vale = :id_vale";
+		$sql = "UPDATE $this->table SET $novaQuery WHERE id_venda = :id_venda";
 		$stmt = DB::prepare( $sql );
 
 		foreach ( $params as $key => & $val ) {
@@ -61,7 +61,7 @@ class Vendas {
 	}
 
 	public function readLine( $id ) {
-		$sql = "SELECT * FROM $this->table WHERE id = :id";
+		$sql = "SELECT * FROM $this->table WHERE id_venda = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		$stmt->execute();
