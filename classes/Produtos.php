@@ -58,8 +58,7 @@ class Produtos {
 			
 		};
 		return $stmt->execute();
-
-}
+	}
 	
 	public function atualizar_estoque( $id_produto, $quantidade  ) {
 		
@@ -68,49 +67,36 @@ class Produtos {
 		$stmt->bindParam( ':id_produto', $id_produto, PDO::PARAM_INT );
 		$stmt->bindParam( ':quantidade', $quantidade, PDO::PARAM_INT );		
 		return $stmt->execute();
-}
+	}
 
-	
-	//PRECISA USAR O foreach PARA LER TODOS
 	public function readAllAdmin() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '1' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	//PRECISA USAR O foreach PARA LER TODOS
-	//foreach($user->readAllCliente() as $key => $value_users): ?
-
-	//endforeach;
+	
 	public function readProdutos() {
 		$sql = "SELECT id_produto, nome FROM $this->table  ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		$produtos =  $stmt->fetchAll();
-		
-	return ($produtos); 
+		return ($produtos); 
 	}
 	
 	
 	public function lerProdutos($search) {
-		
 		
 		$sql = "SELECT id_produto, nome FROM $this->table WHERE nome LIKE '%".$search."%' LIMIT 0,3 ";
 		$stmt = DB::prepare( $sql );
 		$stmt->execute();
 		$produtos =  $stmt->fetchAll();
 		
-		//foreach($produtos as $key => $ValueProdutos){
-	    //$todosProdutos[] = array('id_produto'=>$ValueProdutos->id_produto, 'nome' =>$ValueProdutos->nome);
-		//}
+
 		
-	return ($produtos); 
+		return ($produtos); 
 	}
 	
-	
-	
-	
-
 	public function readAllTecnico() {
 		$sql = "SELECT * FROM $this->table WHERE tipo = '2' ORDER BY id DESC";
 		$stmt = DB::prepare( $sql );
@@ -118,10 +104,6 @@ class Produtos {
 		return $stmt->fetchAll();
 	}
 	
-	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
-	//foreach($user->readId($id = $resultado de outra class->tipo_empresa ) as $key => $value): ?
-
-	//endforeach;
 	public function readAll() {
 		$sql = "SELECT * FROM $this->table ORDER BY nome ASC";
 		$stmt = DB::prepare( $sql );
@@ -129,7 +111,6 @@ class Produtos {
 		return $stmt->fetchAll();
 	}
 	
-	//PRECISA USAR O foreach PARA trazer todas as linhas com o id
 	public function lerProduto( $id ) {
 		$sql = "SELECT * FROM $this->table WHERE id_produto = :id";
 		$stmt = DB::prepare( $sql );
@@ -146,7 +127,7 @@ class Produtos {
 		return $stmt->fetch();
 	}
 
-		public function produtoVendido( $id ) {
+	public function produtoVendido( $id ) {
 		$sql = "SELECT * FROM $this->table WHERE id_produto = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
@@ -154,10 +135,6 @@ class Produtos {
 		return $stmt->fetch();
 	}
 	
-	
-
-
-
 	public function delete( $id ) {
 		$sql = "DELETE FROM $this->table WHERE id_produto = :id";
 		$stmt = DB::prepare( $sql );

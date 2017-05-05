@@ -54,11 +54,20 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
     		$http.post('/controller/controller_listar-vendas.php?acao=atualizarProduto&id='+$scope.produtoUpdate.id_vendidos, $scope.produtoUpdate )
 				.then(function (produtoAtualizado) {
 
-				$scope.produtoAtualizadoOK = produtoAtualizado.data;
-				console.log($scope.produtoAtualizadoOK );	
+				
+
+				$scope.sub_total = $filter('currency')(produtoAtualizado.data.sub_total, "R$ ");
+
+				$scope.valor_prestacao = $filter('currency')(produtoAtualizado.data.valor_prestacao.toFixed(2), "R$ ");
+
+				$scope.total = $filter('currency')(produtoAtualizado.data.total.toFixed(2), "R$ ");
+
+					$scope.buscarVendidos();
+
+					console.log(produtoAtualizado.data);
 			});
 
-    		$scope.buscarVendidos();
+    	
 			$scope.produtoUpdate = "";
 			$scope.check = true;
     	}
@@ -77,9 +86,21 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 
 				$http.post('/controller/controller_listar-vendas.php?acao=atualizarProduto&id='+$scope.produtoUpdate.id_vendidos, $scope.produtoUpdate )
 				.then(function (produtoAtualizado) {
+				
 
-				$scope.produtoAtualizadoOK = produtoAtualizado.data;
-				console.log($scope.produtoAtualizadoOK );
+
+				$scope.sub_total = $filter('currency')(produtoAtualizado.data.sub_total, "R$ ");
+
+				$scope.valor_prestacao = $filter('currency')(produtoAtualizado.data.valor_prestacao.toFixed(2), "R$ ");
+
+				$scope.total = $filter('currency')(produtoAtualizado.data.total.toFixed(2), "R$ ");
+
+					
+
+					console.log(produtoAtualizado.data.sub_total);
+
+
+
 				
 				});
 
@@ -114,11 +135,28 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 	$scope.deletarProduto = function (produto){
 
 		$http.post('/controller/controller_listar-vendas.php?acao=deletarProduto&id='+produto.id_vendidos, produto)
-		.then(function (produtoDeletado) {
+		.then(function (vendaSearch) {
 
-			$scope.produtoDeletar = produto.id_vendidos;
-			$scope.buscarVendidos();
-			console.log(produtoDeletado.data);
+			
+		
+				$scope.sub_total = $filter('currency')(vendaSearch.data.sub_total, "R$ ");
+
+				$scope.valor_prestacao = $filter('currency')(vendaSearch.data.valor_prestacao.toFixed(2), "R$ ");
+
+				$scope.total = $filter('currency')(vendaSearch.data.total.toFixed(2), "R$ ");
+
+					$scope.buscarVendidos();
+
+					console.log(vendaSearch.data);
+		
+
+		
+
+
+
+
+
+
 		});	
 	}
 
@@ -134,7 +172,6 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 
 			$scope.quantidadeProd = produtoFind.data.quantidade;
 			var quantidadeForm = add.quantidade;
-
 			
 			if (parseInt(quantidadeForm) > parseInt($scope.quantidadeProd)){
 				$scope.statusAlert = true;
@@ -153,57 +190,57 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 
 			$http.post('/controller/controller_listar-vendas.php?acao=adicionarProduto', produto)
 			.then(function (produtoAdd) {
-
 					
-					$scope.sub_total = $filter('currency')(produtoAdd.data.sub_total.toFixed(2), "R$ ");
-
-
+					$scope.sub_total = $filter('currency')(produtoAdd.data.sub_total, "R$ ");
 
 					$scope.valor_prestacao = $filter('currency')(produtoAdd.data.valor_prestacao.toFixed(2), "R$ ");
-
-					
 
 					$scope.total = $filter('currency')(produtoAdd.data.total.toFixed(2), "R$ ");
 
 					$scope.buscarVendidos();
 
-					console.log('O produto foi adicionado');
-				
-				});
-
-	
-
-
-	
-	
-	
-					
+					console.log(produtoAdd.data);
+				});	
 			}
-
-			
-			
-			
-		
-		
 		});
 
-	$scope.statusAlert = false;	
-$scope.check = true;
-
-$scope.produtoAdicionar = false;
-
-		
+		$scope.statusAlert = false;	
+		$scope.check = true;
+		$scope.produtoAdicionar = false;	
 	}
 
 	$scope.closeAlert = function () {
 
 		$scope.statusAlert = false;
-	};
+	}
+
+	$scope.deletar = function(){
+
+		$http.get('/controller/controller_listar-vendas.php?acao=deletarVenda&id='+id)
+		.then(function (vendaDeletada) {
+
+			$scope.listarVendas();
+			$scope.cancel();
+			console.log(vendaDeletada.data);
+
+
+		});
+
+
+
+	}
 
 	$scope.listarProdutos ();
 	$scope.buscarVendidos();
 
 });
+
+
+
+
+
+
+
 
 angular.module('app').controller('app-listar-vendas', function ($scope, $http, $filter, $uibModal) {
 
@@ -223,6 +260,8 @@ angular.module('app').controller('app-listar-vendas', function ($scope, $http, $
 
 		
 	};
+
+	$scope.total_vendas = 
 
 
 
@@ -302,6 +341,23 @@ angular.module('app').controller('app-listar-vendas', function ($scope, $http, $
 			controller: 'openModal',
 			scope: $scope,
 			 size: 'lg'
+
+		});
+	};
+
+	/*****************************************************************************/
+
+	////////////////////////// Modal Editar //////////////////////////////////
+
+	$scope.excluir = function (venda) {
+
+		$scope.dadosModal = venda;
+		$uibModal.open({
+			animation: true,
+			templateUrl: 'excluirModal.html',
+			controller: 'openModal',
+			scope: $scope,
+			 size: 'md'
 
 		});
 	};

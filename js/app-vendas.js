@@ -166,9 +166,12 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 	};
 
 	$scope.calcularTotal = function () {
-		$scope.total = $scope.subtotal - $scope.entrada;
+		
+		$scope.total = $scope.subtotal - $scope.entrada; 
 		var valorParcelas = $scope.total / $scope.parcelas;
 		$scope.valorParcelas = valorParcelas.toFixed(2);
+
+		
 	};
 
 	$scope.calcParcelas = function () {
@@ -179,6 +182,7 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 			$scope.modPag = "À Vista";
 			$scope.entrada = 0;
 			$scope.total = $scope.sub_total;
+			$scope.valorParcelas = 0;
 
 		} else {
 			$scope.parcelaS = true;
@@ -232,20 +236,23 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 
 
 
-
 		$http.post('/controller/controller_vendas.php?acao=cadastrarVenda', $scope.venda_add)
 			.then(function (id_venda) {
+
+
+console.log(id_venda.data);
+//console.log($scope.venda_add);
 
 				$scope.id_venda = id_venda.data.id_venda;
 
 
-				$http.post('/controller/controller_vendas.php?acao=cadastrarProdutos&id_venda=' + $scope.id_venda, $scope.produtos)
-					.then(function (produtos) {
+				//$http.post('/controller/controller_vendas.php?acao=cadastrarProdutos&id_venda=' + $scope.id_venda, $scope.produtos)
+					//.then(function (produtos) {
 
-						$scope.produtosmeu = produtos.data;
+						//$scope.produtosmeu = produtos.data;
 
-location.reload(); 
-					});
+//location.reload(); 
+					//});
 
 			});
 		

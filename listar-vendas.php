@@ -113,7 +113,7 @@
 						<input type="text" class="form-control text-center mod" ng-model="prestacao3" readonly>
 					</div>
 					
-<div class="row">
+		<div class="row">
 				
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">					
 			
@@ -165,8 +165,8 @@
 				
 					
 				</div>
-</div>
-</div>
+		</div>
+		</div>
 				
 			</div>
 					
@@ -179,11 +179,11 @@
 				
 			</form>
 		</div>
-	</script>
-<!--- Fim do Modal Detalhes -->	
+		</script>
+	<!--- Fim do Modal Detalhes -->	
 
 <!---*********************************** Modal Editar **************************-->
-	<script type="text/ng-template" id="editarModal.html">
+<script type="text/ng-template" id="editarModal.html">
 		<div class="custom modal-header">
 			<button type="button" class="close" data-dismiss="modal" ng-click="cancel()">&times;</button>
 			<h4 class="modal-title">
@@ -263,6 +263,21 @@
 						<label class="textRed" for="representante">&nbsp;3ª&nbsp; Prestação</label>
 						<input type="text" class="form-control text-center mod" ng-model="prestacao3" readonly>
 					</div>
+
+					<div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 app-margimBotomCamposFomr">
+					</div>
+
+					<div class="col-xs-12 col-sm-1 col-md-1 col-lg-1 mg-top">
+					
+						<button class="btn btn-default pull-right" type="button" ng-click="editarVenda()">
+
+							Alterar Dados
+
+						</button>
+
+					</div>
+
+				</div>
 					
 <div class="row">			
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">					
@@ -392,43 +407,66 @@
 			</div>
 					
 				</div>
-				
+			
 				<div class="modal-footer">
 					<button class="btn btn-info" type="button" ng-click="adicionarProduto()" ng-disabled="produtoUpdate">
-								Adicionar Produto <i class="fa fa-cart-plus" aria-hidden="true"></i>
-							</button>
-					
+						Adicionar Produto <i class="fa fa-cart-plus" aria-hidden="true"></i>
+					</button>	
 				</div>
-
-			
-					
-					
-			
-				
 			</form>
-
 		</div>
 	</script>
 <!-- Fim do Modal Editar -->
 
 
-
+<!---********************************** Modal Excluir *******************************************-->
+	<script type="text/ng-template" id="excluirModal.html">
+		<div class="custom modal-header">
+			<button type="button" class="close" data-dismiss="modal" ng-click="cancel()">&times;</button>
+			<h4 class="modal-title">
+				<i class="fa fa-trash" aria-hidden="true"></i>
+				<strong class="size-text">
+				
+					&nbsp; Excluir Venda
+				</strong>
+			</h4>
+		</div>
+		
+		<div class="modal-body">
+			
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">	
+		<strong><label >Deseja excluir a venda ? </label></strong><br>
+					<strong>De: </strong><span >{{dadosModal.nome_cliente}}</span> - <strong>Valor: </strong><span >{{total}}</span>.
+				</div>
+		
+					
+			</div>
+		</div>
+		
+				<div class="modal-footer">
+					<button class="btn btn-warning" type="button" ng-click="deletar()">Deletar</button>
+					<button class="btn btn-info" type="button" ng-click="cancel()">Fechar</button>
+					
+				</div>
+	 </script>
+<!--- Fim do Modal Detalhes -->	
 
 </head>
 
 <body ng-controller="app-listar-vendas">
 
-<div class="container">
-	<div class="row">
-		<div class="col-lg-12">
-			<h1 class="app-h1-painel">Painel - Despesas</h1>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="app-h1-painel">Painel - Despesas</h1>
+			</div>
 		</div>
 	</div>
-</div>
 
-<?php 
-include'menu.php'
-?>
+	<?php 
+	include'menu.php'
+	?>
 
 	<div class="container">
 
@@ -483,6 +521,7 @@ include'menu.php'
 								
 								<td>
 								R$ {{ venda.total | currency : "" }}
+
 									
 								</td>
 								
@@ -496,7 +535,7 @@ include'menu.php'
 									Editar
 									</button>
 								
-									<button type="button" class="btn btn-danger">
+									<button type="button" class="btn btn-danger" ng-click="excluir(venda)">
 									Excluir
 									</button>
 								
@@ -506,10 +545,9 @@ include'menu.php'
 						</tbody>
 					</table>
 					
-					<div class="total pull-right">
-						<strong>Total: </strong> R$ 375,00
-					</div>
-					<hr class="hr-mg">
+				
+					<hr class="corHr m">
+						
 					
 				</div>
 				<br>

@@ -99,6 +99,15 @@ if ( isset($_GET['acao']) && $_GET['acao'] == 'buscarVendidos' ) {
 	print json_encode ( $produtos );
 }
 
+if ( isset($_GET['acao']) && $_GET['acao'] == 'buscarVendaId' ) {
+
+	$id = $_GET['id'];
+	
+	$venda = $db_venda->buscarVendaId( $id );
+	
+	print json_encode ( $venda );
+}
+
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "listarProdutos" ) {
 
 	$produtos = $db_produtos->readProdutos();
@@ -134,8 +143,46 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "atualizarProduto" ) {
 		$db_produtos->atualizar_estoque($produto_anterior, $updateQuantidade);
 		$db_produtos_vendidos->delete($id_vendidos);
 
-		echo json_encode( 'Atualizou quantidade menor');
+	$produtos_vendidos = $db_produtos_vendidos->buscarVendidos ($produtoForm->id_venda);
+	$venda = $db_venda->readLine($produtoForm->id_venda);
+
+	$entrada = $venda->entrada;
+	$parcelas = $venda->quantidade_parcelas;
+	$sub_total = 0;
+	$total = 0;
+
+	foreach ($produtos_vendidos as $produto) {
+
+		$sub_total += $produto->total_produto;
+	}
+
+	$total = $sub_total - $entrada;
+
+	if ($parcelas == 0){
+		$v_prestação = 0;
+	}
+	else{  $v_prestação = $total / $parcelas;}
+	
+	$venda = array(  'id_venda' => $venda->id_venda,
+				     'id_cliente' => $venda->id_cliente,
+					 'id_vendedor' => $venda->id_vendedor,
+					 'data_venda' => $venda->data_venda,
+					 'id_rota' => $venda->id_rota,
+					 'sub_total' => $sub_total,
+	      			 'entrada' => $venda->entrada,
+					 'total' => $total,
+					 'modo_pagamento' => $venda->modo_pagamento,
+					 'quantidade_parcelas' => $venda->quantidade_parcelas,
+					 'valor_prestacao' => $v_prestação,
+					 'data_prestacao1' => $venda->data_prestacao1,
+					 'data_prestacao2' => $venda->data_prestacao2,
+					 'data_prestacao3' => $venda->data_prestacao3,
+					 'data_registro' => $venda->data_registro
+	 );
+
+		$db_venda->update($venda);
 		
+		print json_encode($venda);		
 	}
 
 	elseif ($id_produto == $produto_anterior && $quantidade > $quantidade_anterior) {
@@ -255,11 +302,70 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "deletarProduto" ) {
 
 	$db_produtos->atualizar_estoque($id_produto, $updateQuantidade);
 
-
-
 	$produtos = $db_produtos_vendidos->delete($id);
+
+
+
+
+
+
+
+
+
+
+	$produtos_vendidos = $db_produtos_vendidos->buscarVendidos ($produtoForm->id_venda);
+	$venda = $db_venda->readLine($produtoForm->id_venda);
+
+	$entrada = $venda->entrada;
+	$parcelas = $venda->quantidade_parcelas;
+	$sub_total = 0;
+	$total = 0;
+
+	foreach ($produtos_vendidos as $produto) {
+
+		$sub_total += $produto->total_produto;
+
+	}
+
+	$total = $sub_total - $entrada;
+
+	if ($parcelas == 0){
+		$v_prestação = 0;
+
+	}else{$v_prestação = $total / $parcelas;}
 	
-	echo json_encode( 'Deletou o produto com id '.$id_produto );
+
+	$venda = array(  'id_venda' => $venda->id_venda,
+				     'id_cliente' => $venda->id_cliente,
+					 'id_vendedor' => $venda->id_vendedor,
+					 'data_venda' => $venda->data_venda,
+					 'id_rota' => $venda->id_rota,
+					 'sub_total' => $sub_total,
+	      			 'entrada' => $venda->entrada,
+					 'total' => $total,
+					 'modo_pagamento' => $venda->modo_pagamento,
+					 'quantidade_parcelas' => $venda->quantidade_parcelas,
+					 'valor_prestacao' => $v_prestação,
+					 'data_prestacao1' => $venda->data_prestacao1,
+					 'data_prestacao2' => $venda->data_prestacao2,
+					 'data_prestacao3' => $venda->data_prestacao3,
+					 'data_registro' => $venda->data_registro
+	 );
+
+
+	$db_venda->update($venda);
+		
+		//print json_encode($venda);	
+
+
+
+
+
+
+
+
+	
+	echo json_encode( $venda );
 }
 
 if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "lerProduto" ) {
@@ -281,21 +387,20 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "adicionarProduto" ) {
 	$produtoSelecionado = $db_produtos->readProduto($id);
 	$quantidadeUpdate = $produtoSelecionado->quantidade - $dadosProduto->quantidade;
 	$db_produtos->atualizar_estoque($id, $quantidadeUpdate);
+
 	
 	$dadosProduto = (array) $dadosProduto;
 	$db_produtos_vendidos->create( $dadosProduto );
 
-
-
-
-
-$produtos_vendidos = $db_produtos_vendidos->buscarVendidos ($id_venda);
+	$produtos_vendidos = $db_produtos_vendidos->buscarVendidos ($id_venda);
 	$venda = $db_venda->readLine($id_venda);
 
 	$entrada = $venda->entrada;
 	$parcelas = $venda->quantidade_parcelas;
 	$sub_total = 0;
 	$total = 0;
+
+	
 
 	foreach ($produtos_vendidos as $produto) {
 
@@ -304,7 +409,14 @@ $produtos_vendidos = $db_produtos_vendidos->buscarVendidos ($id_venda);
 	}
 
 	$total = $sub_total - $entrada;
-	$v_prestação = $total / $parcelas;
+
+	if ($parcelas == 0){
+		$v_prestação = 0;
+
+	}
+
+	else{  $v_prestação = $total / $parcelas;}
+	
 
 	$venda = array(  'id_venda' => $venda->id_venda,
 				     'id_cliente' => $venda->id_cliente,
@@ -332,6 +444,40 @@ $produtos_vendidos = $db_produtos_vendidos->buscarVendidos ($id_venda);
 		
 	
 		print json_encode($venda);	
+}
+
+if( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "deletarVenda" ){
+
+	$id = $_GET[ 'id' ];
+
+	$venda = $db_venda->buscarVendaId($id);
+	$produtoVendidos = $db_produtos_vendidos->buscarVendidos($id);
+
+	foreach ($produtoVendidos as $produto) {
+
+		
+		$id_venda = $produto->id_venda;
+		$id_produto = $produto->id_produto;
+		$quantidade_produto = $produto->quantidade;
+		$id_vendidos = $produto->id_vendidos;
+
+		$produtoSelecionado = $db_produtos->readProduto($id_produto);
+		$quantidadeUpdate = $produtoSelecionado->quantidade + $quantidade_produto;
+
+		$db_produtos_vendidos->delete($id_vendidos);
+		$db_produtos->atualizar_estoque($id_produto, $quantidadeUpdate);
+
+		$db_venda->delete($id_venda);
+
+
+
+
+		
+	}
+
+	
+print_r( 'A venda com id '.$id_venda. ' foi deletada com sucesso!');
+	
 }
 
 
@@ -474,7 +620,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarVenda" ) {
 			'entrada' => $dadosVenda->entrada,
 			'total' => $dadosVenda->total,
 			'modo_pagamento' => $dadosVenda->modo_pagamento,
-
+			'valor_prestacao' => 0,
 			'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
 			'data_registro' => $data
 		);
@@ -491,11 +637,11 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarVenda" ) {
 				'entrada' => $dadosVenda->entrada,
 				'total' => $dadosVenda->total,
 				'modo_pagamento' => $dadosVenda->modo_pagamento,
-
-				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
 				'valor_prestacao' => $dadosVenda->valor_prestacao,
-				'data_prestacao1' => $dadosVenda->data_prestacao1,
-				'data_registro' => $data
+				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
+				'data_registro' => $data,
+
+				'data_prestacao1' => $dadosVenda->data_prestacao1
 
 			);		
 	}
@@ -511,35 +657,36 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarVenda" ) {
 				'entrada' => $dadosVenda->entrada,
 				'total' => $dadosVenda->total,
 				'modo_pagamento' => $dadosVenda->modo_pagamento,
-
-				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
 				'valor_prestacao' => $dadosVenda->valor_prestacao,
+				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
+				'data_registro' => $data,
+
 				'data_prestacao1' => $dadosVenda->data_prestacao1,
-				'data_prestacao2' => $dadosVenda->data_prestacao2,
-				'data_registro' => $data
+				'data_prestacao2' => $dadosVenda->data_prestacao2
+			
 
 			);	
 	}
 	
 	elseif($dadosVenda->quantidade_parcelas ==3){
 		
-		$venda = Array(
-			'id_cliente' => $dadosVenda->id_cliente,
-			'id_vendedor' => $dadosVenda->id_vendedor,
-			'data_venda' => $dadosVenda->data_venda,
-			'id_rota' => $dadosVenda->id_rota,
-			'sub_total' => $dadosVenda->sub_total,
-			'entrada' => $dadosVenda->entrada,
-			'total' => $dadosVenda->total,
-			'modo_pagamento' => $dadosVenda->modo_pagamento,
+			$venda = Array(
+				'id_cliente' => $dadosVenda->id_cliente,
+				'id_vendedor' => $dadosVenda->id_vendedor,
+				'data_venda' => $dadosVenda->data_venda,
+				'id_rota' => $dadosVenda->id_rota,
+				'sub_total' => $dadosVenda->sub_total,
+				'entrada' => $dadosVenda->entrada,
+				'total' => $dadosVenda->total,
+				'modo_pagamento' => $dadosVenda->modo_pagamento,
+				'valor_prestacao' => $dadosVenda->valor_prestacao,
+				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
+				'data_registro' => $data,
 
-			'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
-			'valor_prestacao' => $dadosVenda->valor_prestacao,
-			'data_prestacao1' => $dadosVenda->data_prestacao1,
-			'data_prestacao2' => $dadosVenda->data_prestacao2,
-			'data_prestacao3' => $dadosVenda->data_prestacao3,
-			'data_registro' => $data
-
+				'data_prestacao1' => $dadosVenda->data_prestacao1,
+				'data_prestacao2' => $dadosVenda->data_prestacao2,
+				'data_prestacao3' => $dadosVenda->data_prestacao3
+			
 		);
 	}
 	

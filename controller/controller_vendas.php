@@ -140,7 +140,7 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarVenda" ) {
 			'entrada' => $dadosVenda->entrada,
 			'total' => $dadosVenda->total,
 			'modo_pagamento' => $dadosVenda->modo_pagamento,
-
+			'valor_prestacao' => $dadosVenda->valor_prestacao,
 			'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
 			'data_registro' => $data
 		);
@@ -157,11 +157,11 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarVenda" ) {
 				'entrada' => $dadosVenda->entrada,
 				'total' => $dadosVenda->total,
 				'modo_pagamento' => $dadosVenda->modo_pagamento,
-
-				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
 				'valor_prestacao' => $dadosVenda->valor_prestacao,
-				'data_prestacao1' => $dadosVenda->data_prestacao1,
-				'data_registro' => $data
+				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
+				'data_registro' => $data,
+
+				'data_prestacao1' => $dadosVenda->data_prestacao1
 
 			);		
 	}
@@ -177,35 +177,36 @@ if ( isset( $_GET[ 'acao' ] ) && $_GET[ 'acao' ] == "cadastrarVenda" ) {
 				'entrada' => $dadosVenda->entrada,
 				'total' => $dadosVenda->total,
 				'modo_pagamento' => $dadosVenda->modo_pagamento,
-
-				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
 				'valor_prestacao' => $dadosVenda->valor_prestacao,
+				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
+				'data_registro' => $data,
+
 				'data_prestacao1' => $dadosVenda->data_prestacao1,
-				'data_prestacao2' => $dadosVenda->data_prestacao2,
-				'data_registro' => $data
+				'data_prestacao2' => $dadosVenda->data_prestacao2
+			
 
 			);	
 	}
 	
 	elseif($dadosVenda->quantidade_parcelas ==3){
 		
-		$venda = Array(
-			'id_cliente' => $dadosVenda->id_cliente,
-			'id_vendedor' => $dadosVenda->id_vendedor,
-			'data_venda' => $dadosVenda->data_venda,
-			'id_rota' => $dadosVenda->id_rota,
-			'sub_total' => $dadosVenda->sub_total,
-			'entrada' => $dadosVenda->entrada,
-			'total' => $dadosVenda->total,
-			'modo_pagamento' => $dadosVenda->modo_pagamento,
+			$venda = Array(
+				'id_cliente' => $dadosVenda->id_cliente,
+				'id_vendedor' => $dadosVenda->id_vendedor,
+				'data_venda' => $dadosVenda->data_venda,
+				'id_rota' => $dadosVenda->id_rota,
+				'sub_total' => $dadosVenda->sub_total,
+				'entrada' => $dadosVenda->entrada,
+				'total' => $dadosVenda->total,
+				'modo_pagamento' => $dadosVenda->modo_pagamento,
+				'valor_prestacao' => $dadosVenda->valor_prestacao,
+				'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
+				'data_registro' => $data,
 
-			'quantidade_parcelas' => $dadosVenda->quantidade_parcelas,
-			'valor_prestacao' => $dadosVenda->valor_prestacao,
-			'data_prestacao1' => $dadosVenda->data_prestacao1,
-			'data_prestacao2' => $dadosVenda->data_prestacao2,
-			'data_prestacao3' => $dadosVenda->data_prestacao3,
-			'data_registro' => $data
-
+				'data_prestacao1' => $dadosVenda->data_prestacao1,
+				'data_prestacao2' => $dadosVenda->data_prestacao2,
+				'data_prestacao3' => $dadosVenda->data_prestacao3
+			
 		);
 	}
 	

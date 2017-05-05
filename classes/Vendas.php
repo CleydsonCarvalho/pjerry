@@ -50,7 +50,6 @@ class Vendas {
 
 		};
 		return $stmt->execute();
-
 	}
 
 	public function readAll() {
@@ -76,8 +75,16 @@ class Vendas {
 		return $stmt->fetch();
 	}
 
+	public function buscarVendaId( $id ) {
+		$sql = "SELECT * FROM $this->table WHERE id_venda = :id ";
+		$stmt = DB::prepare( $sql );
+		$stmt->bindParam( ':id', $id,  PDO::PARAM_INT );
+		$stmt->execute();
+		return $stmt->fetch();
+	}
+
 	public function delete( $id ) {
-		$sql = "DELETE FROM $this->table WHERE id_vale = :id";
+		$sql = "DELETE FROM $this->table WHERE id_venda = :id";
 		$stmt = DB::prepare( $sql );
 		$stmt->bindParam( ':id', $id, PDO::PARAM_INT );
 		return $stmt->execute();
