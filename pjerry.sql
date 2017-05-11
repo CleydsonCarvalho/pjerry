@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 01-Maio-2017 às 10:37
+-- Generation Time: 11-Maio-2017 às 00:49
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -284,9 +284,9 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id_produto`, `nome`, `marca`, `quantidade`, `id_fornecedor`, `valor_compra`, `valor_venda`, `valor_prazo`) VALUES
-(1, 'Shampoo Monica', 'Alway', 62, 9, '12.00', '18.25', '22.00'),
-(2, 'Condicionador', 'Toda Bela', 65, 10, '15.00', '25.00', '28.00'),
-(5, 'Creme Barbear', 'Joson', 65, 10, '18.50', '22.00', '24.00');
+(1, 'Shampoo Monica', 'Alway', 74, 9, '12.00', '18.25', '22.00'),
+(2, 'Condicionador', 'Toda Bela', 37, 10, '15.00', '25.00', '28.00'),
+(5, 'Creme Barbear', 'Joson', 74, 10, '18.50', '22.00', '24.00');
 
 -- --------------------------------------------------------
 
@@ -308,27 +308,13 @@ CREATE TABLE `produtos_vendidos` (
 --
 
 INSERT INTO `produtos_vendidos` (`id_vendidos`, `id_venda`, `id_produto`, `valor_produto`, `quantidade`, `total_produto`) VALUES
-(56, 160, 5, '22.00', '10', '220'),
-(55, 160, 1, '18.25', '5', '91.25'),
-(54, 158, 5, '22.00', '1', '22'),
-(53, 158, 1, '18.25', '8', '146'),
-(52, 157, 5, '22.00', '10', '220'),
-(51, 156, 1, '18.25', '10', '182.5'),
-(49, 155, 5, '22.00', '3', '66'),
-(48, 155, 2, '25.00', '2', '50'),
-(59, 164, 2, '25.00', '10', '250'),
-(60, 165, 1, '18.25', '15', '273.75'),
-(61, 166, 5, '22.00', '10', '220'),
-(62, 166, 2, '25.00', '2', '50'),
-(63, 166, 1, '18.25', '5', '91.25'),
-(64, 167, 5, '22.00', '1', '22'),
-(65, 167, 2, '25.00', '1', '25'),
-(66, 168, 2, '25.00', '1', '25'),
-(67, 168, 5, '22.00', '1', '22'),
-(68, 168, 1, '18.25', '1', '18.25'),
-(69, 168, 2, '25.00', '1', '25'),
-(70, 168, 5, '22.00', '1', '22'),
-(71, 168, 1, '18.25', '1', '18.25');
+(194, 158, 2, '25.00', '1', '25'),
+(196, 158, 1, '18.25', '8', '146'),
+(202, 178, 2, '25.00', '2', '50'),
+(203, 178, 1, '18.25', '2', '36.5'),
+(204, 178, 5, '22.00', '1', '22'),
+(205, 179, 5, '22.00', '5', '110'),
+(206, 158, 5, '22.00', '1', '22');
 
 -- --------------------------------------------------------
 
@@ -447,11 +433,11 @@ CREATE TABLE `vendas` (
   `data_venda` date NOT NULL,
   `id_rota` int(11) NOT NULL,
   `sub_total` varchar(30) NOT NULL,
-  `entrada` varchar(30) DEFAULT NULL,
+  `entrada` varchar(30) NOT NULL,
   `total` varchar(30) NOT NULL,
   `modo_pagamento` varchar(100) NOT NULL,
   `quantidade_parcelas` int(10) DEFAULT '0',
-  `valor_prestacao` varchar(30) DEFAULT NULL,
+  `valor_prestacao` varchar(30) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `data_prestacao1` date DEFAULT NULL,
   `data_prestacao2` date DEFAULT NULL,
   `data_prestacao3` date DEFAULT NULL,
@@ -463,19 +449,9 @@ CREATE TABLE `vendas` (
 --
 
 INSERT INTO `vendas` (`id_venda`, `id_cliente`, `id_vendedor`, `data_venda`, `id_rota`, `sub_total`, `entrada`, `total`, `modo_pagamento`, `quantidade_parcelas`, `valor_prestacao`, `data_prestacao1`, `data_prestacao2`, `data_prestacao3`, `data_registro`) VALUES
-(165, 2, 16, '2017-04-24', 62, '273.75', '0', '273.75', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-24 03:36:27.606481'),
-(164, 7, 16, '2017-04-24', 47, '250', '0', '250', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-24 03:34:48.762828'),
-(163, 7, 17, '2017-04-24', 44, '365', '0', '365', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-24 03:33:09.107128'),
-(162, 2, 16, '2017-04-24', 45, '365', '0', '365', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-24 03:31:24.434141'),
-(161, 2, 16, '2017-04-23', 59, '86.5', '0', '86.50', 'Parcelado', 3, '28.83', '2017-05-23', '2017-06-23', '2017-07-23', '2017-04-23 19:58:31.217079'),
-(160, 6, 17, '2017-04-23', 62, '311.25', '11.25', '300', 'Parcelado', 2, '150', '2017-05-23', '2017-06-23', NULL, '2017-04-23 19:53:25.239748'),
-(167, 7, 17, '2017-04-26', 44, '47', '0', '47', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-27 13:15:40.812945'),
-(155, 2, 16, '2017-04-23', 45, '189', '9', '180', 'Parcelado', 6, '30', '2017-05-23', '2017-06-23', '2017-07-23', '2017-04-23 08:53:15.923663'),
-(156, 7, 17, '2017-04-23', 47, '182.5', '0', '182.50', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-23 19:39:08.276766'),
-(157, 2, 16, '2017-04-23', 56, '220', '0', '220', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-23 19:42:14.113044'),
-(158, 2, 16, '2017-04-23', 52, '168', '0', '168', 'À Vista', 0, NULL, NULL, NULL, NULL, '2017-04-23 19:46:25.984094'),
-(166, 2, 16, '2017-04-25', 47, '543.75', '43.75', '500', 'Parcelado', 2, '250', '2017-05-25', '2017-06-25', NULL, '2017-04-25 22:24:35.192264'),
-(168, 6, 17, '2017-04-29', 59, '130.5', '30.50', '100', 'Parcelado', 2, '50', '2017-05-29', '2017-06-29', NULL, '2017-04-29 11:47:00.271022');
+(179, 2, 16, '2017-05-07', 44, '110', '60', '50', 'Parcelado', 1, '50', '2017-06-07', NULL, NULL, '2017-05-07 08:40:57.730414'),
+(158, 2, 16, '2017-04-23', 52, '193', '0', '193', 'À Vista', 0, '0', NULL, NULL, NULL, '2017-04-23 19:46:25.984094'),
+(178, 6, 16, '2017-05-06', 48, '108.5', '8.50', '100', 'Parcelado', 2, '50', '2017-06-06', '2017-07-06', NULL, '2017-05-06 11:48:55.547856');
 
 --
 -- Indexes for dumped tables
@@ -635,7 +611,7 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT for table `produtos_vendidos`
 --
 ALTER TABLE `produtos_vendidos`
-  MODIFY `id_vendidos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_vendidos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=207;
 --
 -- AUTO_INCREMENT for table `relacao_rce`
 --
@@ -660,7 +636,7 @@ ALTER TABLE `vale`
 -- AUTO_INCREMENT for table `vendas`
 --
 ALTER TABLE `vendas`
-  MODIFY `id_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `id_venda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=180;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

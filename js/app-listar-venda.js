@@ -5,17 +5,55 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 	$scope.check = true;
 	$scope.produtoAdicionar = false;
 	$scope.statusAlert = false;
+	$scope.setEdit = true;
+	$scope.StPrest1 = false;
+
+	$scope.pagamento = $scope.dadosModal.quantidade_parcelas;
 	$scope.valor_prestacao = $filter('currency')(0, "R$ ");
 	$scope.sub_total = $filter('currency')($scope.dadosModal.sub_total, "R$ ");
 	$scope.entrada = $filter('currency')($scope.dadosModal.entrada, "R$ ");
 	$scope.total = $filter('currency')($scope.dadosModal.total, "R$ ");
 	$scope.valor_prestacao = $filter('currency')($scope.dadosModal.valor_prestacao, "R$ ");
-	$scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
-	$scope.prestacao2 = $filter('date')($scope.dadosModal.data_prestacao2, "dd/MM/yyyy");
-	$scope.prestacao3 = $filter('date')($scope.dadosModal.data_prestacao3, "dd/MM/yyyy");
+	
+	var d = new Date($scope.dadosModal.data_venda);
+	var ano = d.getFullYear();
+	var proxMes = d.getMonth();
+	var dia = d.getDate()+1;
+
+	//$scope.data_vendaE = new Date(ano, proxMes, dia);
+	$scope.dadosModal.data_venda = new Date(ano, proxMes, dia);
+		
+	var anoM = d.getFullYear();
+	var proxMesM = d.getMonth()+1;
+	var diaM = d.getDate()+1;
+
+	$scope.prestacao1Edit = new Date(anoM, proxMesM, diaM);
+
+	$scope.data_venda = $filter('date')($scope.dadosModal.data_venda, "dd/MM/yyyy");
+
+
+
+	$scope.nomeEdit = $scope.dadosModal.nome_cliente;
+	$scope.vendedorEdit = $scope.dadosModal.nome_vendedor;
+	$scope.dadosModal.id_rota = parseInt($scope.dadosModal.id_rota);
+	
 
 	var id = $scope.dadosModal.id_venda;
 
+	$scope.pagamentoEdit = $scope.dadosModal.quantidade_parcelas;
+
+
+	$scope.tipoPag = function (){
+
+		if ($scope.dadosModal.quantidade_parcelas == 0){
+
+			$scope.pagamento = "À Vista";
+
+		}else{
+			$scope.pagamento = $scope.dadosModal.quantidade_parcelas+'X';
+		}
+	}
+		
 	$scope.listarProdutos = function () {
 
 		$http.get('/controller/controller_listar-vendas.php?acao=listarProdutos')
@@ -121,7 +159,6 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
     	$scope.produtoAdicionar = false;	
     }
 
-
     $scope.setCheck = function (){
 
     	$scope.check = false;
@@ -149,14 +186,6 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 
 					console.log(vendaSearch.data);
 		
-
-		
-
-
-
-
-
-
 		});	
 	}
 
@@ -225,11 +254,336 @@ angular.module('app').controller('openModal', function ($scope, $http, $uibModal
 
 
 		});
-
-
-
 	}
 
+	$scope.editarVenda = function (){
+
+		$scope.setEdit = !$scope.setEdit;
+		
+
+		console.log('entrou');
+	}
+
+	$scope.salvarVenda = function (nomeEdit){
+
+		$scope.setEdit = !$scope.setEdit;
+		$scope.data_venda = $filter ('date')($scope.dadosModal.data_venda, 'dd/MM/yyyy')
+
+		console.log($scope.dadosModal.nome_cliente);
+	}
+
+	$scope.listarClientes = function () {
+
+		$http.post('/controller/controller_clientes.php?acao=listarClientes')
+			.then(function (clientes) {
+
+				$scope.clientesOK = clientes.data;
+			});
+	};
+
+	$scope.buscarVendedores = function () {
+		
+		$http.post('/controller/controller_vendas.php?acao=buscarVendedores')
+			.then(function (funcionarios) {
+
+				$scope.vendedores = funcionarios.data;
+
+			});
+	};
+
+	$scope.listarRotas = function () {
+
+		$http.post('/controller/controller_rota.php?acao=lerRotas')
+			.then(function (rotas) {
+
+				$scope.rotas = rotas.data;
+			});
+	};
+
+	$scope.set1Prest = function (pag, data_vendaE){
+
+
+
+		switch (parseInt(pag)) {
+
+		 case 0:
+		    $scope.prestacao1Edit = "";
+		    $scope.prestacao2 = "";
+		    $scope.prestacao3 = "";
+
+		    console.log(pag);
+		    break;
+
+		  
+		  case 1:
+
+		  	var d = new Date(data_vendaE);
+			var ano = d.getFullYear();
+			var proxMes = d.getMonth()+1;
+			var dia = d.getDate();
+			var prest1update = new Date(ano, proxMes, dia);
+
+			$scope.prestacao1Edit = prest1update;
+			$scope.prestacao2 = '---';
+		    $scope.prestacao3 = '---';
+			console.log(prest1update);
+		    break;
+		  
+		  case 2:
+
+		  	var d = new Date(data_vendaE);
+			var ano = d.getFullYear();
+			var proxMes = d.getMonth()+1;
+			var dia = d.getDate();
+			var prest1update = new Date(ano, proxMes, dia);
+
+			var d = new Date(data_vendaE);
+			var ano = d.getFullYear();
+			var proxMes = d.getMonth()+2;
+			var dia = d.getDate();
+			var prest2update = new Date(ano, proxMes, dia);
+
+		  	$scope.prestacao1Edit = prest1update;
+		  	$scope.prestacao2 = $filter('date')(prest2update, "dd/MM/yyyy");
+		    $scope.prestacao3 = '---';
+		  	console.log(prest2update);
+		    break;
+		  
+		   case 3:
+
+		    var d = new Date(data_vendaE);
+			var ano = d.getFullYear();
+			var proxMes = d.getMonth()+1;
+			var dia = d.getDate();
+			var prest1update = new Date(ano, proxMes, dia);
+
+			var d = new Date(data_vendaE);
+			var ano = d.getFullYear();
+			var proxMes = d.getMonth()+2;
+			var dia = d.getDate();
+			var prest2update = new Date(ano, proxMes, dia);
+
+			var d = new Date(data_vendaE);
+			var ano = d.getFullYear();
+			var proxMes = d.getMonth()+3;
+			var dia = d.getDate();
+			var prest3update = new Date(ano, proxMes, dia);
+
+		  	$scope.prestacao1Edit = prest1update;
+		  	$scope.prestacao2 = $filter('date')(prest2update, "dd/MM/yyyy");
+		  	$scope.prestacao3 = $filter('date')(prest3update, "dd/MM/yyyy");
+		  	console.log(pag);
+		    break;
+		  
+		}
+	}
+
+	$scope.update1Prest = function (pag, dataPrest1){
+
+			var d = new Date(dataPrest1);
+			var ano = d.getFullYear();
+			var proxMes = d.getMonth();
+			var dia = d.getDate();
+		 switch (parseInt(pag)) {
+
+		 case 0:
+		 	$scope.calcPrestacao(pag, dataPrest1);
+		 	$scope.StPrest1 = true;
+		 	$scope.entradaEdit = $filter('currency')(0, "R$ ");
+		 	$scope.total = $filter('currency')($scope.sub_total, "R$ ");
+
+		    $scope.prest1 = '---';
+		    $scope.prestacao2 = '---';
+		    $scope.prestacao3 = '---';
+
+		   // console.log(pag);
+		    break;
+
+		  
+		  case 1:
+
+		  	$scope.StPrest1 = false;
+		  	$scope.calcPrestacao(pag, dataPrest1);
+		  	
+			var prest1update = new Date(ano, proxMes, dia);
+
+			$scope.prestacao1Edit = prest1update;
+			$scope.prestacao2 = '---';
+		    $scope.prestacao3 = '---';
+			console.log(pag);
+		    break;
+		  
+		  case 2:
+
+		  	$scope.StPrest1 = false;
+		  	$scope.calcPrestacao(pag, dataPrest1);
+
+		  
+			var prest1update = new Date(ano, proxMes, dia);
+			var prest2update = new Date(ano, proxMes+1, dia);
+
+		  	$scope.prestacao1Edit = prest1update;
+		  	$scope.prestacao2 = $filter('date')(prest2update, "dd/MM/yyyy");
+		    $scope.prestacao3 = '---';
+		  	console.log(pag);
+		    break;
+		  
+		   case 3:
+		   $scope.calcPrestacao(pag, dataPrest1);
+
+		   	$scope.StPrest1 = false;
+
+	
+			var prest1update = new Date(ano, proxMes, dia);
+
+		
+			var prest2update = new Date(ano, proxMes+1, dia);
+
+		
+			var prest3update = new Date(ano, proxMes+2, dia);
+
+		  	$scope.prestacao1Edit = prest1update;
+		  	$scope.prestacao2 = $filter('date')(prest2update, "dd/MM/yyyy");
+		  	$scope.prestacao3 = $filter('date')(prest3update, "dd/MM/yyyy");
+		  	console.log(pag);
+		    break;
+		  
+		 }
+	}
+
+	$scope.setPrestacao = function (){
+		switch (parseInt($scope.dadosModal.quantidade_parcelas)) {
+
+		  case 1:
+		    $scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
+		    $scope.prestacao2 = '---';
+		    $scope.prestacao3 = '---';
+		    break;
+		  case 2:
+		  	$scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
+		    $scope.prestacao2 = $filter('date')($scope.dadosModal.data_prestacao2, "dd/MM/yyyy");
+		    $scope.prestacao3 = '---';
+		    break;
+
+		    case 3:
+		    $scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
+		    $scope.prestacao2 = $filter('date')($scope.dadosModal.data_prestacao2, "dd/MM/yyyy");
+		    $scope.prestacao3 = $filter('date')($scope.dadosModal.data_prestacao3, "dd/MM/yyyy");
+		    break;
+		  
+		}
+	}
+
+	$scope.calcPrestacao = function (pagamentoEdit, data_vendaE){
+
+		if (pagamentoEdit == parseInt(0)){
+			//$scope.pagamentoEdit = 0;
+			//console.log(pagamentoEdit);
+			var valor_prestacao = 0;
+			$scope.valor_prestacao = $filter('currency')(valor_prestacao, "R$ ")
+
+			console.log('passou 0');
+		}
+
+		else{
+
+			var valor_prestacao = $scope.dadosModal.total / pagamentoEdit;
+			$scope.valor_prestacao = $filter('currency')(valor_prestacao, "R$ ");
+			//console.log($scope.valor_prestacao);
+			console.log('passou valor');
+
+		}	
+	}
+
+	$scope.calcEntrada = function (entradaEdit, pagamentoEdit){
+
+		if( entradaEdit == "" || entradaEdit == 0){
+
+			$scope.entradaEdit = "0";
+
+		
+			
+
+
+
+			console.log('passou aqui');
+		}
+
+		if(entradaEdit < parseFloat($scope.dadosModal.sub_total)){
+
+			var updateTotal = parseFloat($scope.dadosModal.sub_total) - entradaEdit
+			
+
+				
+				$scope.dadosModal.total = updateTotal;
+				$scope.total = $filter('currency')(updateTotal, "R$ ");	
+			$scope.calcPrestacao (pagamentoEdit);
+			//console.log(parseInt($scope.dadosModal.sub_total));
+
+		}
+		else{
+			// Colocar para emitir uma alerta
+
+			console.log('Não pode inserir esse valor');
+		}
+
+		$scope.entrada = $filter ('currency')(entradaEdit, 'R$ ');
+	}
+
+	$scope.updatePrestacao = function (){
+		
+		switch (parseInt($scope.dadosModal.quantidade_parcelas)) {
+
+		  case 1:
+		    $scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
+		    $scope.prestacao2 = '---';
+		    $scope.prestacao3 = '---';
+		    break;
+		  case 2:
+		  	$scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
+		    $scope.prestacao2 = $filter('date')($scope.dadosModal.data_prestacao2, "dd/MM/yyyy");
+		    $scope.prestacao3 = '---';
+		    break;
+
+		    case 3:
+		    $scope.prestacao1 = $filter('date')($scope.dadosModal.data_prestacao1, "dd/MM/yyyy");
+		    $scope.prestacao2 = $filter('date')($scope.dadosModal.data_prestacao2, "dd/MM/yyyy");
+		    $scope.prestacao3 = $filter('date')($scope.dadosModal.data_prestacao3, "dd/MM/yyyy");
+		    break;
+		  
+		}
+	}
+
+	$scope.popup1prest = function () {
+		$scope.popupPrest.opened = true;
+	  }
+
+	$scope.popupPrest = {
+		opened: false
+	 
+	 }
+
+	$scope.setNomeRota = function (rota){
+
+		angular.forEach($scope.rotas, function (value, key) {
+			if (value.idRota == rota) {
+
+				$scope.dadosModal.nome_rota = value.nome;
+
+				console.log('Essa é a '+value.nome);
+			};
+		});
+		
+
+		
+	}
+
+
+	$scope.tipoPag ();
+    $scope.setPrestacao ();
+	$scope.listarClientes();
+	$scope.buscarVendedores();
+	$scope.listarRotas();
 	$scope.listarProdutos ();
 	$scope.buscarVendidos();
 
@@ -254,25 +608,10 @@ angular.module('app').controller('app-listar-vendas', function ($scope, $http, $
 				$scope.vendasOk = vendas.data;
 				
 
-			});
-
-
-
-		
+			});	
 	};
 
-	$scope.total_vendas = 
-
-
-
-	
-	
 	$scope.listarVendas();
-
-
-
-
-
 
 //location.reload();
 
@@ -281,23 +620,26 @@ angular.module('app').controller('app-listar-vendas', function ($scope, $http, $
 
 	$scope.dataHoje = function () {
 		$scope.dataVenda = new Date();
-	};
+	 };
 
 	$scope.open1 = function () {
 		$scope.popup1.opened = true;
-	};
+	 };
 
 	$scope.open2 = function () {
 		$scope.popup2.opened = true;
-	};
+	 };
 
+	
 	$scope.popup1 = {
 		opened: false
-	};
+	 };
 
 	$scope.popup2 = {
 		opened: false
-	};
+	 };
+
+
 
 	$scope.setDate = function () {
 		var date = new Date();
@@ -363,16 +705,4 @@ angular.module('app').controller('app-listar-vendas', function ($scope, $http, $
 	};
 
 	/*****************************************************************************/
-
-
-
-
-
-
-
-
-
-
-
-
 });
