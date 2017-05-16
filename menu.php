@@ -62,8 +62,6 @@
 						<li class="divider"></li>
 						<li><a href="produtos.php"><i class="fa fa-product-hunt margimDireitaIcon"></i> Produtos</a>
 						</li>
-						
-						
 					</ul>
 				</li>
 
@@ -76,11 +74,24 @@
 				
 
 					<ul class="dropdown-menu multi-level">
-						<li><a href='vendas-adicionar.php'><i class="fa fa-plus margimDireitaIcon"></i> Adiconar</a>
+						<li>
+						<a href='vendas-adicionar.php'>
+						<i class="fa fa-plus margimDireitaIcon"></i> Adiconar
+						</a>
 						</li>
 
-						<li><a href="listar-vendas.php"><i class="fa fa-search margimDireitaIcon"></i> Listar Vendas</a>
+						<li>
+						<a href="listar-vendas.php">
+						<i class="fa fa-search margimDireitaIcon"></i> Listar Vendas
+						</a>
 						</li>
+
+						<li>
+						<a href="receber-vendas.php">
+						<i class="fa fa-usd margimDireitaIcon"></i> &nbspReceber
+						</a>
+						</li>
+
 					</ul>
 				</li>
 

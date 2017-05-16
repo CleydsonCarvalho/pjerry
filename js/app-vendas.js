@@ -43,7 +43,6 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 
 				$scope.clientesOK = clientes.data;
 			});
-
 	};
 
 	$scope.todosClientes = function () {
@@ -53,12 +52,11 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 
 				$scope.todosClientes = clientes.data;
 			});
-
 	};
 
 	$scope.buscarVendedores = function () {
 
-	$http.post('/controller/controller_vendas.php?acao=buscarVendedores')
+	 $http.post('/controller/controller_vendas.php?acao=buscarVendedores')
 			.then(function (funcionarios) {
 
 				$scope.vendedores = funcionarios.data;
@@ -73,7 +71,6 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 		$scope.vendedorSelecionado = $scope.buscarVendedor.nome;
 		$scope.status = true;
 		$scope.sBuscProd = false;
-
 	};
 
 	$scope.findCliente = function () {
@@ -105,7 +102,7 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 
 	$scope.editarCliente = function () {
 		$scope.status = false;
-	};
+	 };
 
 	$scope.listarProduto = function (id) {
 
@@ -162,16 +159,13 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 	$scope.apagar = function (produto) {
 
 		$scope.produtos.splice($scope.produtos.indexOf(produto), 1);
-
 	};
 
 	$scope.calcularTotal = function () {
 		
 		$scope.total = $scope.subtotal - $scope.entrada; 
 		var valorParcelas = $scope.total / $scope.parcelas;
-		$scope.valorParcelas = valorParcelas.toFixed(2);
-
-		
+		$scope.valorParcelas = valorParcelas.toFixed(2);	
 	};
 
 	$scope.calcParcelas = function () {
@@ -207,9 +201,8 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 		$http.post('/controller/controller_vendas.php?acao=calcularParcelas&&parcelas=' + vezes + '&&data=' + data)
 			.then(function (parcelas) {
 
-				$scope.parcela = parcelas.data;
-
-			});
+			$scope.parcela = parcelas.data;
+		});
 	};
 
 	$scope.finalizarVenda = function () {
@@ -240,57 +233,56 @@ angular.module('app').controller('app-vendas', function ($scope, $http, $filter,
 			.then(function (id_venda) {
 
 
-console.log(id_venda.data);
-//console.log($scope.venda_add);
+
+		console.log($scope.venda_add);
 
 				$scope.id_venda = id_venda.data.id_venda;
 
 
-				//$http.post('/controller/controller_vendas.php?acao=cadastrarProdutos&id_venda=' + $scope.id_venda, $scope.produtos)
-					//.then(function (produtos) {
+				$http.post('/controller/controller_vendas.php?acao=cadastrarProdutos&id_venda=' + $scope.id_venda, $scope.produtos)
+					.then(function (produtos) {
 
-						//$scope.produtosmeu = produtos.data;
+						$scope.produtosmeu = produtos.data;
 
-//location.reload(); 
-					//});
+		location.reload(); 
+					});
 
 			});
-		
-
 	};
 
 	$scope.closeAlert = function () {
 		$scope.statusAlert = false;
-	};
+	 };
 
 
 	////////////////////////// Data Picker ////////////////////////////////////
 	
 	$scope.dataHoje = function () {
 		$scope.dataVenda = new Date();
-	};
+	 };
 
 	$scope.open1 = function () {
 		$scope.popup1.opened = true;
-	};
+	 };
 
 	$scope.open2 = function () {
 		$scope.popup2.opened = true;
-	};
+	 };
 
 	$scope.popup1 = {
 		opened: false
-	};
+	 };
 
 	$scope.popup2 = {
 		opened: false
-	};
+	 };
 
 	$scope.setDate = function () {
-		var date = new Date();
-		var ano = date.getFullYear();
-		var proxMes = date.getMonth() + 1;
+	
+		
 		var d = $scope.dataVenda;
+		var ano = d.getFullYear();
+		var proxMes = d.getMonth() + 1;
 		var dia = d.getDate();
 
 		$scope.data_venc = new Date(ano, proxMes, dia);
