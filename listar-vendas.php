@@ -226,7 +226,7 @@
 					
 					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 						<label class="textRed" for="endereço1">&nbsp;Pagamento</label>
-<<<<<<< HEAD
+
 						<input type="text" class="form-control mod" ng-model="dadosModal.quantidade_parcelas"  readonly>
 					</div>
 
@@ -236,17 +236,17 @@
 						<input type="text" class="form-control mod" ng-model="sub_total" readonly>
 					</div>
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" >
-=======
-						<input type="text" class="form-control mod" ng-model="pagamentoEdit" ng-init="pagamentoEdit = dadosModal.quantidade_parcelas+ 'X'" readonly>
-					</div>
 
-				
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr" ng-if="dadosModal.quantidade_parcelas != 0">
-						<label class="textRed" for="representante">&nbsp;Sub-Total</label>
-						<input type="text" class="form-control mod" ng-model="sub_total" readonly>
-					</div>
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-if="entrada != 'R$ 0,00'">
->>>>>>> origin/master
+
+
+
+
+
+
+
+
+
+
 						<label class="textRed" for="numero">&nbsp;Entrada</label>
 						<input type="text" class="form-control mod" ng-model="entrada" readonly>
 					</div>
@@ -256,23 +256,23 @@
 
 
 
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" >
-=======
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr" ng-if="dadosModal.quantidade_parcelas == 0">
->>>>>>> origin/master
+
+
+
+
+
+
+
+
+
+
 						<label class="textRed" for="bairro">&nbsp;Total</label>
 						<input type="text" class="form-control mod" ng-model="total" readonly>
 					</div>
 
-<<<<<<< HEAD
-=======
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-if="dadosModal.quantidade_parcelas != 0">
-						<label class="textRed" for="bairro">&nbsp;Total</label>
-						<input type="text" class="form-control mod" ng-model="total" readonly>
-					</div>
 
->>>>>>> origin/master
 
 
 
@@ -281,30 +281,30 @@
 
 
 					
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" >
-=======
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-if="valor_prestacao != 'R$ 0,00'">
->>>>>>> origin/master
+
+
+
 						<label class="textRed" for="numero">&nbsp;Valor Prestação</label>
 						<input type="text" class="form-control mod" ng-model="valor_prestacao" readonly>
 					</div>
 					
 				
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" >
-=======
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-show="prestacao1">
->>>>>>> origin/master
+
+
+
 					<label class="textRed" for="numero">&nbsp;1ª&nbsp; Prestação</label>
 						<input type="text" class="form-control text-center mod" ng-model="prestacao1" readonly>
 					</div>
 
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" >
-=======
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-show="prestacao2">
->>>>>>> origin/master
+
+
+
 						<label class="textRed"  for="estado">&nbsp;2ª&nbsp; Prestação</label>
 						<input type="text" class="form-control text-center mod" ng-model="prestacao2" readonly>
 					</div>
@@ -313,17 +313,17 @@
 						<label class="textRed" for="representante">&nbsp;3ª&nbsp; Prestação</label>
 						<input type="text" class="form-control text-center mod" ng-model="prestacao3" readonly>
 					</div>
-<<<<<<< HEAD
+
  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-=======
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
->>>>>>> origin/master
+
+
+
 						<button class="btn btn-default pull-right"  type="button" ng-click="editarVenda()">
 
 							Alterar Dados
 
 						</button>
-<<<<<<< HEAD
+
 
 
 					</div>
@@ -354,46 +354,46 @@
 						<input type="text" class="form-control" ng-model="dadosModal.nome_vendedor" uib-typeahead="vendedor.nome for vendedor in vendedores | filter:$viewValue | limitTo:5" ng-blur="findVendedor()" autofocus autocomplete="off"  required>
 						
 					</div>
-=======
 
 
-					</div>
 
+
+					
 	
 
 
 
-				</div>
-			</form>
-		</div>
-		<!--Fim-->
 
-				<!---************ Form Editar ***********-->
-		<div ng-if="!setEdit">
-			<form method="post" enctype="multipart/form-data" autocomplete="off">
-				<div class="row">
-				
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-						<label class="textRed" for="nome">
-						 Cliente</label>
-						<input type="text" uib-typeahead="cliente.nome for cliente in clientesOK | filter:$viewValue | limitTo:5" class="form-control" ng-model="dadosModal.nome_cliente" autofocus autocomplete="off" required>
-						
-					</div>
 
-					<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 app-margimBotomCamposFomr">
-						<label class="textRed" for="cnpj">&nbsp;Vendedor</label>
-						<input type="text" class="form-control" ng-model="dadosModal.nome_vendedor" uib-typeahead="vendedor.nome for vendedor in vendedores | filter:$viewValue | limitTo:5" autofocus autocomplete="off"  required>
-					</div>
->>>>>>> origin/master
-					
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
 						<label class="textRed" for="cnpj">Rota</label>
 							<select class="form-control" ng-model="dadosModal.id_rota" ng-change="setNomeRota(dadosModal.id_rota)" >
 							<option ng-selected="rota.idRota == dadosModal.id_rota" ng-repeat="rota in rotas" ng-value="{{rota.idRota}}"
 							
 							>{{rota.nome}}</option>
 						</select>
-<<<<<<< HEAD
+
 
 					</div>
 					
@@ -425,63 +425,63 @@
 
 					
 					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr" >
-=======
-
-					</div>
-					
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 ">
-						<label class="textRed" for="cnpj">&nbsp;Data da Venda</label>
-							<p class="input-group">
-								<input type="text" class="form-control " uib-datepicker-popup="dd/MM/yyyy" ng-model="dadosModal.data_venda" is-open="popup2.opened"  ng-required="true" show-button-bar="false" ng-change="set1Prest(pagamentoEdit, dadosModal.data_venda)"/>
-								<span class="input-group-btn">
-							<button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-					  			</span>
-							
-							</p>
-					</div>
-					
-				
-					
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr">
-						<label class="textRed" for="valor compra">&nbsp;Pagamento</label>
-						<select class="form-control" ng-model="dadosModal.quantidade_parcelas" ng-required="true" ng-change="update1Prest(dadosModal.quantidade_parcelas, prestacao1Edit)" >
-						
-							<option ng-selected="pagamentoEdit == 'À Vista'" value="0">À Vista</option>
-							<option ng-selected="pagamentoEdit == 1" value="1">1X</option>
-							<option ng-selected="pagamentoEdit == 2" value="2">2X</option>
-							<option ng-selected="pagamentoEdit == 3" value="3">3X</option>
-							
-						</select>
-					</div>
 
 
-					
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr" ng-if="dadosModal.quantidade_parcelas != 0">
->>>>>>> origin/master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 						<label class="textRed" for="representante">&nbsp;Sub-Total</label>
 						<input type="text" class="form-control" ng-model="sub_total" readonly>
 					</div>
 
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-if="!entradaSet">
-=======
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-if="entrada != 'R$ 0,00'">
->>>>>>> origin/master
+
+
+
 						<label class="textRed" for="numero">&nbsp;Entrada</label>
 
 						<div class="input-group">
 							<span class="input-group-addon">R$</span>
-<<<<<<< HEAD
+
 							<input type="text" ng-model="entradaEdit" class="form-control" ng-change="calcEntrada(entradaEdit, dadosModal.quantidade_parcelas)"  ng-currency-mask>
-=======
-							<input type="text" ng-model="dadosModal.entrada" class="form-control" ng-change="calcEntrada(dadosModal.entrada, dadosModal.quantidade_parcelas)"  ng-currency-mask>
->>>>>>> origin/master
+
+
+
 						</div>
 
 					</div>
 
 
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-if="entradaSet">
 						<label class="textRed" for="numero">&nbsp;Entrada</label>
 
@@ -495,16 +495,16 @@
 
 
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" >
-=======
-
-					<div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 app-margimBotomCamposFomr" ng-if="dadosModal.quantidade_parcelas == 0">
-						<label class="textRed" for="bairro">&nbsp;Total</label>
-						<input type="text" class="form-control" ng-model="total" readonly>
-					</div>
 
 
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-if="dadosModal.quantidade_parcelas != 0">
->>>>>>> origin/master
+
+
+
+
+
+
+
+
 						<label class="textRed" for="bairro">&nbsp;Total</label>
 						<input type="text" class="form-control" ng-model="total" readonly>
 					</div>
@@ -524,7 +524,7 @@
 
 				
 
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 " ng-if="!prest1">
 					<label class="textRed" for="numero">&nbsp;1ª&nbsp; Prestação</label>
 
@@ -543,44 +543,44 @@
 
 
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr">
-=======
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 " ng-show="!StPrest1">
-					<label class="textRed" for="numero">&nbsp;1ª&nbsp; Prestação</label>
-
-						<input type="text" class="form-control text-center" uib-datepicker-popup="dd/MM/yyyy" ng-model="prestacao1Edit" is-open="popupPrest.opened"  ng-required="true" show-button-bar="false" ng-click="popup1prest()" ng-change="update1Prest(pagamentoEdit, prestacao1Edit)"/>
-								
-					</div>
-
-
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-show="StPrest1">
-						<label class="textRed"  for="estado">&nbsp;1ª&nbsp; Prestação</label>
-						<input type="text" class="form-control text-center" ng-model="prest1" readonly>
-					</div>
 
 
 
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-show="prestacao2">
->>>>>>> origin/master
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 						<label class="textRed"  for="estado">&nbsp;2ª&nbsp; Prestação</label>
 						<input type="text" class="form-control text-center" ng-model="prestacao2" readonly>
 					</div>
 
-<<<<<<< HEAD
+
 					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" >
-=======
-					<div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 app-margimBotomCamposFomr" ng-show="prestacao3">
->>>>>>> origin/master
+
+
+
 						<label class="textRed" for="representante">&nbsp;3ª&nbsp; Prestação</label>
 						<input type="text" class="form-control text-center" ng-model="prestacao3" readonly>
 					</div>
 
-<<<<<<< HEAD
+
  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
 						<button class="btn btn-info pull-right"  type="button" ng-click="salvarVenda(data_vendaView)" >
-=======
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 app-margimBotomCamposFomr">
-						<button class="btn btn-info pull-right"  type="button" ng-click="salvarVenda(nomeEdit.nome)" >
->>>>>>> origin/master
+
+
+
+
 
 							Salvar Dados
 
